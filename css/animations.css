@@ -1,0 +1,181 @@
+/* ============================================================
+   THE BROWN PRINT v2 — animations.css
+   Scroll reveals, text reveals, spring transitions, reduced motion
+   ============================================================ */
+
+/* ---------- SCROLL REVEALS ---------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(1.5rem);
+  transition: opacity 0.9s cubic-bezier(0.215, 0.61, 0.355, 1),
+              transform 0.9s cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+
+.reveal.in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger children */
+.reveal-stagger > * {
+  opacity: 0;
+  transform: translateY(1.5rem);
+  transition: opacity 0.9s cubic-bezier(0.215, 0.61, 0.355, 1),
+              transform 0.9s cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+
+.reveal-stagger.in > *:nth-child(1) { transition-delay: 0ms; }
+.reveal-stagger.in > *:nth-child(2) { transition-delay: 80ms; }
+.reveal-stagger.in > *:nth-child(3) { transition-delay: 160ms; }
+.reveal-stagger.in > *:nth-child(4) { transition-delay: 240ms; }
+.reveal-stagger.in > *:nth-child(5) { transition-delay: 320ms; }
+.reveal-stagger.in > *:nth-child(6) { transition-delay: 400ms; }
+
+.reveal-stagger.in > * {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ---------- TEXT REVEALS (line split) ---------- */
+.reveal-line {
+  display: block;
+  overflow: hidden;
+}
+
+.reveal-line__inner {
+  display: block;
+  transform: translateY(100%);
+  opacity: 0;
+  transition: transform 0.9s cubic-bezier(0.215, 0.61, 0.355, 1),
+              opacity 0.9s cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+
+.reveal-line.in .reveal-line__inner {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* Word-by-word reveal */
+.reveal-word {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s cubic-bezier(0.165, 0.84, 0.44, 1),
+              transform 0.7s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.reveal-word.in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ---------- HERO ENTRANCE ---------- */
+.hero-entrance {
+  opacity: 0;
+  transform: translateY(2rem);
+  transition: opacity 0.8s cubic-bezier(0.215, 0.61, 0.355, 1),
+              transform 0.8s cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+
+.hero-entrance.in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Staggered hero elements */
+.hero-entrance[data-delay="150"] { transition-delay: 150ms; }
+.hero-entrance[data-delay="200"] { transition-delay: 200ms; }
+.hero-entrance[data-delay="250"] { transition-delay: 250ms; }
+.hero-entrance[data-delay="300"] { transition-delay: 300ms; }
+.hero-entrance[data-delay="400"] { transition-delay: 400ms; }
+.hero-entrance[data-delay="500"] { transition-delay: 500ms; }
+.hero-entrance[data-delay="600"] { transition-delay: 600ms; }
+.hero-entrance[data-delay="700"] { transition-delay: 700ms; }
+
+/* ---------- FLOAT ANIMATION ---------- */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+.anim-float { animation: float 6s ease-in-out infinite; }
+
+/* ---------- PULSE ---------- */
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.anim-pulse { animation: pulse 2s ease-in-out infinite; }
+
+/* ---------- SPIN ---------- */
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.anim-spin { animation: spin 8s linear infinite; }
+
+/* ---------- GRADIENT SHIFT ---------- */
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ---------- GLOW PULSE ---------- */
+@keyframes glowPulse {
+  0%, 100% { box-shadow: 0 0 20px var(--accent-glow); }
+  50% { box-shadow: 0 0 40px var(--accent-glow), 0 0 60px var(--accent-glow); }
+}
+
+.anim-glow { animation: glowPulse 3s ease-in-out infinite; }
+
+/* ---------- SLIDE UP ---------- */
+@keyframes slideUp {
+  from { transform: translateY(100%); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* ---------- SCALE IN ---------- */
+@keyframes scaleIn {
+  from { transform: scale(0.9); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+/* ---------- SPRING HOVER (CSS fallback) ---------- */
+.spring-hover {
+  transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.spring-hover:hover {
+  transform: scale(1.04);
+}
+
+.spring-hover:active {
+  transform: scale(0.97);
+}
+
+/* ---------- REDUCED MOTION ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .reveal-stagger > *,
+  .reveal-line__inner,
+  .reveal-word,
+  .hero-entrance {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  .anim-float,
+  .anim-pulse,
+  .anim-spin,
+  .anim-glow {
+    animation: none !important;
+  }
+
+  .marquee__track {
+    animation: none !important;
+  }
+}

@@ -1,0 +1,107 @@
+/* ============================================================
+   THE BROWN PRINT v2 — music.css
+   Music page: dark violet/purple theme
+   ============================================================ */
+
+/* --- Hero --- */
+.page-hero--mus {
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  padding: 8rem 0 4rem;
+  background: linear-gradient(to bottom, #0c0a09, rgba(76,29,149,0.4), #0c0a09);
+}
+
+.page-hero--mus::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 30%, rgba(139,92,246,0.2), transparent 70%);
+  pointer-events: none;
+}
+
+.page-hero--mus h1 { color: #fafaf9; }
+.page-hero--mus h1 .accent { color: #a78bfa; }
+.page-hero--mus p { color: #a8a29e; max-width: 40rem; margin: 0 auto; }
+
+.page-hero--mus .hero__divider {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.page-hero--mus .hero__divider-line {
+  width: 3rem;
+  height: 1px;
+  background: rgba(139,92,246,0.4);
+}
+
+/* --- Section labels --- */
+.mus-label { color: #a78bfa; }
+
+/* --- Work grid section --- */
+.mus-section {
+  padding: clamp(4rem, 8vw, 8rem) 0;
+}
+
+.mus-section__header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+.mus-section__icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  color: #a78bfa;
+}
+
+.mus-section__label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #a78bfa;
+}
+
+/* --- CTA section --- */
+.mus-cta {
+  background: linear-gradient(to bottom, #0c0a09, rgba(76,29,149,0.3));
+}
+
+.mus-cta h2 { color: #fafaf9; }
+.mus-cta p { color: #a8a29e; }
+
+/* --- Work card tinting --- */
+[data-theme="music"] .work-card {
+  border-color: rgba(139,92,246,0.2);
+}
+
+[data-theme="music"] .work-card:hover {
+  border-color: rgba(139,92,246,0.5);
+}
+
+[data-theme="music"] .work-card__play {
+  background: #8b5cf6;
+  color: #fff;
+}
+
+/* --- Marquee --- */
+.mus-marquee {
+  border-color: rgba(139,92,246,0.1);
+}
+
+.mus-marquee .marquee__item {
+  color: rgba(139,92,246,0.2);
+}
+
+.mus-marquee .marquee__sep {
+  color: #8b5cf6;
+}

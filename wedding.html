@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="wedding">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weddings — The Brown Print</title>
+  <meta name="description" content="Punjabi-rooted wedding cinema in Toronto. Cinematic films and photography for Anand Karaj, sangeet, and celebrations.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/pages/home.css">
+  <link rel="stylesheet" href="css/pages/wedding.css">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💒</text></svg>">
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="shell header__inner">
+      <a href="index.html" class="header__logo">
+        <svg width="28" height="28" viewBox="0 0 100 100" fill="none">
+          <rect width="100" height="100" rx="20" fill="#0c0a09"/>
+          <circle cx="50" cy="50" r="28" stroke="#f59e0b" stroke-width="6" fill="none"/>
+          <circle cx="50" cy="50" r="8" fill="#f59e0b"/>
+        </svg>
+        <span class="header__logo-text">The Brown Print</span>
+      </a>
+      <nav class="header__nav">
+        <a href="index.html" class="header__link">Home</a>
+        <a href="wedding.html" class="header__link active">Weddings</a>
+        <a href="music.html" class="header__link">Music</a>
+        <a href="concerts.html" class="header__link">Concerts</a>
+        <a href="social.html" class="header__link">Social</a>
+        <a href="brands.html" class="header__link">Brands</a>
+      </nav>
+      <div class="header__clock">00:00:00 EST</div>
+      <div class="header__cta">
+        <button class="btn btn--accent" data-modal-open>Request <span class="btn__arrow">→</span></button>
+      </div>
+      <button class="header__menu-btn" aria-label="Menu"><span></span></button>
+    </div>
+  </header>
+
+  <!-- MOBILE NAV -->
+  <div class="nav-overlay">
+    <button class="nav-overlay__close" aria-label="Close menu">✕</button>
+    <a href="index.html" class="nav-overlay__link">Home</a>
+    <a href="wedding.html" class="nav-overlay__link active">Weddings</a>
+    <a href="music.html" class="nav-overlay__link">Music</a>
+    <a href="concerts.html" class="nav-overlay__link">Concerts</a>
+    <a href="social.html" class="nav-overlay__link">Social</a>
+    <a href="brands.html" class="nav-overlay__link">Brands</a>
+  </div>
+
+  <!-- HERO (music.html style, centered) -->
+  <section class="page-hero page-hero--wed">
+    <div class="shell" style="position:relative; z-index:1;">
+      <div style="display:flex;align-items:center;gap:1rem;justify-content:center;margin-bottom:1.5rem;">
+        <div style="width:3rem;height:1px;background:rgba(190,18,60,0.3);"></div>
+        <span class="hero__eyebrow wed-label hero-entrance" data-delay="200">Weddings</span>
+        <div style="width:3rem;height:1px;background:rgba(190,18,60,0.3);"></div>
+      </div>
+      <h1 class="hero__h1 hero-entrance" data-delay="250" style="text-align:center;">Where forever <span class="accent">begins</span></h1>
+      <p class="hero-entrance" data-delay="350" style="text-align:center;margin-top:1rem;font-size:1.05rem;">Punjabi weddings told with warmth, colour, and quiet emotion — from the Anand Karaj to the last dance.</p>
+      <div class="hero__ctas hero-entrance" data-delay="500" style="justify-content:center;margin-top:2rem;">
+        <button class="btn btn--accent" data-modal-open>Start your wedding project <span class="btn__arrow">→</span></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- PHOTOGRAPHY -->
+  <section class="wed-section wed-section--photos">
+    <div class="shell">
+      <div class="wed-section__header reveal">
+        <svg class="wed-section__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+        <span class="wed-section__label">Photography</span>
+      </div>
+      <h2 class="wed-section__heading reveal" style="transition-delay:100ms;">Moments, framed</h2>
+      <div id="weddingPhotos" class="work-grid reveal-stagger"></div>
+    </div>
+  </section>
+
+  <!-- FILMS -->
+  <section class="wed-section wed-section--films">
+    <div class="shell">
+      <div class="wed-section__header reveal">
+        <svg class="wed-section__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="2" width="20" height="20" rx="2.18"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="2" y1="7" x2="7" y2="7"/><line x1="2" y1="17" x2="7" y2="17"/><line x1="17" y1="17" x2="22" y2="17"/><line x1="17" y1="7" x2="22" y2="7"/></svg>
+        <span class="wed-section__label">Films</span>
+      </div>
+      <h2 class="wed-section__heading reveal" style="transition-delay:100ms;">Stories in motion</h2>
+      <div id="weddingVideos" class="work-grid reveal-stagger"></div>
+    </div>
+  </section>
+
+  <!-- REAL WEDDINGS STORIES -->
+  <section class="wed-section wed-section--stories">
+    <div class="shell">
+      <div style="text-align:center;margin-bottom:3rem;">
+        <p class="wed-label reveal" style="font-size:0.75rem;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;">Real Weddings</p>
+        <h2 class="wed-section__heading reveal" style="transition-delay:100ms;text-align:center;">The stories behind the frames</h2>
+        <p class="reveal" style="transition-delay:200ms;max-width:42rem;margin:0.75rem auto 0;color:#57534e;">Every couple has a story. Here are a few of our favourites — read them, get inspired, imagine your own.</p>
+      </div>
+      <div id="storyList" class="stories-grid reveal-stagger"></div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section wed-cta">
+    <div class="shell">
+      <div class="cta-section__inner reveal">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="#fb7185" style="margin-bottom:1rem;"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        <h2 class="cta-section__heading">Planning your day?</h2>
+        <p class="cta-section__text">Tell us your vision and we'll craft a film and gallery you'll treasure for generations.</p>
+        <button class="btn btn--accent" data-modal-open>Start your wedding project <span class="btn__arrow">→</span></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="shell">
+      <div class="footer__top">
+        <div class="footer__brand">
+          <a href="index.html" class="header__logo">
+            <svg width="28" height="28" viewBox="0 0 100 100" fill="none"><rect width="100" height="100" rx="20" fill="#0c0a09"/><circle cx="50" cy="50" r="28" stroke="#f59e0b" stroke-width="6" fill="none"/><circle cx="50" cy="50" r="8" fill="#f59e0b"/></svg>
+            <span class="header__logo-text">The Brown Print</span>
+          </a>
+          <p>Punjabi-rooted film studio in Toronto. Concert films, wedding cinema, music videos, and brand storytelling.</p>
+        </div>
+        <div class="footer__col">
+          <h4>Pages</h4>
+          <a href="index.html">Home</a>
+          <a href="wedding.html">Weddings</a>
+          <a href="music.html">Music</a>
+          <a href="concerts.html">Concerts</a>
+        </div>
+        <div class="footer__col">
+          <h4>More</h4>
+          <a href="social.html">Social Events</a>
+          <a href="brands.html">Brand Films</a>
+          <a href="#" data-modal-open>Contact</a>
+        </div>
+        <div class="footer__col">
+          <h4>Connect</h4>
+          <a href="#">Instagram</a>
+          <a href="#">YouTube</a>
+          <a href="#">Vimeo</a>
+          <a href="mailto:hello@thebrownprint.ca">Email</a>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p>&copy; 2024 The Brown Print. All rights reserved.</p>
+        <div class="footer__socials">
+          <a href="#" aria-label="Instagram">IG</a>
+          <a href="#" aria-label="YouTube">YT</a>
+          <a href="#" aria-label="Vimeo">VM</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- PHOTO ALBUM LIGHTBOX -->
+  <div class="album-backdrop" id="albumBackdrop">
+    <div class="album-panel">
+      <button class="album-panel__close" id="albumClose">✕</button>
+      <button class="album-nav album-nav--prev" id="albumPrev">‹</button>
+      <button class="album-nav album-nav--next" id="albumNext">›</button>
+      <img class="album-panel__img" id="albumImg" src="" alt="">
+      <div class="album-panel__caption">
+        <div class="album-panel__title" id="albumTitle"></div>
+        <div class="album-panel__sub" id="albumSub"></div>
+      </div>
+      <div class="album-counter" id="albumCounter"></div>
+    </div>
+  </div>
+
+  <!-- REQUEST MODAL -->
+  <div class="modal-backdrop">
+    <div class="modal-panel">
+      <button class="modal-panel__close" aria-label="Close">✕</button>
+      <h3>Start a project</h3>
+      <p class="subtitle">Tell us about your vision and we'll get back to you within 24 hours.</p>
+      <form>
+        <div class="modal-field"><label for="modal-name">Name</label><input type="text" id="modal-name" name="name" placeholder="Your name" required></div>
+        <div class="modal-field"><label for="modal-email">Email</label><input type="email" id="modal-email" name="email" placeholder="you@email.com" required></div>
+        <div class="modal-field"><label for="modal-project">Project details</label><textarea id="modal-project" name="project" placeholder="Tell us about your event, date, and vision..." rows="4"></textarea></div>
+        <button type="submit" class="btn btn--accent">Send inquiry <span class="btn__arrow">→</span></button>
+      </form>
+      <div class="modal-success" style="display:none;"><h3>Message sent!</h3><p>We'll get back to you within 24 hours. Thank you for reaching out.</p></div>
+    </div>
+  </div>
+
+  <!-- SCRIPTS -->
+  <script src="content.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/loader.js"></script>
+  <script src="js/nav.js"></script>
+  <script src="js/reveals.js"></script>
+  <script src="js/player.js"></script>
+  <script src="js/modal.js"></script>
+  <script src="js/cards.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      TBP.initAdaptiveGrid();
+      TBP.initLenis();
+      TBPLoader.init();
+      TBPLoader.interceptLinks();
+      TBPNav.init();
+      TBPReveals.init();
+      TBPCards.init();
+      TBPModal.init();
+
+      // Populate wedding photos
+      const photosGrid = document.getElementById('weddingPhotos');
+      if (photosGrid && CONTENT.weddingPhotos) {
+        photosGrid.innerHTML = CONTENT.weddingPhotos.map((item, i) => `
+          <div class="work-card ${item.tall ? 'tall' : ''}" data-album-index="${i}" data-album-type="photos">
+            <img src="${item.src}" alt="${item.title}" loading="lazy">
+            <div class="work-card__shade"></div>
+            <div class="work-card__info">
+              <div class="work-card__title">${item.title}</div>
+              <div class="work-card__sub">${item.sub}</div>
+            </div>
+          </div>
+        `).join('');
+        // Photo album click
+        photosGrid.querySelectorAll('.work-card[data-album-index]').forEach(card => {
+          card.addEventListener('click', () => {
+            const idx = parseInt(card.dataset.albumIndex);
+            openAlbum('photos', idx);
+          });
+        });
+      }
+
+      // Populate wedding videos
+      const videosGrid = document.getElementById('weddingVideos');
+      if (videosGrid && CONTENT.weddingVideos) {
+        videosGrid.innerHTML = CONTENT.weddingVideos.map(item => `
+          <div class="work-card ${item.tall ? 'tall' : ''}" data-video-src="${item.videoSrc}">
+            <img src="${item.poster}" alt="${item.title}" loading="lazy">
+            <div class="work-card__shade"></div>
+            <div class="work-card__info">
+              <div class="work-card__title">${item.title}</div>
+              <div class="work-card__sub">${item.sub}</div>
+            </div>
+            <div class="work-card__play">▶</div>
+          </div>
+        `).join('');
+        videosGrid.querySelectorAll('.work-card[data-video-src]').forEach(card => {
+          card.addEventListener('click', (e) => {
+            if (e.target.closest('.work-card-video')) return;
+            const item = CONTENT.weddingVideos.find(v => v.videoSrc === card.dataset.videoSrc);
+            if (item && item.videoSrc) VideoPlayer.open(item);
+          });
+        });
+      }
+
+      // Populate stories
+      const storyList = document.getElementById('storyList');
+      if (storyList && CONTENT.weddingStories) {
+        storyList.innerHTML = CONTENT.weddingStories.map(s => `
+          <div class="story-card">
+            <div class="story-card__img"><img src="${s.src}" alt="${s.couple}" loading="lazy"></div>
+            <div class="story-card__body">
+              <span class="story-card__place">${s.place}</span>
+              <h3 class="story-card__title">${s.couple}</h3>
+              <p class="story-card__excerpt">${s.excerpt}</p>
+              <span class="story-card__link">Read story →</span>
+            </div>
+          </div>
+        `).join('');
+      }
+
+      // === PHOTO ALBUM LIGHTBOX ===
+      const albumBackdrop = document.getElementById('albumBackdrop');
+      const albumImg = document.getElementById('albumImg');
+      const albumTitle = document.getElementById('albumTitle');
+      const albumSub = document.getElementById('albumSub');
+      const albumCounter = document.getElementById('albumCounter');
+      const albumClose = document.getElementById('albumClose');
+      const albumPrev = document.getElementById('albumPrev');
+      const albumNext = document.getElementById('albumNext');
+      let albumItems = [];
+      let albumIdx = 0;
+
+      function openAlbum(type, startIdx) {
+        if (type === 'photos') albumItems = CONTENT.weddingPhotos;
+        else return;
+        albumIdx = startIdx;
+        showAlbumItem();
+        albumBackdrop.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function showAlbumItem() {
+        const item = albumItems[albumIdx];
+        albumImg.src = item.src;
+        albumImg.alt = item.title;
+        albumTitle.textContent = item.title;
+        albumSub.textContent = item.sub;
+        albumCounter.textContent = `${albumIdx + 1} / ${albumItems.length}`;
+      }
+
+      function closeAlbum() {
+        albumBackdrop.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+
+      albumClose.addEventListener('click', closeAlbum);
+      albumBackdrop.addEventListener('click', (e) => { if (e.target === albumBackdrop) closeAlbum(); });
+      albumPrev.addEventListener('click', (e) => { e.stopPropagation(); albumIdx = (albumIdx - 1 + albumItems.length) % albumItems.length; showAlbumItem(); });
+      albumNext.addEventListener('click', (e) => { e.stopPropagation(); albumIdx = (albumIdx + 1) % albumItems.length; showAlbumItem(); });
+      document.addEventListener('keydown', (e) => {
+        if (!albumBackdrop.classList.contains('open')) return;
+        if (e.key === 'Escape') closeAlbum();
+        if (e.key === 'ArrowLeft') { albumIdx = (albumIdx - 1 + albumItems.length) % albumItems.length; showAlbumItem(); }
+        if (e.key === 'ArrowRight') { albumIdx = (albumIdx + 1) % albumItems.length; showAlbumItem(); }
+      });
+
+      TBPReveals.init();
+    });
+  </script>
+</body>
+</html>

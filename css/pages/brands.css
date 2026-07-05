@@ -1,0 +1,107 @@
+/* ============================================================
+   THE BROWN PRINT v2 — brands.css
+   Brands page: dark gold/emerald premium theme
+   ============================================================ */
+
+/* --- Hero --- */
+.page-hero--brd {
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  padding: 8rem 0 4rem;
+  background: linear-gradient(to bottom, #0c0a09, rgba(5,150,105,0.18), #0c0a09);
+}
+
+.page-hero--brd::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 30%, rgba(212,178,95,0.18), transparent 70%);
+  pointer-events: none;
+}
+
+.page-hero--brd h1 { color: #fafaf9; }
+.page-hero--brd h1 .accent { color: #d4b25f; }
+.page-hero--brd p { color: #a8a29e; max-width: 40rem; margin: 0 auto; }
+
+.page-hero--brd .hero__divider {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.page-hero--brd .hero__divider-line {
+  width: 3rem;
+  height: 1px;
+  background: rgba(212,178,95,0.4);
+}
+
+/* --- Section labels --- */
+.brd-label { color: #d4b25f; }
+
+/* --- Work grid section --- */
+.brd-section {
+  padding: clamp(4rem, 8vw, 8rem) 0;
+}
+
+.brd-section__header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+.brd-section__icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  color: #d4b25f;
+}
+
+.brd-section__label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #d4b25f;
+}
+
+/* --- Client strip marquee --- */
+.brd-strip {
+  border-color: rgba(16,185,129,0.15);
+}
+
+.brd-strip .marquee__item {
+  color: rgba(212,178,95,0.2);
+}
+
+.brd-strip .marquee__sep {
+  color: #c79a3f;
+}
+
+/* --- CTA section --- */
+.brd-cta {
+  background: linear-gradient(to bottom, #0c0a09, rgba(5,150,105,0.15));
+}
+
+.brd-cta h2 { color: #fafaf9; }
+.brd-cta p { color: #a8a29e; }
+
+/* --- Work card tinting --- */
+[data-theme="brands"] .work-card {
+  border-color: rgba(212,178,95,0.2);
+}
+
+[data-theme="brands"] .work-card:hover {
+  border-color: rgba(212,178,95,0.5);
+}
+
+[data-theme="brands"] .work-card__play {
+  background: #c79a3f;
+  color: #0c0a09;
+}

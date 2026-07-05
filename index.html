@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="home">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Brown Print — Concert Photography & Videography</title>
+  <meta name="description"
+    content="Punjabi-rooted film studio in Toronto. Concert films, wedding cinema, music videos, and brand storytelling.">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/pages/home.css">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎬</text></svg>">
+</head>
+
+<body>
+
+  <!-- ========== PAGE LOADER ========== -->
+  <!-- Built by loader.js -->
+
+  <!-- ========== FILMSTRIP WIPE ========== -->
+  <!-- Built by loader.js -->
+
+  <!-- ========== HEADER ========== -->
+  <header class="header">
+    <div class="shell header__inner">
+      <a href="index.html" class="header__logo">
+        <svg width="28" height="28" viewBox="0 0 100 100" fill="none">
+          <rect width="100" height="100" rx="20" fill="#0c0a09" />
+          <circle cx="50" cy="50" r="28" stroke="#f59e0b" stroke-width="6" fill="none" />
+          <circle cx="50" cy="50" r="8" fill="#f59e0b" />
+          <rect x="25" y="20" width="6" height="60" rx="3" fill="#f59e0b" opacity="0.4" />
+          <rect x="69" y="20" width="6" height="60" rx="3" fill="#f59e0b" opacity="0.4" />
+        </svg>
+        <span class="header__logo-text">The Brown Print</span>
+      </a>
+
+      <nav class="header__nav">
+        <a href="index.html" class="header__link active">Home</a>
+        <a href="wedding.html" class="header__link">Weddings</a>
+        <a href="music.html" class="header__link">Music</a>
+        <a href="concerts.html" class="header__link">Concerts</a>
+        <a href="social.html" class="header__link">Social</a>
+        <a href="brands.html" class="header__link">Brands</a>
+      </nav>
+
+      <div class="header__clock">00:00:00 EST</div>
+
+      <div class="header__cta">
+        <button class="btn btn--accent" data-modal-open>
+          Request
+          <span class="btn__arrow">→</span>
+        </button>
+      </div>
+
+      <button class="header__menu-btn" aria-label="Menu">
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ========== MOBILE NAV OVERLAY ========== -->
+  <div class="nav-overlay">
+    <button class="nav-overlay__close" aria-label="Close menu">✕</button>
+    <a href="index.html" class="nav-overlay__link active">Home</a>
+    <a href="wedding.html" class="nav-overlay__link">Weddings</a>
+    <a href="music.html" class="nav-overlay__link">Music</a>
+    <a href="concerts.html" class="nav-overlay__link">Concerts</a>
+    <a href="social.html" class="nav-overlay__link">Social</a>
+    <a href="brands.html" class="nav-overlay__link">Brands</a>
+  </div>
+
+  <!-- ========== HERO ========== -->
+  <section class="hero">
+    <div class="hero__bg">
+      <img src="media/home/home_hero.jpeg" alt="Photography & Videography Gears" loading="eager">
+    </div>
+    <canvas class="hero__canvas" id="heroCanvas"></canvas>
+    <div class="hero__overlay"></div>
+    <div class="hero__watermark">THE BROWN PRINT</div>
+
+    <div class="shell hero__inner">
+      <div class="hero__content">
+        <div class="hero__eyebrow hero-entrance" data-delay="200">
+          <span>●</span> Toronto · Canada
+        </div>
+        <h1 class="hero__h1 hero-entrance" data-delay="250">
+          Every story<br>leaves a <span class="accent">print</span>
+        </h1>
+        <div class="hero__rating hero-entrance" data-delay="500">
+          <div class="hero__rating-stars">★★★★★</div>
+          <span>Trusted by 350+ families & artists</span>
+        </div>
+        <div class="hero__ctas hero-entrance" data-delay="600">
+          <button class="btn btn--accent" data-modal-open>
+            Start a project
+            <span class="btn__arrow">→</span>
+          </button>
+          <a href="#portfolio" class="btn btn--outline">
+            View work
+          </a>
+        </div>
+      </div>
+
+      <div class="hero__right hero-entrance" data-delay="400">
+        <div class="hero__carousel">
+          <div class="hero__carousel-header">
+            <span class="hero__carousel-label">Concert Films</span>
+            <div class="hero__carousel-dots"></div>
+          </div>
+          <h3 class="hero__carousel-title">Arena Live — Rogers Centre</h3>
+          <p class="hero__carousel-sub">Multi-cam live concert film · 2024</p>
+        </div>
+
+        <div class="hero__partners">
+          <svg width="24" height="24" viewBox="0 0 100 100" fill="none" opacity="0.4">
+            <rect width="100" height="100" rx="20" fill="#f59e0b" />
+            <text x="50" y="65" text-anchor="middle" fill="#0c0a09" font-size="40" font-weight="bold">T</text>
+          </svg>
+          <svg width="24" height="24" viewBox="0 0 100 100" fill="none" opacity="0.4">
+            <rect width="100" height="100" rx="20" fill="#f59e0b" />
+            <text x="50" y="65" text-anchor="middle" fill="#0c0a09" font-size="40" font-weight="bold">B</text>
+          </svg>
+          <svg width="24" height="24" viewBox="0 0 100 100" fill="none" opacity="0.4">
+            <rect width="100" height="100" rx="20" fill="#f59e0b" />
+            <text x="50" y="65" text-anchor="middle" fill="#0c0a09" font-size="40" font-weight="bold">P</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero__status hero-entrance" data-delay="800">
+      <span>Working since 2014</span>
+      <span>Remote-first, worldwide</span>
+      <span>Scroll to explore ↓</span>
+    </div>
+  </section>
+
+  <!-- ========== ABOUT ========== -->
+  <section class="about-section">
+    <div class="shell about-section__inner">
+      <div>
+        <p class="about-section__statement reveal">
+          We are <span class="accent">The Brown Print</span> — a Punjabi-rooted film studio in Toronto crafting
+          cinematic weddings, concerts, music videos, and brand stories that <span class="accent">resonate</span>.
+        </p>
+        <div class="about-section__meta reveal" style="transition-delay: 200ms;">
+          <div class="about-section__meta-item">
+            <span class="about-section__meta-value">350+</span>
+            <span class="about-section__meta-label">Weddings Filmed</span>
+          </div>
+          <div class="about-section__meta-item">
+            <span class="about-section__meta-value">80+</span>
+            <span class="about-section__meta-label">Music Projects</span>
+          </div>
+          <div class="about-section__meta-item">
+            <span class="about-section__meta-value">12</span>
+            <span class="about-section__meta-label">Years of Craft</span>
+          </div>
+        </div>
+      </div>
+      <div class="about-section__globe anim-float"></div>
+    </div>
+  </section>
+
+  <!-- ========== CREATE BAND ========== -->
+  <section class="create-band">
+    <div class="shell">
+      <div class="create-band__row reveal-stagger">
+        <span class="create-band__pill">Capture</span>
+        <span class="create-band__pill">Create</span>
+        <span class="create-band__pill accent">→</span>
+        <span class="create-band__pill">Deliver</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== MARQUEE ========== -->
+  <div class="marquee">
+    <div class="marquee__track">
+      <span class="marquee__item">Concert Films</span>
+      <span class="marquee__item marquee__sep">✦</span>
+      <span class="marquee__item">Wedding Cinema</span>
+      <span class="marquee__item marquee__sep">✦</span>
+      <span class="marquee__item">Music Videos</span>
+      <span class="marquee__item marquee__sep">✦</span>
+      <span class="marquee__item">Brand Films</span>
+      <span class="marquee__item marquee__sep">✦</span>
+      <span class="marquee__item">Social Events</span>
+      <span class="marquee__item marquee__sep">✦</span>
+      <!-- Duplicate for seamless loop -->
+      <span class="marquee__item">Concert Films</span>
+      <span class="marquee__item marquee__sep">✦</span>
+      <span class="marquee__item">Wedding Cinema</span>
+      <span class="marquee__item marquee__sep">✦</span>
+      <span class="marquee__item">Music Videos</span>
+      <span class="marquee__item marquee__sep">✦</span>
+      <span class="marquee__item">Brand Films</span>
+      <span class="marquee__item marquee__sep">✦</span>
+      <span class="marquee__item">Social Events</span>
+      <span class="marquee__item marquee__sep">✦</span>
+    </div>
+  </div>
+
+  <!-- ========== PORTFOLIO ========== -->
+  <section class="portfolio-section" id="portfolio">
+    <div class="shell">
+      <div class="portfolio-section__header">
+        <div>
+          <p class="portfolio-section__label reveal">Selected work</p>
+          <h2 class="portfolio-section__heading reveal" style="transition-delay: 100ms;">What we create</h2>
+        </div>
+        <a href="concerts.html" class="btn btn--outline reveal" style="transition-delay: 200ms;">
+          View all
+          <span class="btn__arrow">→</span>
+        </a>
+      </div>
+
+      <div class="portfolio-grid reveal-stagger">
+        <!-- Concert Films -->
+        <div class="portfolio-card" onclick="window.location.href='concerts.html'">
+          <div class="portfolio-card__badge">
+            <span class="portfolio-card__category">01 — Concert Films</span>
+            <div class="portfolio-card__arrow">↗</div>
+          </div>
+          <div class="portfolio-card__watermark">TBP</div>
+          <h3 class="portfolio-card__title">Live Stage Energy</h3>
+          <p class="portfolio-card__desc">High-energy multi-cam concert films that put you in the crowd. From intimate
+            venues to sold-out arenas.</p>
+          <div class="portfolio-card__tags">
+            <span class="portfolio-card__tag">Multi-cam</span>
+            <span class="portfolio-card__tag">Live Sound</span>
+            <span class="portfolio-card__tag">4K</span>
+          </div>
+        </div>
+
+        <!-- Wedding Cinema -->
+        <div class="portfolio-card" onclick="window.location.href='wedding.html'">
+          <div class="portfolio-card__badge">
+            <span class="portfolio-card__category">02 — Wedding Cinema</span>
+            <div class="portfolio-card__arrow">↗</div>
+          </div>
+          <div class="portfolio-card__watermark">TBP</div>
+          <h3 class="portfolio-card__title">Timeless Love Stories</h3>
+          <p class="portfolio-card__desc">Cinematic wedding films rooted in Punjabi tradition. Every laavan, every tear,
+            every dance floor moment.</p>
+          <div class="portfolio-card__tags">
+            <span class="portfolio-card__tag">Anand Karaj</span>
+            <span class="portfolio-card__tag">Cinematic</span>
+            <span class="portfolio-card__tag">Toronto</span>
+          </div>
+        </div>
+
+        <!-- Music Videos -->
+        <div class="portfolio-card" onclick="window.location.href='music.html'">
+          <div class="portfolio-card__badge">
+            <span class="portfolio-card__category">03 — Music Videos</span>
+            <div class="portfolio-card__arrow">↗</div>
+          </div>
+          <div class="portfolio-card__watermark">TBP</div>
+          <h3 class="portfolio-card__title">Concept & Vision</h3>
+          <p class="portfolio-card__desc">Concept-driven music videos and album visuals. From lyric videos to full
+            production storytelling.</p>
+          <div class="portfolio-card__tags">
+            <span class="portfolio-card__tag">Concept</span>
+            <span class="portfolio-card__tag">Album Visuals</span>
+            <span class="portfolio-card__tag">Single</span>
+          </div>
+        </div>
+
+        <!-- Brand Films -->
+        <div class="portfolio-card" onclick="window.location.href='brands.html'">
+          <div class="portfolio-card__badge">
+            <span class="portfolio-card__category">04 — Brand Films</span>
+            <div class="portfolio-card__arrow">↗</div>
+          </div>
+          <div class="portfolio-card__watermark">TBP</div>
+          <h3 class="portfolio-card__title">Stories That Sell</h3>
+          <p class="portfolio-card__desc">Clubs, restaurants, real estate, and hospitality films that elevate your brand
+            presence.</p>
+          <div class="portfolio-card__tags">
+            <span class="portfolio-card__tag">Restaurant</span>
+            <span class="portfolio-card__tag">Real Estate</span>
+            <span class="portfolio-card__tag">Hospitality</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SERVICES ========== -->
+  <section class="services-section">
+    <div class="shell">
+      <div class="services-section__header">
+        <p class="services-section__label reveal">Services</p>
+        <h2 class="services-section__heading reveal" style="transition-delay: 100ms;">What we do</h2>
+      </div>
+
+      <div class="services-list reveal-stagger">
+        <div class="service-row" onclick="window.location.href='concerts.html'">
+          <span class="service-row__num">01</span>
+          <h3 class="service-row__title">Concert Films</h3>
+          <div class="service-row__arrow">↗</div>
+        </div>
+        <div class="service-row" onclick="window.location.href='wedding.html'">
+          <span class="service-row__num">02</span>
+          <h3 class="service-row__title">Wedding Cinema</h3>
+          <div class="service-row__arrow">↗</div>
+        </div>
+        <div class="service-row" onclick="window.location.href='music.html'">
+          <span class="service-row__num">03</span>
+          <h3 class="service-row__title">Music Videos</h3>
+          <div class="service-row__arrow">↗</div>
+        </div>
+        <div class="service-row" onclick="window.location.href='brands.html'">
+          <span class="service-row__num">04</span>
+          <h3 class="service-row__title">Brand Films</h3>
+          <div class="service-row__arrow">↗</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== STATS ========== -->
+  <section class="stats-section">
+    <div class="shell">
+      <div class="stats-panel reveal">
+        <div class="stats-grid">
+          <div class="stat">
+            <div class="stat__number" data-target="350" data-suffix="+">0</div>
+            <div class="stat__label">Weddings Filmed</div>
+          </div>
+          <div class="stat">
+            <div class="stat__number" data-target="80" data-suffix="+">0</div>
+            <div class="stat__label">Music Projects</div>
+          </div>
+          <div class="stat">
+            <div class="stat__number" data-target="1200000" data-suffix="">0</div>
+            <div class="stat__label">Concert Views</div>
+          </div>
+          <div class="stat">
+            <div class="stat__number" data-target="12" data-suffix="">0</div>
+            <div class="stat__label">Years of Craft</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== CTA ========== -->
+  <section class="cta-section">
+    <div class="shell">
+      <div class="cta-section__inner reveal">
+        <h2 class="cta-section__heading">Ready to leave your print?</h2>
+        <p class="cta-section__text">Let's create something cinematic together. Whether it's a concert, wedding, music
+          video, or brand story — we're here to bring your vision to life.</p>
+        <button class="btn btn--accent" data-modal-open>
+          Start a project
+          <span class="btn__arrow">→</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer">
+    <div class="shell">
+      <div class="footer__top">
+        <div class="footer__brand">
+          <a href="index.html" class="header__logo">
+            <svg width="28" height="28" viewBox="0 0 100 100" fill="none">
+              <rect width="100" height="100" rx="20" fill="#0c0a09" />
+              <circle cx="50" cy="50" r="28" stroke="#f59e0b" stroke-width="6" fill="none" />
+              <circle cx="50" cy="50" r="8" fill="#f59e0b" />
+            </svg>
+            <span class="header__logo-text">The Brown Print</span>
+          </a>
+          <p>Punjabi-rooted film studio in Toronto. Concert films, wedding cinema, music videos, and brand storytelling.
+          </p>
+        </div>
+        <div class="footer__col">
+          <h4>Pages</h4>
+          <a href="index.html">Home</a>
+          <a href="wedding.html">Weddings</a>
+          <a href="music.html">Music</a>
+          <a href="concerts.html">Concerts</a>
+        </div>
+        <div class="footer__col">
+          <h4>More</h4>
+          <a href="social.html">Social Events</a>
+          <a href="brands.html">Brand Films</a>
+          <a href="#" data-modal-open>Contact</a>
+        </div>
+        <div class="footer__col">
+          <h4>Connect</h4>
+          <a href="#">Instagram</a>
+          <a href="#">YouTube</a>
+          <a href="#">Vimeo</a>
+          <a href="mailto:hello@thebrownprint.ca">Email</a>
+        </div>
+      </div>
+
+      <div class="footer__bottom">
+        <p>&copy; 2024 The Brown Print. All rights reserved.</p>
+        <div class="footer__socials">
+          <a href="#" aria-label="Instagram">IG</a>
+          <a href="#" aria-label="YouTube">YT</a>
+          <a href="#" aria-label="Vimeo">VM</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer__watermark">THE BROWN PRINT</div>
+  </footer>
+
+  <!-- ========== REQUEST MODAL ========== -->
+  <div class="modal-backdrop">
+    <div class="modal-panel">
+      <button class="modal-panel__close" aria-label="Close">✕</button>
+      <h3>Start a project</h3>
+      <p class="subtitle">Tell us about your vision and we'll get back to you within 24 hours.</p>
+
+      <form>
+        <div class="modal-field">
+          <label for="modal-name">Name</label>
+          <input type="text" id="modal-name" name="name" placeholder="Your name" required>
+        </div>
+        <div class="modal-field">
+          <label for="modal-email">Email</label>
+          <input type="email" id="modal-email" name="email" placeholder="you@email.com" required>
+        </div>
+        <div class="modal-field">
+          <label for="modal-project">Project details</label>
+          <textarea id="modal-project" name="project" placeholder="Tell us about your event, date, and vision..."
+            rows="4"></textarea>
+        </div>
+        <button type="submit" class="btn btn--accent">
+          Send inquiry
+          <span class="btn__arrow">→</span>
+        </button>
+      </form>
+
+      <div class="modal-success" style="display: none;">
+        <h3>Message sent!</h3>
+        <p>We'll get back to you within 24 hours. Thank you for reaching out.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== SCRIPTS ========== -->
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.168.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.168.0/examples/jsm/"
+    }
+  }
+  </script>
+
+  <!-- Lenis disabled: causes scroll lag -->
+  <script src="content.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/loader.js"></script>
+  <script src="js/nav.js"></script>
+  <script src="js/reveals.js"></script>
+  <script src="js/hero.js"></script>
+  <script src="js/cards.js"></script>
+  <script src="js/player.js"></script>
+  <script src="js/modal.js"></script>
+  <script src="js/pages/home.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Init adaptive grid
+      TBP.initAdaptiveGrid();
+
+      // Init Lenis
+      TBP.initLenis();
+
+      // Init loader (sets ready flag)
+      TBPLoader.init();
+      TBPLoader.interceptLinks();
+
+      // Init nav
+      TBPNav.init();
+
+      // Init reveals (gated on loader ready)
+      TBPReveals.init();
+
+      // Init hero liquid reveal
+      const heroCanvas = document.getElementById('heroCanvas');
+      const heroContainer = document.querySelector('.hero');
+      if (heroCanvas && heroContainer) {
+        const beforeImg = new Image();
+        beforeImg.src = 'media/home/hero-before.jpg';
+        const afterImg = new Image();
+        afterImg.src = 'media/home/hero-after.jpg';
+        TBPHero.init({
+          container: heroContainer,
+          canvas: heroCanvas,
+          beforeImg: beforeImg,
+          afterImg: afterImg,
+        });
+      }
+
+      // Init cards
+      TBPCards.init();
+
+      // Init modal
+      TBPModal.init();
+
+      // Init home page
+      TBPHome.init();
+    });
+  </script>
+</body>
+
+</html>

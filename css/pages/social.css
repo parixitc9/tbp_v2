@@ -1,0 +1,139 @@
+/* ============================================================
+   THE BROWN PRINT v2 — social.css
+   Social page: light teal/coral theme
+   ============================================================ */
+
+/* --- Hero --- */
+.page-hero--soc {
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  padding: 8rem 0 4rem;
+  background: linear-gradient(to bottom, #f0fdfa, #fff1f2, #f0fdfa);
+}
+
+.page-hero--soc::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 30%, rgba(45,212,191,0.22), transparent 70%);
+  pointer-events: none;
+}
+
+.page-hero--soc h1 { color: #292524; }
+.page-hero--soc h1 .accent { color: #14b8a6; }
+.page-hero--soc p { color: #57534e; max-width: 40rem; margin: 0 auto; }
+
+.page-hero--soc .hero__divider {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.page-hero--soc .hero__divider-line {
+  width: 3rem;
+  height: 1px;
+  background: rgba(13,148,136,0.4);
+}
+
+/* --- Section labels --- */
+.soc-label { color: #0d9488; }
+
+/* --- Work grid section --- */
+.soc-section {
+  padding: clamp(4rem, 8vw, 8rem) 0;
+}
+
+.soc-section__header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+.soc-section__icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  color: #0d9488;
+}
+
+.soc-section__label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #0d9488;
+}
+
+/* --- Confetti marquee --- */
+.soc-confetti {
+  border-color: rgba(45,212,191,0.2);
+  background: #fff1f2;
+}
+
+.soc-confetti .marquee__item {
+  color: rgba(20,184,166,0.35);
+}
+
+.soc-confetti .marquee__sep {
+  color: #14b8a6;
+}
+
+/* --- CTA section --- */
+.soc-cta {
+  background: #ffe4e6;
+}
+
+.soc-cta h2 { color: #292524; }
+.soc-cta p { color: #57534e; }
+
+/* --- Work card tinting --- */
+[data-theme="social"] .work-card {
+  border-color: rgba(45,212,191,0.25);
+}
+
+[data-theme="social"] .work-card:hover {
+  border-color: rgba(45,212,191,0.5);
+}
+
+[data-theme="social"] .work-card__play {
+  background: #14b8a6;
+  color: #fff;
+}
+
+/* --- Footer light theme --- */
+[data-theme="social"] .footer {
+  background: #ccfbf1;
+  border-color: rgba(45,212,191,0.4);
+}
+
+[data-theme="social"] .footer__top h4 { color: #292524; }
+[data-theme="social"] .footer__brand p { color: #57534e; }
+[data-theme="social"] .footer__col a { color: #57534e; }
+[data-theme="social"] .footer__col a:hover { color: #0d9488; }
+[data-theme="social"] .footer__bottom { border-color: rgba(45,212,191,0.4); }
+[data-theme="social"] .footer__bottom p { color: #78716c; }
+
+/* --- Modal light theme --- */
+[data-theme="social"] .modal-panel {
+  background: #f0fdfa;
+  border-color: rgba(45,212,191,0.3);
+}
+
+[data-theme="social"] .modal-field input,
+[data-theme="social"] .modal-field textarea {
+  background: rgba(0,0,0,0.03);
+  border-color: rgba(45,212,191,0.3);
+  color: #292524;
+}
+
+[data-theme="social"] .modal-field input::placeholder,
+[data-theme="social"] .modal-field textarea::placeholder {
+  color: #a8a29e;
+}
