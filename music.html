@@ -7,7 +7,7 @@
   <meta name="description" content="Concept-driven album visuals and music videos for artists who want their sound to be seen.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/components.css">
   <link rel="stylesheet" href="css/animations.css">
@@ -50,23 +50,30 @@
   </div>
 
   <!-- HERO -->
-  <section class="page-hero page-hero--mus">
-    <div class="shell" style="position:relative; z-index:1;">
-      <div style="display:flex;align-items:center;gap:1rem;justify-content:center;margin-bottom:1.5rem;">
-        <div style="width:3rem;height:1px;background:rgba(139,92,246,0.4);"></div>
-        <span class="hero__eyebrow mus-label hero-entrance" data-delay="200">Music Albums</span>
-        <div style="width:3rem;height:1px;background:rgba(139,92,246,0.4);"></div>
+  <section class="lhero">
+    <div class="lhero__media"><img src="media/music/music-1.webp" alt="Artist performing under studio lights" fetchpriority="high"></div>
+    <div class="lhero__vignette" aria-hidden="true"></div>
+    <div class="lhero__body shell">
+      <div class="hero-copy">
+        <p class="hero-copy__eyebrow hero-entrance" data-delay="200">Music Films — Toronto</p>
+        <h1 class="hero-entrance" data-delay="250"><span class="outline-txt">Sound, made</span><br><span class="serif-accent">visible.</span></h1>
+        <p class="hero-entrance" data-delay="400">Concept-driven album visuals and music videos for artists who want their sound to be seen.</p>
+        <div class="hero-copy__ctas hero-entrance" data-delay="500">
+          <button class="btn btn--accent" data-modal-open>Start a music project <span class="btn__arrow">→</span></button>
+          <a class="btn btn--hero-ghost" href="#work">See the work <span class="btn__arrow">↗</span></a>
+        </div>
       </div>
-      <h1 class="hero__h1 hero-entrance" data-delay="250" style="text-align:center;">Sound, made <span class="accent">visible</span></h1>
-      <p class="hero-entrance" data-delay="350" style="text-align:center;margin-top:1rem;font-size:1.05rem;">Concept-driven album visuals and music videos for artists who want their sound to be seen.</p>
-      <div class="hero__ctas hero-entrance" data-delay="500" style="justify-content:center;margin-top:2rem;">
-        <button class="btn btn--accent" data-modal-open>Start a music project <span class="btn__arrow">→</span></button>
+    </div>
+    <div class="lhero__tick hero-entrance" data-delay="600" aria-hidden="true">
+      <div class="lhero__tick-track">
+        <span>Album Visuals <i class="sep">✦</i> Music Videos <i class="sep">✦</i> Lyric Films <i class="sep">✦</i> Studio Sessions <i class="sep">✦</i> Visualizers <i class="sep">✦</i></span>
+        <span>Album Visuals <i class="sep">✦</i> Music Videos <i class="sep">✦</i> Lyric Films <i class="sep">✦</i> Studio Sessions <i class="sep">✦</i> Visualizers <i class="sep">✦</i></span>
       </div>
     </div>
   </section>
 
   <!-- PROJECTS -->
-  <section class="mus-section">
+  <section class="mus-section" id="work">
     <div class="shell">
       <div class="mus-section__header reveal">
         <svg class="mus-section__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/></svg>
@@ -89,6 +96,77 @@
       <span class="marquee__item">Studio Sessions</span><span class="marquee__item marquee__sep">✦</span>
     </div>
   </div>
+
+  <!-- SERVICES -->
+  <section class="lsvc">
+    <div class="shell">
+      <div class="lsvc__head">
+        <p class="s-eyebrow reveal">Services</p>
+        <h2 class="reveal" style="transition-delay:100ms;">Built for <span class="serif-accent">the sound.</span></h2>
+      </div>
+      <div class="lsvc__stack">
+        <article class="lsvc__card">
+          <div class="lsvc__top"><span class="lsvc__no">01 / VIDEOS</span><button class="lsvc__cta" data-modal-open>Book this →</button></div>
+          <h3>Music Videos</h3>
+          <div class="lsvc__body">
+            <p class="lsvc__desc">Concept-first videos built around your track — treatment, set design, and a cut that moves with the beat.</p>
+            <div class="lsvc__tags"><span>Concept</span><span>Set design</span><span>4K</span></div>
+          </div>
+        </article>
+        <article class="lsvc__card">
+          <div class="lsvc__top"><span class="lsvc__no">02 / ALBUMS</span><button class="lsvc__cta" data-modal-open>Book this →</button></div>
+          <h3>Album Visuals</h3>
+          <div class="lsvc__body">
+            <p class="lsvc__desc">Cover films, canvas loops, and visualizers — one visual world across the whole record.</p>
+            <div class="lsvc__tags"><span>Cover films</span><span>Canvas loops</span><span>Visualizers</span></div>
+          </div>
+        </article>
+        <article class="lsvc__card">
+          <div class="lsvc__top"><span class="lsvc__no">03 / SESSIONS</span><button class="lsvc__cta" data-modal-open>Book this →</button></div>
+          <h3>Studio Sessions</h3>
+          <div class="lsvc__body">
+            <p class="lsvc__desc">Live takes and acoustic sessions filmed in the room — multi-cam, synced to the board mix.</p>
+            <div class="lsvc__tags"><span>Live takes</span><span>Multi-cam</span><span>Sound sync</span></div>
+          </div>
+        </article>
+        <article class="lsvc__card">
+          <div class="lsvc__top"><span class="lsvc__no">04 / ARTISTS</span><button class="lsvc__cta" data-modal-open>Book this →</button></div>
+          <h3>Artist Films &amp; EPK</h3>
+          <div class="lsvc__body">
+            <p class="lsvc__desc">Documentary pieces, press kits, and tour content — the story between the releases.</p>
+            <div class="lsvc__tags"><span>Documentary</span><span>EPK</span><span>Tour content</span></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section class="lstats">
+    <div class="shell">
+      <p class="s-eyebrow reveal">By the numbers</p>
+      <div class="lstat-row reveal">
+        <div class="n"><span class="stat__number" data-target="60">0</span><em>+</em></div>
+        <p class="lb">Videos released</p>
+        <p class="ds">Music videos, sessions, and visualizers.</p>
+      </div>
+      <div class="lstat-row reveal">
+        <div class="n"><span class="stat__number" data-target="2.5">0</span><em>M</em></div>
+        <p class="lb">Views across platforms</p>
+        <p class="ds">On artist channels, reels, and shorts.</p>
+      </div>
+      <div class="lstat-row reveal">
+        <div class="n"><span class="stat__number" data-target="12">0</span></div>
+        <p class="lb">Charting artists</p>
+        <p class="ds">From first singles to festival headliners.</p>
+      </div>
+      <div class="lstat-row reveal">
+        <div class="n"><span class="stat__number" data-target="6">0</span><em>w</em></div>
+        <p class="lb">Concept to release</p>
+        <p class="ds">Treatment, shoot, grade, and delivery.</p>
+      </div>
+    </div>
+  </section>
 
   <!-- CTA -->
   <section class="cta-section mus-cta">

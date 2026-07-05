@@ -7,7 +7,7 @@
   <meta name="description" content="Clubs, restaurants, real estate, and hospitality films that elevate your brand.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/components.css">
   <link rel="stylesheet" href="css/animations.css">
@@ -50,23 +50,30 @@
   </div>
 
   <!-- HERO -->
-  <section class="page-hero page-hero--brd">
-    <div class="shell" style="position:relative; z-index:1;">
-      <div style="display:flex;align-items:center;gap:1rem;justify-content:center;margin-bottom:1.5rem;">
-        <div style="width:3rem;height:1px;background:rgba(212,178,95,0.4);"></div>
-        <span class="hero__eyebrow brd-label hero-entrance" data-delay="200">Brands</span>
-        <div style="width:3rem;height:1px;background:rgba(212,178,95,0.4);"></div>
+  <section class="lhero">
+    <div class="lhero__media"><img src="media/brands/brand-1.webp" alt="Moody restaurant interior during evening service" fetchpriority="high"></div>
+    <div class="lhero__vignette" aria-hidden="true"></div>
+    <div class="lhero__body shell">
+      <div class="hero-copy">
+        <p class="hero-copy__eyebrow hero-entrance" data-delay="200">Brand Films — Toronto</p>
+        <h1 class="hero-entrance" data-delay="250"><span class="outline-txt">Films that sell</span><br>the <span class="serif-accent">feeling.</span></h1>
+        <p class="hero-entrance" data-delay="400">Clubs, restaurants, real estate, and hospitality films that elevate your brand presence.</p>
+        <div class="hero-copy__ctas hero-entrance" data-delay="500">
+          <button class="btn btn--accent" data-modal-open>Start a brand project <span class="btn__arrow">→</span></button>
+          <a class="btn btn--hero-ghost" href="#work">See the work <span class="btn__arrow">↗</span></a>
+        </div>
       </div>
-      <h1 class="hero__h1 hero-entrance" data-delay="250" style="text-align:center;">Films that sell the <span class="accent">feeling</span></h1>
-      <p class="hero-entrance" data-delay="350" style="text-align:center;margin-top:1rem;font-size:1.05rem;">Clubs, restaurants, real estate, and hospitality films that elevate your brand presence.</p>
-      <div class="hero__ctas hero-entrance" data-delay="500" style="justify-content:center;margin-top:2rem;">
-        <button class="btn btn--accent" data-modal-open>Start a brand project <span class="btn__arrow">→</span></button>
+    </div>
+    <div class="lhero__tick hero-entrance" data-delay="600" aria-hidden="true">
+      <div class="lhero__tick-track">
+        <span>Restaurants <i class="sep">✦</i> Nightclubs <i class="sep">✦</i> Real Estate <i class="sep">✦</i> Hospitality <i class="sep">✦</i> Cafés <i class="sep">✦</i> Launch Events <i class="sep">✦</i></span>
+        <span>Restaurants <i class="sep">✦</i> Nightclubs <i class="sep">✦</i> Real Estate <i class="sep">✦</i> Hospitality <i class="sep">✦</i> Cafés <i class="sep">✦</i> Launch Events <i class="sep">✦</i></span>
       </div>
     </div>
   </section>
 
   <!-- CLIENTS -->
-  <section class="brd-section">
+  <section class="brd-section" id="work">
     <div class="shell">
       <div class="brd-section__header reveal">
         <svg class="brd-section__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"/><path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"/><path d="M10 6h4"/><path d="M10 10h4"/><path d="M10 14h4"/><path d="M10 18h4"/></svg>
@@ -91,6 +98,77 @@
       <span class="marquee__item">Retail</span><span class="marquee__item marquee__sep">✦</span>
     </div>
   </div>
+
+  <!-- SERVICES -->
+  <section class="lsvc">
+    <div class="shell">
+      <div class="lsvc__head">
+        <p class="s-eyebrow reveal">Services</p>
+        <h2 class="reveal" style="transition-delay:100ms;">Built for <span class="serif-accent">the brand.</span></h2>
+      </div>
+      <div class="lsvc__stack">
+        <article class="lsvc__card">
+          <div class="lsvc__top"><span class="lsvc__no">01 / FILMS</span><button class="lsvc__cta" data-modal-open>Book this →</button></div>
+          <h3>Brand Films</h3>
+          <div class="lsvc__body">
+            <p class="lsvc__desc">Story-led films that show what your brand feels like — not just what it looks like.</p>
+            <div class="lsvc__tags"><span>Story-led</span><span>4K</span><span>Cinema grade</span></div>
+          </div>
+        </article>
+        <article class="lsvc__card">
+          <div class="lsvc__top"><span class="lsvc__no">02 / ADS</span><button class="lsvc__cta" data-modal-open>Book this →</button></div>
+          <h3>Promos &amp; Ads</h3>
+          <div class="lsvc__body">
+            <p class="lsvc__desc">Short, sharp cuts built for paid and organic — 15s and 30s versions sized for every placement.</p>
+            <div class="lsvc__tags"><span>15/30s cuts</span><span>Paid-ready</span><span>Vertical</span></div>
+          </div>
+        </article>
+        <article class="lsvc__card">
+          <div class="lsvc__top"><span class="lsvc__no">03 / SPACES</span><button class="lsvc__cta" data-modal-open>Book this →</button></div>
+          <h3>Space &amp; Property Tours</h3>
+          <div class="lsvc__body">
+            <p class="lsvc__desc">Restaurants, penthouses, and hotels filmed to feel walkable — smooth movement, real light, drone when it counts.</p>
+            <div class="lsvc__tags"><span>Real estate</span><span>Hospitality</span><span>Drone</span></div>
+          </div>
+        </article>
+        <article class="lsvc__card">
+          <div class="lsvc__top"><span class="lsvc__no">04 / EVENTS</span><button class="lsvc__cta" data-modal-open>Book this →</button></div>
+          <h3>Launch &amp; Event Recaps</h3>
+          <div class="lsvc__body">
+            <p class="lsvc__desc">Grand openings and launch nights cut into recap films and socials while the buzz is still live.</p>
+            <div class="lsvc__tags"><span>Recap film</span><span>Socials</span><span>48h teaser</span></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section class="lstats">
+    <div class="shell">
+      <p class="s-eyebrow reveal">By the numbers</p>
+      <div class="lstat-row reveal">
+        <div class="n"><span class="stat__number" data-target="80">0</span><em>+</em></div>
+        <p class="lb">Brand films delivered</p>
+        <p class="ds">Restaurants, clubs, real estate, and hospitality.</p>
+      </div>
+      <div class="lstat-row reveal">
+        <div class="n"><span class="stat__number" data-target="35">0</span><em>+</em></div>
+        <p class="lb">Clients</p>
+        <p class="ds">Most stay for the next campaign.</p>
+      </div>
+      <div class="lstat-row reveal">
+        <div class="n"><span class="stat__number" data-target="3">0</span><em>x</em></div>
+        <p class="lb">Average engagement lift</p>
+        <p class="ds">When film replaces static content.</p>
+      </div>
+      <div class="lstat-row reveal">
+        <div class="n"><span class="stat__number" data-target="48">0</span><em>h</em></div>
+        <p class="lb">Teaser delivery</p>
+        <p class="ds">The first cut lands before the buzz fades.</p>
+      </div>
+    </div>
+  </section>
 
   <!-- CTA -->
   <section class="cta-section brd-cta">

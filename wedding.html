@@ -7,7 +7,7 @@
   <meta name="description" content="Punjabi-rooted wedding cinema in Toronto. Cinematic films and photography for Anand Karaj, sangeet, and celebrations.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/components.css">
   <link rel="stylesheet" href="css/animations.css">
@@ -55,24 +55,31 @@
     <a href="brands.html" class="nav-overlay__link">Brands</a>
   </div>
 
-  <!-- HERO (music.html style, centered) -->
-  <section class="page-hero page-hero--wed">
-    <div class="shell" style="position:relative; z-index:1;">
-      <div style="display:flex;align-items:center;gap:1rem;justify-content:center;margin-bottom:1.5rem;">
-        <div style="width:3rem;height:1px;background:rgba(190,18,60,0.3);"></div>
-        <span class="hero__eyebrow wed-label hero-entrance" data-delay="200">Weddings</span>
-        <div style="width:3rem;height:1px;background:rgba(190,18,60,0.3);"></div>
+  <!-- HERO -->
+  <section class="lhero">
+    <div class="lhero__media"><img src="media/wedding/photo-1.webp" alt="Bride and groom during their Anand Karaj ceremony" fetchpriority="high"></div>
+    <div class="lhero__vignette" aria-hidden="true"></div>
+    <div class="lhero__body shell">
+      <div class="hero-copy">
+        <p class="hero-copy__eyebrow hero-entrance" data-delay="200">Wedding Films — Toronto</p>
+        <h1 class="hero-entrance" data-delay="250"><span class="outline-txt">Where forever</span><br><span class="serif-accent">begins.</span></h1>
+        <p class="hero-entrance" data-delay="400">Punjabi weddings told with warmth, colour, and quiet emotion — from the Anand Karaj to the last dance.</p>
+        <div class="hero-copy__ctas hero-entrance" data-delay="500">
+          <button class="btn btn--accent" data-modal-open>Start your wedding project <span class="btn__arrow">→</span></button>
+          <a class="btn btn--hero-ghost" href="#work">See the work <span class="btn__arrow">↗</span></a>
+        </div>
       </div>
-      <h1 class="hero__h1 hero-entrance" data-delay="250" style="text-align:center;">Where forever <span class="accent">begins</span></h1>
-      <p class="hero-entrance" data-delay="350" style="text-align:center;margin-top:1rem;font-size:1.05rem;">Punjabi weddings told with warmth, colour, and quiet emotion — from the Anand Karaj to the last dance.</p>
-      <div class="hero__ctas hero-entrance" data-delay="500" style="justify-content:center;margin-top:2rem;">
-        <button class="btn btn--accent" data-modal-open>Start your wedding project <span class="btn__arrow">→</span></button>
+    </div>
+    <div class="lhero__tick hero-entrance" data-delay="600" aria-hidden="true">
+      <div class="lhero__tick-track">
+        <span>Anand Karaj <i class="sep">✦</i> Mehndi Morning <i class="sep">✦</i> Sangeet Night <i class="sep">✦</i> First Look <i class="sep">✦</i> Golden Hour <i class="sep">✦</i> Reception <i class="sep">✦</i></span>
+        <span>Anand Karaj <i class="sep">✦</i> Mehndi Morning <i class="sep">✦</i> Sangeet Night <i class="sep">✦</i> First Look <i class="sep">✦</i> Golden Hour <i class="sep">✦</i> Reception <i class="sep">✦</i></span>
       </div>
     </div>
   </section>
 
   <!-- PHOTOGRAPHY -->
-  <section class="wed-section wed-section--photos">
+  <section class="wed-section wed-section--photos" id="work">
     <div class="shell">
       <div class="wed-section__header reveal">
         <svg class="wed-section__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
@@ -104,6 +111,77 @@
         <p class="reveal" style="transition-delay:200ms;max-width:42rem;margin:0.75rem auto 0;color:#57534e;">Every couple has a story. Here are a few of our favourites — read them, get inspired, imagine your own.</p>
       </div>
       <div id="storyList" class="stories-grid reveal-stagger"></div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="lsvc">
+    <div class="shell">
+      <div class="lsvc__head">
+        <p class="s-eyebrow reveal">Services</p>
+        <h2 class="reveal" style="transition-delay:100ms;">Built for <span class="serif-accent">the big day.</span></h2>
+      </div>
+      <div class="lsvc__stack">
+        <article class="lsvc__card">
+          <div class="lsvc__top"><span class="lsvc__no">01 / FILMS</span><button class="lsvc__cta" data-modal-open>Book this →</button></div>
+          <h3>The Wedding Film</h3>
+          <div class="lsvc__body">
+            <p class="lsvc__desc">A cinematic feature of the whole day — the vows, the tears, the dance floor — graded warm and cut to your story.</p>
+            <div class="lsvc__tags"><span>Feature film</span><span>4K</span><span>Licensed music</span></div>
+          </div>
+        </article>
+        <article class="lsvc__card">
+          <div class="lsvc__top"><span class="lsvc__no">02 / PHOTOGRAPHY</span><button class="lsvc__cta" data-modal-open>Book this →</button></div>
+          <h3>Photography</h3>
+          <div class="lsvc__body">
+            <p class="lsvc__desc">Candid coverage and editorial portraits — from the mehndi morning to golden hour, delivered as a curated gallery.</p>
+            <div class="lsvc__tags"><span>Candid</span><span>Portraits</span><span>Albums</span></div>
+          </div>
+        </article>
+        <article class="lsvc__card">
+          <div class="lsvc__top"><span class="lsvc__no">03 / SOCIALS</span><button class="lsvc__cta" data-modal-open>Book this →</button></div>
+          <h3>Teasers &amp; Reels</h3>
+          <div class="lsvc__body">
+            <p class="lsvc__desc">A vertical teaser within days — ready for the family group chat before the honeymoon starts.</p>
+            <div class="lsvc__tags"><span>60s teaser</span><span>Vertical</span><span>Same-week</span></div>
+          </div>
+        </article>
+        <article class="lsvc__card">
+          <div class="lsvc__top"><span class="lsvc__no">04 / FULL COVERAGE</span><button class="lsvc__cta" data-modal-open>Book this →</button></div>
+          <h3>Multi-Day Coverage</h3>
+          <div class="lsvc__body">
+            <p class="lsvc__desc">Mehndi, sangeet, Anand Karaj, and reception — one crew across every event, so nothing gets missed.</p>
+            <div class="lsvc__tags"><span>Multi-day</span><span>Two shooters</span><span>Backup audio</span></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section class="lstats">
+    <div class="shell">
+      <p class="s-eyebrow reveal">By the numbers</p>
+      <div class="lstat-row reveal">
+        <div class="n"><span class="stat__number" data-target="150">0</span><em>+</em></div>
+        <p class="lb">Weddings filmed</p>
+        <p class="ds">From intimate ceremonies to three-day celebrations.</p>
+      </div>
+      <div class="lstat-row reveal">
+        <div class="n"><span class="stat__number" data-target="300">0</span><em>k+</em></div>
+        <p class="lb">Frames delivered</p>
+        <p class="ds">Photos and film stills across every gallery.</p>
+      </div>
+      <div class="lstat-row reveal">
+        <div class="n"><span class="stat__number" data-target="2">0</span><em>x</em></div>
+        <p class="lb">Shooters every day</p>
+        <p class="ds">Two angles on every vow, every laugh.</p>
+      </div>
+      <div class="lstat-row reveal">
+        <div class="n"><span class="stat__number" data-target="4">0</span><em>w</em></div>
+        <p class="lb">Full film delivery</p>
+        <p class="ds">Teaser in days, feature film in weeks.</p>
+      </div>
     </div>
   </section>
 

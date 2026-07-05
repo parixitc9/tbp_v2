@@ -84,25 +84,9 @@ const TBPLoader = (() => {
     }, 700);
   }
 
-  /* --- Init --- */
+  /* --- Init (counter animation removed — pages become ready immediately) --- */
   function init() {
-    build();
-
-    if (TBP.prefersReducedMotion) {
-      loaderEl.classList.add('done');
-      setTimeout(() => {
-        loaderEl?.remove();
-        loaderEl = null;
-        markReady();
-      }, 100);
-      return;
-    }
-
-    TBP.lockScroll();
-    animateCounter(() => {
-      TBP.unlockScroll();
-      markReady();
-    });
+    markReady();
   }
 
   /* --- Ready system --- */

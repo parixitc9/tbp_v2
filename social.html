@@ -7,7 +7,7 @@
   <meta name="description" content="Birthdays, anniversaries, engagements, and family milestones captured in Toronto.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/components.css">
   <link rel="stylesheet" href="css/animations.css">
@@ -50,23 +50,30 @@
   </div>
 
   <!-- HERO -->
-  <section class="page-hero page-hero--soc">
-    <div class="shell" style="position:relative; z-index:1;">
-      <div style="display:flex;align-items:center;gap:1rem;justify-content:center;margin-bottom:1.5rem;">
-        <div style="width:3rem;height:1px;background:rgba(13,148,136,0.4);"></div>
-        <span class="hero__eyebrow soc-label hero-entrance" data-delay="200">Social Events</span>
-        <div style="width:3rem;height:1px;background:rgba(13,148,136,0.4);"></div>
+  <section class="lhero">
+    <div class="lhero__media"><img src="media/social/social-1.webp" alt="Family celebrating together at a golden anniversary" fetchpriority="high"></div>
+    <div class="lhero__vignette" aria-hidden="true"></div>
+    <div class="lhero__body shell">
+      <div class="hero-copy">
+        <p class="hero-copy__eyebrow hero-entrance" data-delay="200">Social Events — Toronto</p>
+        <h1 class="hero-entrance" data-delay="250"><span class="outline-txt">Every celebration,</span><br><span class="serif-accent">captured.</span></h1>
+        <p class="hero-entrance" data-delay="400">Birthdays, anniversaries, engagements, and family milestones — every moment deserves to be remembered.</p>
+        <div class="hero-copy__ctas hero-entrance" data-delay="500">
+          <button class="btn btn--accent" data-modal-open>Start a social project <span class="btn__arrow">→</span></button>
+          <a class="btn btn--hero-ghost" href="#work">See the work <span class="btn__arrow">↗</span></a>
+        </div>
       </div>
-      <h1 class="hero__h1 hero-entrance" data-delay="250" style="text-align:center;">Every <span class="accent">celebration</span>, captured</h1>
-      <p class="hero-entrance" data-delay="350" style="text-align:center;margin-top:1rem;font-size:1.05rem;">Birthdays, anniversaries, engagements, and family milestones — every moment deserves to be remembered.</p>
-      <div class="hero__ctas hero-entrance" data-delay="500" style="justify-content:center;margin-top:2rem;">
-        <button class="btn btn--accent" data-modal-open>Start a social project <span class="btn__arrow">→</span></button>
+    </div>
+    <div class="lhero__tick hero-entrance" data-delay="600" aria-hidden="true">
+      <div class="lhero__tick-track">
+        <span>Birthdays <i class="sep">✦</i> Anniversaries <i class="sep">✦</i> Engagements <i class="sep">✦</i> Graduations <i class="sep">✦</i> Sangeet Nights <i class="sep">✦</i> Family Parties <i class="sep">✦</i></span>
+        <span>Birthdays <i class="sep">✦</i> Anniversaries <i class="sep">✦</i> Engagements <i class="sep">✦</i> Graduations <i class="sep">✦</i> Sangeet Nights <i class="sep">✦</i> Family Parties <i class="sep">✦</i></span>
       </div>
     </div>
   </section>
 
   <!-- EVENTS GRID -->
-  <section class="soc-section">
+  <section class="soc-section" id="work">
     <div class="shell">
       <div class="soc-section__header reveal">
         <svg class="soc-section__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48l2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48l2.83-2.83"/></svg>
@@ -91,6 +98,77 @@
       <span class="marquee__item">Family Parties</span><span class="marquee__item marquee__sep">✦</span>
     </div>
   </div>
+
+  <!-- SERVICES -->
+  <section class="lsvc">
+    <div class="shell">
+      <div class="lsvc__head">
+        <p class="s-eyebrow reveal">Services</p>
+        <h2 class="reveal" style="transition-delay:100ms;">Built for <span class="serif-accent">the party.</span></h2>
+      </div>
+      <div class="lsvc__stack">
+        <article class="lsvc__card">
+          <div class="lsvc__top"><span class="lsvc__no">01 / FILMS</span><button class="lsvc__cta" data-modal-open>Book this →</button></div>
+          <h3>Event Films</h3>
+          <div class="lsvc__body">
+            <p class="lsvc__desc">Highlight films that keep the energy of the night — the speeches, the surprises, the dance floor.</p>
+            <div class="lsvc__tags"><span>Highlights</span><span>4K</span><span>Same-week</span></div>
+          </div>
+        </article>
+        <article class="lsvc__card">
+          <div class="lsvc__top"><span class="lsvc__no">02 / PHOTOGRAPHY</span><button class="lsvc__cta" data-modal-open>Book this →</button></div>
+          <h3>Photography</h3>
+          <div class="lsvc__body">
+            <p class="lsvc__desc">Candid frames and family portraits, delivered as a shareable gallery the whole guest list can keep.</p>
+            <div class="lsvc__tags"><span>Candid</span><span>Portraits</span><span>Prints</span></div>
+          </div>
+        </article>
+        <article class="lsvc__card">
+          <div class="lsvc__top"><span class="lsvc__no">03 / SOCIALS</span><button class="lsvc__cta" data-modal-open>Book this →</button></div>
+          <h3>Reels &amp; Highlights</h3>
+          <div class="lsvc__body">
+            <p class="lsvc__desc">Vertical cuts ready for the feed within a day — captioned, colour-graded, and sized for every platform.</p>
+            <div class="lsvc__tags"><span>Vertical</span><span>24h teaser</span><span>Captions</span></div>
+          </div>
+        </article>
+        <article class="lsvc__card">
+          <div class="lsvc__top"><span class="lsvc__no">04 / FULL COVERAGE</span><button class="lsvc__cta" data-modal-open>Book this →</button></div>
+          <h3>Full Celebration Coverage</h3>
+          <div class="lsvc__body">
+            <p class="lsvc__desc">From the decor reveal to the last goodbye — photo and film together, one crew, zero missed moments.</p>
+            <div class="lsvc__tags"><span>Photo + film</span><span>Two shooters</span><span>Family edits</span></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section class="lstats">
+    <div class="shell">
+      <p class="s-eyebrow reveal">By the numbers</p>
+      <div class="lstat-row reveal">
+        <div class="n"><span class="stat__number" data-target="200">0</span><em>+</em></div>
+        <p class="lb">Celebrations covered</p>
+        <p class="ds">Birthdays, anniversaries, and everything between.</p>
+      </div>
+      <div class="lstat-row reveal">
+        <div class="n"><span class="stat__number" data-target="500">0</span><em>+</em></div>
+        <p class="lb">Families served</p>
+        <p class="ds">Many of them, more than once.</p>
+      </div>
+      <div class="lstat-row reveal">
+        <div class="n"><span class="stat__number" data-target="24">0</span><em>h</em></div>
+        <p class="lb">First highlight delivered</p>
+        <p class="ds">The reel lands while the party is still trending.</p>
+      </div>
+      <div class="lstat-row reveal">
+        <div class="n"><span class="stat__number" data-target="10">0</span></div>
+        <p class="lb">Years of parties</p>
+        <p class="ds">A decade of milestones on film.</p>
+      </div>
+    </div>
+  </section>
 
   <!-- CTA -->
   <section class="cta-section soc-cta">

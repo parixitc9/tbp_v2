@@ -1,74 +1,351 @@
-<!DOCTYPE html>
-<html lang="en" data-theme="concerts">
+<!doctype html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Concerts — The Brown Print</title>
-  <meta name="description" content="An immersive live-concert film experience — from the crimson stage wash to a single silver spotlight.">
-  <meta name="theme-color" content="#060606">
+  <meta name="description" content="The Encore Edition — The Brown Print's concert film studio. Multi-cam concert films, aftermovies, and artist films from the loudest rooms in Canada." />
+  <meta name="theme-color" content="#0a0908" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230a0908'/%3E%3Ctext x='32' y='45' font-family='Georgia,serif' font-size='36' font-style='italic' fill='%23e11d2e' text-anchor='middle'%3EB%3C/text%3E%3C/svg%3E" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/base.css">
-  <link rel="stylesheet" href="css/components.css">
-  <link rel="stylesheet" href="css/animations.css">
-  <link rel="stylesheet" href="css/pages/home.css">
-  <link rel="stylesheet" href="css/pages/concerts.css">
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎤</text></svg>">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=Onest:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* ============ RESET / BASE ============ */
+    *{ box-sizing:border-box; margin:0; padding:0 }
+    html{ font-size:16px; -webkit-font-smoothing:antialiased; background:#0a0908 }
+    body{ background:var(--void); color:var(--bone); font-family:'Space Grotesk',sans-serif; overflow-x:hidden }
+    a{ color:inherit; text-decoration:none }
+    button{ font:inherit; color:inherit; background:none; border:none; cursor:pointer }
+    ul{ list-style:none }
+    img{ display:block }
+    ::selection{ background:var(--crimson); color:#fff }
+    .sr-only{ position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0 }
+    :focus-visible{ outline:2px solid var(--crimson); outline-offset:2px }
+
+    /* ============ ADAPTIVE REM GRID (same clamps as base.css) ============ */
+    @media (min-width:1441px){ html{ font-size:clamp(16px, 0.83333vw, 20px) } }
+    @media (max-width:1440px){ html{ font-size:clamp(14px, 1.11111vw, 16px) } }
+    @media (max-width:1024px){ html{ font-size:clamp(13px, 1.5625vw, 16px) } }
+    @media (max-width:640px){  html{ font-size:clamp(12px, 4.44444vw, 16px) } }
+
+    /* ============ TOKENS ============ */
+    :root{
+      --void:#0a0908; --coal:#141110; --ash:#1e1a18; --panel:#171412;
+      --bone:#f5f1ea; --bone-dim:#efe7d7;
+      --crimson:#e11d2e; --crimson-soft:#ff4d5e; --crimson-deep:#8f1020;
+      --amber:#f59e0b; --amber-bright:#fbbf24;
+      --smoke:#8a8177; --silver:#d6d3d1;
+      --line:rgba(245,241,234,.12); --line-soft:rgba(245,241,234,.07);
+      --dim-70:rgba(245,241,234,.7); --dim-55:rgba(245,241,234,.55); --dim-45:rgba(245,241,234,.45); --dim-35:rgba(245,241,234,.35);
+      --r-pill:9999px; --r-card:2rem; --r-card-sm:1.25rem; --r-ctl:.875rem;
+      --ease-out:cubic-bezier(.215,.61,.355,1);
+      --ease-quart:cubic-bezier(.165,.84,.44,1);
+      --spring:cubic-bezier(.2,.8,.2,1);
+      --soft:cubic-bezier(.22,1,.36,1);
+    }
+    .shell{ max-width:88rem; margin-inline:auto; padding-inline:1.25rem }
+    @media (min-width:640px){ .shell{ padding-inline:2.5rem } }
+    .serif{ font-family:'Instrument Serif',Georgia,serif; font-style:italic; font-weight:400 }
+    .ic{ width:1em; height:1em; display:inline-block; vertical-align:-0.125em; fill:none }
+    .outline-txt{ color:transparent; -webkit-text-stroke:1.5px rgba(245,241,234,.6) }
+
+    /* film grain over everything */
+    .grain{ position:fixed; inset:-50%; z-index:300; pointer-events:none; opacity:.05;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='2'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+      animation:grain 8s steps(10) infinite }
+    @keyframes grain{ 0%,100%{transform:translate(0,0)} 20%{transform:translate(-2%,3%)} 40%{transform:translate(3%,-2%)} 60%{transform:translate(-3%,-3%)} 80%{transform:translate(2%,2%)} }
+
+    /* ============ SKIP LINK ============ */
+    .skip{ position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0,0,0,0) }
+    .skip:focus{ position:fixed; left:1rem; top:1rem; z-index:330; width:auto; height:auto; clip:auto; border-radius:var(--r-ctl); background:var(--bone); color:var(--void); padding:.5rem 1rem; font-size:.875rem; font-weight:500 }
+
+    /* ============ REVEALS ============ */
+    [data-reveal]{ opacity:0; transform:translateY(28px); transition:opacity .9s var(--soft), transform .9s var(--soft); transition-delay:var(--d,0ms) }
+    [data-reveal="down"]{ transform:translateY(-14px) }
+    [data-reveal="fade"]{ transform:none }
+    [data-reveal].in{ opacity:1; transform:none }
+    .ln{ display:block; overflow:hidden }
+    .ln>span{ display:inline-block; transform:translateY(112%); transition:transform .9s var(--ease-out); transition-delay:var(--d,0ms) }
+    .lns.in .ln>span{ transform:translateY(0) }
+    .wd{ display:inline-block; overflow:hidden; vertical-align:bottom }
+    .wd>span{ display:inline-block; transform:translateY(24px); opacity:0; transition:transform .7s var(--ease-quart), opacity .7s var(--ease-quart); transition-delay:var(--d,0ms) }
+    .in .wd>span{ transform:none; opacity:1 }
+    .wimg{ opacity:0; transform:scale(.6) rotate(-8deg); transition:opacity .7s var(--soft), transform .7s var(--soft); transition-delay:var(--d,0ms) }
+    .in .wimg{ opacity:1; transform:none }
+
+    /* ============ MARQUEE TICKERS ============ */
+    .tick{ overflow:hidden; white-space:nowrap }
+    .tick-track{ display:flex; width:max-content; animation:mq var(--dur,42s) linear infinite }
+    .tick-track>span{ display:inline-flex; align-items:center; gap:2.5rem; padding-right:2.5rem }
+    @keyframes mq{ to{ transform:translateX(-50%) } }
+
+    /* ============ HEADER (site-wide header, same as other pages) ============ */
+    .header{ position:fixed; top:0; left:0; right:0; z-index:100; padding:.75rem 0; font-family:'Onest',system-ui,sans-serif; transition:background .3s, border-color .3s, backdrop-filter .3s, -webkit-backdrop-filter .3s }
+    .header.scrolled{ background:rgba(12,10,9,.85); border-bottom:1px solid var(--line); backdrop-filter:blur(20px) saturate(180%); -webkit-backdrop-filter:blur(20px) saturate(180%) }
+    .header__inner{ display:flex; align-items:center; justify-content:space-between; gap:1rem }
+    .header__logo{ display:flex; align-items:center; gap:.6rem; transition:transform .3s var(--spring) }
+    .header__logo:hover{ transform:scale(1.04) }
+    .header__logo svg{ flex-shrink:0 }
+    .header__logo-text{ font-size:.85rem; font-weight:600; letter-spacing:.08em; text-transform:uppercase }
+    .header__nav{ display:flex; align-items:center; gap:.25rem }
+    .header__link{ font-size:.8rem; font-weight:500; color:var(--smoke); padding:.4rem .75rem; border-radius:var(--r-pill); transition:color .3s, background .3s }
+    .header__link:hover, .header__link.active{ color:var(--crimson-soft); background:rgba(255,255,255,.06) }
+    .header__clock{ font-size:.75rem; font-weight:500; color:var(--smoke); padding:.35rem .75rem; border:1px solid var(--line); border-radius:var(--r-pill); font-variant-numeric:tabular-nums; white-space:nowrap }
+    .header__cta{ display:inline-flex; align-items:center; gap:.5rem }
+    .header__menu-btn{ display:none; width:2.5rem; height:2.5rem; align-items:center; justify-content:center; border-radius:50%; border:1px solid var(--line); transition:background .2s }
+    .header__menu-btn:hover{ background:rgba(255,255,255,.06) }
+    .header__menu-btn span{ display:block; width:18px; height:2px; background:var(--bone); position:relative }
+    .header__menu-btn span::before, .header__menu-btn span::after{ content:''; position:absolute; left:0; width:100%; height:2px; background:var(--bone); transition:transform .3s }
+    .header__menu-btn span::before{ top:-6px }
+    .header__menu-btn span::after{ top:6px }
+    @media (max-width:768px){ .header__nav{ display:none } .header__clock{ display:none } .header__menu-btn{ display:flex } }
+    .brand{ display:flex; align-items:center; gap:.625rem; font-size:.9375rem; font-weight:600; letter-spacing:.14em }
+    .brand .ic{ font-size:1.25rem; color:var(--crimson) }
+
+    /* ============ HERO ============ */
+    .hero{ position:relative; isolation:isolate; overflow:hidden; display:flex; flex-direction:column; min-height:100lvh; border-radius:0 0 var(--r-card) var(--r-card); background:var(--coal) }
+    .liquid{ position:absolute; inset:0; z-index:0 }
+    .liquid img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; filter:brightness(.55) contrast(1.06) }
+    .hero-vignette{ position:absolute; inset:0; z-index:1; pointer-events:none; background:linear-gradient(to bottom, rgba(10,9,8,.6), rgba(10,9,8,.08) 36%, rgba(10,9,8,.2) 60%, rgba(10,9,8,.9)) }
+    .edge-label{ display:none; position:absolute; right:1.1rem; top:50%; z-index:2; transform:translateY(-50%); writing-mode:vertical-rl; font-size:.65rem; font-weight:500; letter-spacing:.34em; text-transform:uppercase; color:var(--dim-35); pointer-events:none }
+    @media (min-width:1024px){ .edge-label{ display:block } }
+
+    .hero-body{ position:relative; z-index:20; flex:1; display:flex; flex-direction:column; justify-content:flex-end; padding-top:7rem }
+    .hero-copy{ display:flex; flex-direction:column; gap:1.9rem; padding-bottom:3.25rem }
+    .eyebrow{ display:inline-flex; align-items:center; gap:.6rem; font-size:.72rem; font-weight:600; letter-spacing:.28em; text-transform:uppercase; color:var(--dim-55) }
+    .eyebrow::before{ content:"✦"; color:var(--crimson-soft); font-size:.85em }
+    .hero h1{ font-size:3rem; font-weight:700; line-height:.96; letter-spacing:-.02em; text-transform:uppercase }
+    @media (min-width:640px){ .hero h1{ font-size:4.5rem } }
+    @media (min-width:1024px){ .hero h1{ font-size:6rem } }
+    .hero h1 .serif{ text-transform:none; font-weight:400; color:var(--amber-bright); letter-spacing:0 }
+    .hero-foot{ display:flex; flex-wrap:wrap; align-items:center; gap:1rem 1.5rem }
+
+    .hero-tick{ position:relative; z-index:20; border-top:1px solid var(--line); padding-block:1.1rem; font-size:.78rem; font-weight:500; letter-spacing:.22em; text-transform:uppercase; color:var(--dim-55) }
+    .hero-tick .sep{ color:var(--crimson); font-size:.65rem }
+
+    /* ============ BUTTONS (site-wide pill size, same as other pages) ============ */
+    .btn{ display:inline-flex; align-items:center; gap:.5rem; font-family:'Onest',system-ui,sans-serif; font-size:.85rem; font-weight:600; padding:.65rem 1.5rem; border-radius:var(--r-pill); white-space:nowrap; transition:transform .3s var(--spring), background .3s ease, color .3s ease, border-color .3s ease }
+    .btn:hover{ transform:scale(1.04) }
+    .btn:active{ transform:scale(.97) }
+    .btn.solid{ background:var(--crimson); color:#fff }
+    .btn.solid:hover{ background:var(--crimson-soft) }
+    .btn.ghost{ border:1px solid rgba(245,241,234,.3); background:rgba(10,9,8,.25); backdrop-filter:blur(4px); color:var(--bone) }
+    .btn.ghost:hover{ border-color:var(--bone) }
+    .btn__arrow{ display:inline-flex; align-items:center; justify-content:center; width:1.5rem; height:1.5rem; border-radius:50%; background:rgba(255,255,255,.15); font-size:.7rem; transition:transform .3s var(--spring) }
+    .btn:hover .btn__arrow{ transform:translate(2px,-2px) }
+
+    /* ============ FILM WALL ============ */
+    .films{ padding-block:2rem 5rem }
+    @media (min-width:1024px){ .films{ padding-bottom:7rem } }
+    .films-head{ display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between; gap:1rem; margin-bottom:2.75rem }
+    .films-head .eyebrow sup{ margin-left:.35rem; color:var(--crimson-soft); font-size:.7em }
+    .films-head h2{ margin-top:1rem; font-size:2.75rem; font-weight:700; line-height:1; letter-spacing:-.02em; text-transform:uppercase }
+    @media (min-width:640px){ .films-head h2{ font-size:3.75rem } }
+    .films-head h2 .serif{ text-transform:none; font-weight:400; color:var(--amber-bright) }
+    .films-head .note{ font-size:.8rem; color:var(--dim-45); padding-bottom:.4rem }
+    .wall{ columns:1; column-gap:1.25rem }
+    @media (min-width:640px){ .wall{ columns:2 } }
+    @media (min-width:1024px){ .wall{ columns:3 } }
+    .wall>li{ margin-bottom:1.25rem; break-inside:avoid }
+    .tile-card{ position:relative; display:block; width:100%; overflow:hidden; border-radius:var(--r-card-sm); background:var(--coal); box-shadow:0 0 0 1px var(--line-soft); cursor:zoom-in; padding:0; text-align:left }
+    .tile-card img{ width:100%; height:auto; transition:transform .9s var(--soft) }
+    .tile-card::after{ content:""; position:absolute; inset:0; background:linear-gradient(to top, rgba(10,9,8,.88), rgba(10,9,8,0) 48%); opacity:0; transition:opacity .5s ease; pointer-events:none }
+    .tile-num{ position:absolute; left:1rem; top:1rem; z-index:2; font-size:.7rem; font-weight:500; letter-spacing:.1em; color:rgba(245,241,234,.85); background:rgba(10,9,8,.45); backdrop-filter:blur(4px); border-radius:var(--r-pill); padding:.3rem .65rem }
+    .tile-go{ position:absolute; right:1rem; top:1rem; z-index:2; width:2.5rem; height:2.5rem; display:grid; place-items:center; border-radius:var(--r-pill); background:rgba(245,241,234,.12); backdrop-filter:blur(4px); color:#fff; box-shadow:0 0 0 1px rgba(245,241,234,.15); opacity:0; transform:scale(.8); transition:opacity .4s ease, transform .4s var(--spring) }
+    .tile-cap{ position:absolute; inset-inline:1.25rem; bottom:1.1rem; z-index:2; opacity:0; transform:translateY(10px); transition:opacity .5s ease, transform .5s var(--soft) }
+    .tile-cap h3{ font-size:1.25rem; font-weight:500; letter-spacing:-.01em; color:var(--bone) }
+    .tile-cap p{ margin-top:.15rem; font-size:.78rem; color:rgba(245,241,234,.6) }
+    @media (hover:hover){
+      .tile-card:hover img{ transform:scale(1.05) }
+      .tile-card:hover::after, .tile-card:hover .tile-cap, .tile-card:hover .tile-go{ opacity:1 }
+      .tile-card:hover .tile-cap{ transform:none }
+      .tile-card:hover .tile-go{ transform:scale(1) rotate(45deg) }
+    }
+    @media (hover:none){ .tile-card::after, .tile-cap{ opacity:1; transform:none } }
+
+    /* ============ CRIMSON BAND ============ */
+    .redband{ position:relative; z-index:5; transform:rotate(-2deg); width:106vw; margin-left:-3vw; margin-block:2.5rem; background:var(--crimson); color:#fff; padding-block:1rem; box-shadow:0 1rem 3rem rgba(225,29,46,.25) }
+    .redband .tick-track{ --dur:26s }
+    .redband span{ font-size:1.1rem; font-weight:600; letter-spacing:.18em; text-transform:uppercase }
+    .redband .sep{ font-family:'Instrument Serif',serif; font-style:italic; font-weight:400; letter-spacing:0; text-transform:lowercase }
+
+    /* ============ SERVICES (sticky stack) ============ */
+    .services{ padding-block:5rem 6rem }
+    .services-head{ margin-bottom:3rem }
+    .services-head h2{ margin-top:1rem; font-size:2.75rem; font-weight:700; line-height:1; letter-spacing:-.02em; text-transform:uppercase }
+    @media (min-width:640px){ .services-head h2{ font-size:3.75rem } }
+    .services-head h2 .serif{ text-transform:none; font-weight:400; color:var(--amber-bright) }
+    .svc-stack{ display:flex; flex-direction:column; gap:1.25rem }
+    .svc-card{ position:sticky; display:flex; flex-direction:column; gap:1.5rem; min-height:19rem; border-radius:var(--r-card); background:var(--panel); box-shadow:0 0 0 1px var(--line-soft), 0 -1.5rem 3rem rgba(0,0,0,.45); padding:1.75rem }
+    @media (min-width:640px){ .svc-card{ padding:2.5rem } }
+    .svc-card:nth-child(1){ top:5.5rem }
+    .svc-card:nth-child(2){ top:6.75rem }
+    .svc-card:nth-child(3){ top:8rem }
+    .svc-card:nth-child(4){ top:9.25rem; background:linear-gradient(135deg,var(--crimson),var(--crimson-deep)); color:#fff }
+    .svc-top{ display:flex; align-items:flex-start; justify-content:space-between; gap:1rem }
+    .svc-no{ font-size:.85rem; font-weight:500; letter-spacing:.2em; color:var(--dim-45) }
+    .svc-card:nth-child(4) .svc-no{ color:rgba(255,255,255,.6) }
+    .svc-cta{ display:inline-flex; align-items:center; gap:.5rem; font-size:.8rem; font-weight:500; text-transform:uppercase; letter-spacing:.1em; color:var(--dim-70); border-bottom:1px solid var(--line); padding-bottom:.2rem; transition:color .3s ease, border-color .3s ease }
+    .svc-card:nth-child(4) .svc-cta{ color:rgba(255,255,255,.85); border-color:rgba(255,255,255,.35) }
+    @media (hover:hover){ .svc-cta:hover{ color:var(--crimson-soft); border-color:var(--crimson-soft) } .svc-card:nth-child(4) .svc-cta:hover{ color:#fff; border-color:#fff } }
+    .svc-card h3{ font-size:2rem; font-weight:600; letter-spacing:-.02em; max-width:16ch }
+    @media (min-width:640px){ .svc-card h3{ font-size:2.75rem } }
+    .svc-card .body{ margin-top:auto; display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between; gap:1rem }
+    .svc-card .desc{ max-width:34rem; font-size:.95rem; line-height:1.55; color:var(--dim-55) }
+    .svc-card:nth-child(4) .desc{ color:rgba(255,255,255,.75) }
+    .svc-tags{ display:flex; flex-wrap:wrap; gap:.5rem }
+    .svc-tags span{ border:1px solid var(--line); border-radius:var(--r-pill); padding:.4rem .85rem; font-size:.72rem; letter-spacing:.06em; text-transform:uppercase; color:var(--dim-55) }
+    .svc-card:nth-child(4) .svc-tags span{ border-color:rgba(255,255,255,.35); color:rgba(255,255,255,.85) }
+
+    /* ============ STATS LEDGER ============ */
+    .stats{ padding-block:2rem 6rem }
+    .stats .eyebrow{ margin-bottom:1.5rem }
+    .stat-row{ display:flex; align-items:baseline; gap:1.5rem; border-top:1px solid var(--line); padding-block:1.9rem }
+    .stat-row:last-of-type{ border-bottom:1px solid var(--line) }
+    .stat-row .n{ min-width:11rem; font-size:4rem; font-weight:600; letter-spacing:-.03em; line-height:1; font-variant-numeric:tabular-nums }
+    @media (min-width:640px){ .stat-row .n{ min-width:16rem; font-size:5.5rem } }
+    .stat-row .n em{ font-style:normal; color:var(--crimson-soft) }
+    .stat-row .lb{ flex:1; font-size:1rem; font-weight:500; color:var(--dim-70) }
+    .stat-row .ds{ display:none; max-width:18rem; text-align:right; font-size:.8rem; color:var(--dim-45) }
+    @media (min-width:768px){ .stat-row .ds{ display:block } }
+
+    /* ============ FOOTER ============ */
+    footer{ position:relative; overflow:hidden; border-radius:var(--r-card) var(--r-card) 0 0; background:var(--coal) }
+    .foot-in{ position:relative; z-index:10; padding-block:5.5rem 2.5rem }
+    .foot-kick{ font-size:.875rem; color:var(--dim-55) }
+    .foot-giant{ display:block; margin-top:1.25rem; text-align:left; font-size:3.4rem; font-weight:700; line-height:.95; letter-spacing:-.02em; text-transform:uppercase }
+    @media (min-width:640px){ .foot-giant{ font-size:5.5rem } }
+    @media (min-width:1024px){ .foot-giant{ font-size:7rem } }
+    .foot-giant .row{ display:flex; align-items:center; gap:1.5rem }
+    .foot-giant .serif{ text-transform:none; font-weight:400; color:var(--amber-bright) }
+    .foot-giant .arrow{ display:inline-grid; place-items:center; width:.9em; height:.9em; border:2px solid var(--line); border-radius:var(--r-pill); font-size:.55em; color:var(--bone); transition:background .35s ease, border-color .35s ease, transform .45s var(--spring) }
+    .foot-giant .arrow .ic{ transition:transform .35s var(--spring) }
+    @media (hover:hover){
+      .foot-giant:hover .arrow{ background:var(--crimson); border-color:var(--crimson); transform:rotate(45deg) }
+    }
+    .foot-contact{ margin-top:2.25rem; display:flex; flex-wrap:wrap; gap:1rem 2.5rem; font-size:.95rem; color:var(--dim-55) }
+    .foot-contact a{ border-bottom:1px solid var(--line); padding-bottom:.15rem; transition:color .3s ease, border-color .3s ease }
+    @media (hover:hover){ .foot-contact a:hover{ color:var(--bone); border-color:var(--bone) } }
+    .foot-cols{ display:grid; grid-template-columns:repeat(2,1fr); gap:2.5rem; margin-top:4.5rem; border-top:1px solid rgba(245,241,234,.1); padding-block:3rem }
+    @media (min-width:768px){ .foot-cols{ grid-template-columns:repeat(3,1fr) } }
+    .foot-col h3{ font-size:.75rem; font-weight:500; text-transform:uppercase; letter-spacing:.03em; color:rgba(245,241,234,.4) }
+    .foot-col ul{ margin-top:1.25rem; display:flex; flex-direction:column; gap:.75rem; font-size:.875rem }
+    .alink{ display:inline-flex }
+    .alink>span{ display:inline-block; opacity:.65; transition:opacity .35s var(--spring), transform .35s var(--spring) }
+    @media (hover:hover){ .alink:hover>span{ opacity:1; transform:translateX(4px) } }
+    .foot-legal{ display:flex; flex-direction:column; align-items:center; justify-content:space-between; gap:1rem; border-top:1px solid rgba(245,241,234,.1); padding-top:2rem; font-size:.75rem; color:rgba(245,241,234,.45) }
+    @media (min-width:640px){ .foot-legal{ flex-direction:row } }
+    .foot-legal .links{ display:flex; gap:1.5rem }
+    .foot-mark{ position:absolute; inset-inline:0; bottom:-2rem; z-index:0; text-align:center; pointer-events:none; user-select:none; font-weight:700; line-height:1; font-size:13rem; letter-spacing:.05em; color:rgba(245,241,234,.04) }
+
+    /* ============ NAV MENU OVERLAY ============ */
+    .navmenu{ position:fixed; inset:0; z-index:315; display:flex; flex-direction:column; background:var(--void); color:var(--bone); opacity:0; transition:opacity .45s ease }
+    .navmenu.open{ opacity:1 }
+    .navmenu[hidden]{ display:none }
+    .nm-top{ display:flex; align-items:center; justify-content:space-between; padding-block:1.4rem }
+    .nm-close{ display:inline-flex; align-items:center; gap:.5rem; border:1px solid rgba(245,241,234,.15); border-radius:var(--r-ctl); padding:.55rem 1.1rem; font-size:.75rem; font-weight:500; text-transform:uppercase; letter-spacing:.1em; color:var(--dim-70); transition:border-color .3s ease, color .3s ease, background .3s ease }
+    @media (hover:hover){ .nm-close:hover{ background:var(--crimson); border-color:var(--crimson); color:#fff } }
+    .nm-nav{ flex:1; display:flex; flex-direction:column; justify-content:center }
+    .nm-nav ul{ display:flex; flex-direction:column; gap:.25rem }
+    .nm-item{ display:flex; align-items:baseline; gap:1.25rem; width:100%; padding-block:.5rem; text-align:left; font-size:2.25rem; font-weight:600; letter-spacing:-.02em; text-transform:uppercase; transform:translateY(1rem); opacity:0; transition:all .5s ease-out }
+    @media (min-width:640px){ .nm-item{ font-size:3.5rem } }
+    .navmenu.open .nm-item{ transform:translateY(0); opacity:1 }
+    .nm-item .no{ font-size:.9rem; font-weight:400; color:rgba(245,241,234,.3); transition:color .3s ease }
+    .nm-item .lb{ color:var(--dim-70); transition:color .3s ease, transform .4s var(--spring); display:inline-block }
+    .nm-item.active .no{ color:var(--crimson-soft) }
+    .nm-item.active .lb{ color:var(--bone) }
+    @media (hover:hover){
+      .nm-item:hover .no{ color:var(--crimson-soft) }
+      .nm-item:hover .lb{ color:#fff; transform:translateX(.75rem) }
+    }
+    .nm-preview{ display:none; position:absolute; right:6%; top:50%; z-index:-1; width:26rem; aspect-ratio:4/3; transform:translateY(-50%) rotate(3deg) scale(.94); border-radius:var(--r-card-sm); overflow:hidden; opacity:0; transition:opacity .45s ease, transform .55s var(--soft); pointer-events:none }
+    .nm-preview img{ width:100%; height:100%; object-fit:cover }
+    .nm-preview.show{ opacity:.85; transform:translateY(-50%) rotate(3deg) scale(1) }
+    @media (min-width:1024px){ .nm-preview{ display:block } }
+    .nm-bottom{ display:flex; flex-direction:column; gap:.75rem; border-top:1px solid rgba(245,241,234,.1); padding-block:1.5rem; font-size:.75rem; text-transform:uppercase; letter-spacing:.03em; color:rgba(245,241,234,.45) }
+    @media (min-width:640px){ .nm-bottom{ flex-direction:row; align-items:center; justify-content:space-between } }
+    .nm-bottom button{ color:var(--dim-70) }
+    @media (hover:hover){ .nm-bottom button:hover{ color:#fff; text-decoration:underline } }
+
+    /* ============ LIGHTBOX ============ */
+    .lbx{ position:fixed; inset:0; z-index:310; display:flex; align-items:center; justify-content:center; padding:1rem; background:rgba(10,9,8,.75); backdrop-filter:blur(18px); opacity:0; transition:opacity .35s ease }
+    .lbx.open{ opacity:1 }
+    .lbx[hidden]{ display:none }
+    .lbx figure{ position:relative; max-width:min(72rem,92vw); transform:scale(.965); transition:transform .45s var(--soft) }
+    .lbx.open figure{ transform:scale(1) }
+    .lbx img{ max-width:100%; max-height:80vh; border-radius:var(--r-card-sm); box-shadow:0 2rem 6rem rgba(0,0,0,.6) }
+    .lbx figcaption{ display:flex; align-items:baseline; justify-content:space-between; gap:1rem; padding-top:1rem }
+    .lbx figcaption h3{ font-size:1.1rem; font-weight:500 }
+    .lbx figcaption p{ font-size:.8rem; color:var(--dim-55) }
+    .lbx figcaption .cnt{ font-size:.8rem; color:var(--dim-45); font-variant-numeric:tabular-nums }
+    .lbx-x{ position:absolute; right:1.25rem; top:1.25rem; width:2.75rem; height:2.75rem; display:grid; place-items:center; border-radius:var(--r-pill); background:rgba(245,241,234,.1); color:var(--bone); transition:background .3s ease }
+    .lbx-nav{ position:absolute; top:50%; transform:translateY(-50%); width:3rem; height:3rem; display:grid; place-items:center; border-radius:var(--r-pill); background:rgba(245,241,234,.1); backdrop-filter:blur(6px); color:var(--bone); transition:background .3s ease }
+    .lbx-nav.prev{ left:1.25rem } .lbx-nav.prev .ic{ transform:rotate(180deg) }
+    .lbx-nav.next{ right:1.25rem }
+    @media (hover:hover){ .lbx-x:hover, .lbx-nav:hover{ background:var(--crimson) } }
+
+    /* ============ REQUEST MODAL ============ */
+    .modal{ position:fixed; inset:0; z-index:318; display:flex; align-items:flex-end; justify-content:center; padding:1rem; background:rgba(10,9,8,.55); backdrop-filter:blur(16px); opacity:0; transition:opacity .4s ease }
+    @media (min-width:640px){ .modal{ align-items:center } }
+    .modal.open{ opacity:1 }
+    .modal[hidden]{ display:none }
+    .modal-panel{ position:relative; width:100%; max-width:32rem; overflow:hidden; border-radius:var(--r-card); background:var(--panel); padding:1.5rem; box-shadow:0 0 0 1px var(--line), 0 2.5rem 5rem rgba(0,0,0,.5); transform:translateY(28px); transition:transform .45s var(--soft) }
+    @media (min-width:640px){ .modal-panel{ padding:2rem } }
+    .modal.open .modal-panel{ transform:translateY(0) }
+    .modal-x{ position:absolute; right:1rem; top:1rem; width:2.25rem; height:2.25rem; display:grid; place-items:center; border-radius:var(--r-pill); background:rgba(245,241,234,.08); color:var(--dim-55); transition:background .3s ease, color .3s ease }
+    @media (hover:hover){ .modal-x:hover{ background:var(--crimson); color:#fff } }
+    .modal-head{ margin-bottom:1.5rem; display:flex; flex-direction:column; gap:.375rem }
+    .modal-head .tag{ display:inline-flex; align-items:center; gap:.6rem; font-size:.72rem; font-weight:600; letter-spacing:.28em; text-transform:uppercase; color:var(--dim-55) }
+    .modal-head .tag::before{ content:"✦"; color:var(--crimson-soft); font-size:.85em }
+    .modal-head h2{ font-size:1.5rem; font-weight:600; letter-spacing:-.01em }
+    @media (min-width:640px){ .modal-head h2{ font-size:1.875rem } }
+    .modal-head h2 .serif{ color:var(--amber-bright) }
+    .modal form{ display:flex; flex-direction:column; gap:1rem }
+    .modal label{ display:flex; flex-direction:column; gap:.4rem; font-size:.75rem; font-weight:500; text-transform:uppercase; letter-spacing:.03em; color:rgba(245,241,234,.5) }
+    .modal input, .modal textarea{ width:100%; border:1px solid rgba(245,241,234,.15); background:rgba(245,241,234,.05); color:var(--bone); border-radius:var(--r-ctl); padding:.75rem 1rem; font:inherit; font-size:.875rem; outline:none; transition:border-color .3s ease, background .3s ease }
+    .modal input::placeholder, .modal textarea::placeholder{ color:rgba(245,241,234,.3) }
+    .modal input:focus, .modal textarea:focus{ border-color:rgba(245,241,234,.4); background:rgba(245,241,234,.09) }
+    .modal textarea{ resize:none }
+    .modal-foot{ margin-top:.5rem; display:flex; align-items:center; justify-content:space-between; gap:1rem }
+    .modal-foot .note{ font-size:.75rem; color:var(--dim-45) }
+    .modal-ok{ display:none; flex-direction:column; align-items:center; text-align:center; gap:1rem; padding-block:2rem }
+    .modal-ok .badge-big{ width:3.5rem; height:3.5rem; display:grid; place-items:center; border-radius:var(--r-pill); background:var(--crimson); color:#fff; font-size:1.5rem }
+    .modal-ok h2{ font-size:1.5rem; font-weight:600 }
+    .modal-ok p{ max-width:32ch; font-size:.875rem; color:var(--dim-55) }
+    .modal.done form, .modal.done .modal-head{ display:none }
+    .modal.done .modal-ok{ display:flex }
+
+    /* ============ REDUCED MOTION / NOSCRIPT ============ */
+    @media (prefers-reduced-motion: reduce){
+      *{ animation:none !important; transition:none !important }
+      [data-reveal], .ln>span, .wd>span, .wimg{ opacity:1 !important; transform:none !important }
+      .tick-track{ animation:none !important }
+    }
+  </style>
+  <noscript><style>[data-reveal],.ln>span,.wd>span,.wimg{opacity:1!important;transform:none!important}</style></noscript>
 </head>
 <body>
 
-  <!-- LIGHTS-DOWN ENTRANCE -->
-  <div class="c3-lights-down" id="c3-lights" aria-hidden="true"><span>Lights Down</span></div>
+  <!-- SVG sprite -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="i-eq" viewBox="0 0 24 24"><path d="M4 10v4M8.5 6.5v11M13 3v18M17.5 8v8M21 10.5v3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-arr" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-arrup" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="M4 4l16 16M20 4 4 20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-dot" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="3.2" fill="currentColor"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5-11-6.5z" fill="currentColor"/></symbol>
+  </svg>
 
-  <!-- FIXED STAGE BACKDROP -->
-  <div class="c3-stage" id="c3-stage">
-    <div class="c3-stage__img c3-stage__img--crimson" id="c3-img-crimson"></div>
-    <video class="c3-stage__video" id="c3-stage-video" muted loop playsinline autoplay preload="metadata" controlslist="nodownload" disablepictureinpicture aria-hidden="true">
-      <source src="concert.mp4" type="video/mp4">
-    </video>
-    <div class="c3-stage__img c3-stage__img--spotlight" id="c3-img-spotlight"></div>
-    <div class="c3-haze c3-haze--warm"></div>
-    <div class="c3-haze c3-haze--cool"></div>
-    <div class="c3-stage__overlay" id="c3-overlay"></div>
-    <div class="c3-stage__spotlight" id="c3-spotlight"></div>
-    <div class="c3-beam c3-beam--l"></div>
-    <div class="c3-beam c3-beam--r"></div>
-  </div>
+  <div class="grain" aria-hidden="true"></div>
+  <a class="skip" href="#main">Skip to content</a>
 
-  <div class="c3-grain"></div>
-
-  <!-- PARTICLES + CROWD + LIVE HUD -->
-  <canvas class="c3-particles" id="c3-particles" aria-hidden="true"></canvas>
-  <div class="c3-crowd" id="c3-crowd" aria-hidden="true"></div>
-  <div class="c3-live-badge" id="c3-live-badge" aria-hidden="true">
-    <span class="c3-rec-dot"></span>
-    <span>Live</span>
-    <span class="c3-eq"><i></i><i></i><i></i><i></i></span>
-    <span class="c3-timecode" id="c3-timecode">00:00:00:00</span>
-  </div>
-  <div class="c3-edge-label" aria-hidden="true">Live from Toronto · Multi-cam · 4K HDR</div>
-
-  <!-- SIDE TIMELINE -->
-  <div class="c3-timeline">
-    <div class="c3-timeline__line"></div>
-    <div class="c3-timeline__progress" id="c3-tl-progress"></div>
-    <div class="c3-tl-item"><div class="c3-tl-dot active"></div><span class="c3-tl-text active">Crimson Stage</span></div>
-    <div class="c3-tl-item"><div class="c3-tl-dot"></div><span class="c3-tl-text">Spotlight Beam</span></div>
-    <div class="c3-tl-item"><div class="c3-tl-dot"></div><span class="c3-tl-text">Showcase Films</span></div>
-  </div>
-
-  <!-- HEADER -->
+  <!-- ============ HEADER (same as other pages) ============ -->
   <header class="header">
     <div class="shell header__inner">
       <a href="index.html" class="header__logo">
-        <svg width="28" height="28" viewBox="0 0 100 100" fill="none">
-          <rect width="100" height="100" rx="20" fill="#0c0a09"/>
-          <circle cx="50" cy="50" r="28" stroke="#f59e0b" stroke-width="6" fill="none"/>
-          <circle cx="50" cy="50" r="8" fill="#f59e0b"/>
-          <rect x="25" y="20" width="6" height="60" rx="3" fill="#f59e0b" opacity="0.4"/>
-          <rect x="69" y="20" width="6" height="60" rx="3" fill="#f59e0b" opacity="0.4"/>
-        </svg>
+        <svg width="28" height="28" viewBox="0 0 100 100" fill="none"><rect width="100" height="100" rx="20" fill="#0c0a09"/><circle cx="50" cy="50" r="28" stroke="#f59e0b" stroke-width="6" fill="none"/><circle cx="50" cy="50" r="8" fill="#f59e0b"/></svg>
         <span class="header__logo-text">The Brown Print</span>
       </a>
       <nav class="header__nav">
@@ -79,455 +356,550 @@
         <a href="social.html" class="header__link">Social</a>
         <a href="brands.html" class="header__link">Brands</a>
       </nav>
-      <div class="header__clock">00:00:00 EST</div>
-      <div class="header__cta"><button class="btn btn--accent" data-modal-open>Request <span class="btn__arrow">→</span></button></div>
-      <button class="header__menu-btn" aria-label="Menu"><span></span></button>
+      <div class="header__clock" id="clockTime">00:00:00 EST</div>
+      <div class="header__cta"><button class="btn solid" data-modal>Request <span class="btn__arrow">→</span></button></div>
+      <button class="header__menu-btn" id="menuOpen" aria-label="Menu" aria-haspopup="dialog"><span></span></button>
     </div>
   </header>
 
-  <!-- MOBILE NAV -->
-  <div class="nav-overlay">
-    <button class="nav-overlay__close" aria-label="Close menu">✕</button>
-    <a href="index.html" class="nav-overlay__link">Home</a>
-    <a href="wedding.html" class="nav-overlay__link">Weddings</a>
-    <a href="music.html" class="nav-overlay__link">Music</a>
-    <a href="concerts.html" class="nav-overlay__link active">Concerts</a>
-    <a href="social.html" class="nav-overlay__link">Social</a>
-    <a href="brands.html" class="nav-overlay__link">Brands</a>
-  </div>
+  <main id="main">
 
-  <!-- SCROLL CAPTIONS (pinned over stage backdrop) -->
-  <div class="c3-caption-stack">
-    <div class="c3-caption-panel" id="c3-caption-crimson">
-      <span class="c3-phase-num c3-phase-num--crimson" aria-hidden="true">01</span>
-      <span class="c3-kicker c3-kicker--crimson">01 — Phase One</span>
-      <h1 class="c3-hero-title">Bathed in <span class="accent-red">Crimson</span></h1>
-      <p class="c3-hero-sub">The warm roar of the stage lights, the haze, and the silhouette of sound. We capture the raw, unscripted emotion of the stage wash.</p>
-    </div>
-    <div class="c3-caption-panel c3-caption-panel--hidden" id="c3-caption-spotlight">
-      <span class="c3-phase-num" aria-hidden="true">02</span>
-      <span class="c3-kicker c3-kicker--silver">02 — Phase Two</span>
-      <h2 class="c3-hero-title">Into the <span class="accent-silver">Light</span></h2>
-      <p class="c3-hero-sub">One sharp spotlight, one single voice. A silver beam piercing the silence. Every angle frozen in sharp, cinematic contrast.</p>
-    </div>
-  </div>
-
-  <!-- SCROLL CUE -->
-  <div class="c3-scroll-cue" id="c3-scroll-cue">
-    <span>Scroll Down</span>
-    <span class="c3-scroll-cue__line"></span>
-  </div>
-
-  <!-- SCROLL SPACE DRIVER -->
-  <div class="c3-scroll-spacer"></div>
-
-  <!-- ========== MAIN CONTENT (scrollable) ========== -->
-  <div class="c3-main">
-
-    <!-- CRIMSON TICKER -->
-    <div class="c3-ticker" aria-hidden="true">
-      <div class="c3-ticker__track">
-        <span>THE BROWN PRINT × LIVE EXPERIENCE × BATHED IN CRIMSON × UNMUTED PASSION × CONCERT FILMS × THE BROWN PRINT × LIVE EXPERIENCE × BATHED IN CRIMSON × UNMUTED PASSION × CONCERT FILMS ×&nbsp;</span>
-        <span>THE BROWN PRINT × LIVE EXPERIENCE × BATHED IN CRIMSON × UNMUTED PASSION × CONCERT FILMS × THE BROWN PRINT × LIVE EXPERIENCE × BATHED IN CRIMSON × UNMUTED PASSION × CONCERT FILMS ×&nbsp;</span>
+    <!-- ============ HERO ============ -->
+    <section class="hero" id="home">
+      <div class="liquid" id="liquid">
+        <img id="heroBase" src="media/concert3/hero-concert.jpeg" alt="A packed venue under amber stage lights, the crowd reaching toward the stage" fetchpriority="high" />
       </div>
-    </div>
+      <div class="hero-vignette" aria-hidden="true"></div>
+      <span class="edge-label" aria-hidden="true">The Encore Edition — Toronto · Since 2014</span>
 
-    <!-- SHOWCASE GRID (collage) -->
-    <section style="padding:0 2rem; max-width:76rem; margin:0 auto; position:relative;" class="c3-has-spot">
-      <div class="c3-followspot" id="c3-followspot" aria-hidden="true"></div>
-      <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:1.5rem;">
-        <div style="width:2.5rem;height:1px;background:rgba(220,38,38,0.4);"></div>
-        <span style="font-size:0.8rem;font-weight:600;letter-spacing:0.2em;color:#dc2626;text-transform:uppercase;">Live Showcase</span>
-      </div>
-      <h2 class="c3-showcase-title">
-        <span class="c3-outline">Every Show</span>
-        <span class="c3-accent">re-lived</span>
-      </h2>
-      <p style="color:#d6d3d1;font-weight:300;font-size:1.1rem;line-height:1.8;max-width:44rem;margin-bottom:3rem;">Multi-cam concert films that preserve the exact atmosphere, the crowd's energy, and the stage lighting of the night.</p>
-      <div id="concertGrid" class="c3-grid"></div>
-    </section>
-
-    <!-- GLASS PANEL DETAILS -->
-    <section style="padding:6rem 2rem; max-width:76rem; margin:0 auto;">
-      <div class="c3-details">
-        <div class="c3-glass">
-          <span class="c3-tag"><span class="c3-tag__dot"></span>Art & Technology</span>
-          <h3>Visual <span class="em">Rhythm</span></h3>
-          <p>We sync every cut, zoom, and frame glide to the tempo of the performance. High-framerate, multi-camera grids capture every crowd surge and lighting build-up.</p>
-          <div class="c3-features">
-            <div class="c3-feature">
-              <div class="c3-feature__icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/></svg>
-              </div>
-              <div><h4>Multi-Cam Grid</h4><p>4–8 synced cameras covering every angle of the stage and crowd.</p></div>
-            </div>
-            <div class="c3-feature">
-              <div class="c3-feature__icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/></svg>
-              </div>
-              <div><h4>Live Sound Mix</h4><p>Board feed + ambient mics for authentic, punchy audio.</p></div>
-            </div>
-            <div class="c3-feature">
-              <div class="c3-feature__icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="2"/><path d="M7 2v20M17 2v20M2 12h20"/></svg>
-              </div>
-              <div><h4>Cinematic Grade</h4><p>Colour-graded to match the stage lighting and mood of each show.</p></div>
-            </div>
+      <div class="hero-body shell">
+        <div class="hero-copy">
+          <p class="eyebrow" data-reveal data-gate style="--d:200ms">Concert Films — Toronto · since 2014</p>
+          <h1 class="lns in-gate" data-gate>
+            <span class="ln" style="--d:250ms"><span class="outline-txt">The show ends.</span></span>
+            <span class="ln" style="--d:370ms"><span>The film <span class="serif">never does.</span></span></span>
+          </h1>
+          <div class="hero-foot" data-reveal data-gate style="--d:600ms">
+            <button class="btn solid" data-modal>Start a Project <span class="btn__arrow">→</span></button>
+            <button class="btn ghost" data-scroll="films">See the Films <span class="btn__arrow">↗</span></button>
           </div>
         </div>
+      </div>
 
-        <!-- SETLIST -->
-        <div>
-          <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:1.5rem;">
-            <div style="width:2.5rem;height:1px;background:rgba(220,38,38,0.4);"></div>
-            <span style="font-size:0.8rem;font-weight:600;letter-spacing:0.2em;color:#dc2626;text-transform:uppercase;">Run of Show</span>
-          </div>
-          <div class="c3-setlist">
-            <ol>
-              <li><span class="c3-set-num">01</span><span class="c3-set-name">Arena Live</span><span class="c3-set-desc">Full Concert Film · 8:40</span></li>
-              <li><span class="c3-set-num">02</span><span class="c3-set-name">Festival Mainstage</span><span class="c3-set-desc">Highlights · 3:15</span></li>
-              <li><span class="c3-set-num">03</span><span class="c3-set-name">Acoustic Night</span><span class="c3-set-desc">Live Session · 4:50</span></li>
-              <li><span class="c3-set-num">04</span><span class="c3-set-name">Bhangra Beats Live</span><span class="c3-set-desc">Crowd Reel · 2:30</span></li>
-              <li><span class="c3-set-num">05</span><span class="c3-set-name">Encore</span><span class="c3-set-desc">Multi-cam Edit · 6:12</span></li>
-              <li><span class="c3-set-num">06</span><span class="c3-set-name">Under Lights</span><span class="c3-set-desc">Tour Aftermovie · 5:45</span></li>
-            </ol>
-          </div>
+      <div class="hero-tick tick" data-reveal="fade" data-gate style="--d:850ms" aria-hidden="true">
+        <div class="tick-track">
+          <span>Rogers Arena <i class="sep">✦</i> Scotiabank Arena <i class="sep">✦</i> Budweiser Stage <i class="sep">✦</i> Toronto Fest <i class="sep">✦</i> The Vault <i class="sep">✦</i> Surrey Live <i class="sep">✦</i> Danforth Hall <i class="sep">✦</i></span>
+          <span>Rogers Arena <i class="sep">✦</i> Scotiabank Arena <i class="sep">✦</i> Budweiser Stage <i class="sep">✦</i> Toronto Fest <i class="sep">✦</i> The Vault <i class="sep">✦</i> Surrey Live <i class="sep">✦</i> Danforth Hall <i class="sep">✦</i></span>
         </div>
       </div>
     </section>
 
-    <!-- STATS STRIP -->
-    <section style="padding:0 2rem;">
-      <div class="c3-stat-row">
-        <div><span class="c3-stat-num" data-target="80" data-suffix="+">0</span><span class="c3-stat-label">Live Films</span></div>
-        <div><span class="c3-stat-num" data-target="1200000" data-suffix="">0</span><span class="c3-stat-label">Total Views</span></div>
-        <div><span class="c3-stat-num" data-target="45" data-suffix="+">0</span><span class="c3-stat-label">Artists Filmed</span></div>
-        <div><span class="c3-stat-num" data-target="12" data-suffix="">0</span><span class="c3-stat-label">Years</span></div>
-      </div>
-    </section>
-
-    <!-- TICKET CTA -->
-    <section style="padding:4rem 2rem 6rem;">
-      <div class="c3-ticket">
-        <div class="c3-ticket__main">
-          <div class="c3-ticket__presents">The Brown Print Presents</div>
-          <div class="c3-ticket__title">Your Show, Our Film</div>
-          <div class="c3-ticket__meta">
-            <div><span class="c3-ticket__label">Format</span><span class="c3-ticket__value">Multi-cam 4K</span></div>
-            <div><span class="c3-ticket__label">Audio</span><span class="c3-ticket__value">Board + Ambient</span></div>
-            <div><span class="c3-ticket__label">Delivery</span><span class="c3-ticket__value">2–4 Weeks</span></div>
-          </div>
-        </div>
-        <div class="c3-ticket__stub">
-          <span class="c3-ticket__admit">Admit One</span>
-          <div class="c3-barcode"></div>
-          <span class="c3-ticket__seat">General Admission</span>
-          <button class="c3-ticket__btn" data-modal-open>Book Now <span style="font-size:0.8rem;">→</span></button>
-        </div>
-      </div>
-    </section>
-
-    <!-- FOOTER -->
-    <footer class="footer">
+    <!-- ============ FILM WALL ============ -->
+    <section class="films" id="films">
       <div class="shell">
-        <div class="footer__top">
-          <div class="footer__brand">
-            <a href="index.html" class="header__logo">
-              <svg width="28" height="28" viewBox="0 0 100 100" fill="none"><rect width="100" height="100" rx="20" fill="#0c0a09"/><circle cx="50" cy="50" r="28" stroke="#f59e0b" stroke-width="6" fill="none"/><circle cx="50" cy="50" r="8" fill="#f59e0b"/></svg>
-              <span class="header__logo-text">The Brown Print</span>
-            </a>
-            <p>Punjabi-rooted film studio in Toronto. Concert films, wedding cinema, music videos, and brand storytelling.</p>
+        <div class="films-head">
+          <div>
+            <p class="eyebrow" data-reveal>The Film Wall<sup>(6)</sup></p>
+            <h2 class="lns" data-reveal="fade" style="--d:120ms">
+              <span class="ln" style="--d:120ms"><span>Selected <span class="serif">shows.</span></span></span>
+            </h2>
           </div>
-          <div class="footer__col"><h4>Pages</h4><a href="index.html">Home</a><a href="wedding.html">Weddings</a><a href="music.html">Music</a><a href="concerts.html">Concerts</a></div>
-          <div class="footer__col"><h4>More</h4><a href="social.html">Social Events</a><a href="brands.html">Brand Films</a><a href="#" data-modal-open>Contact</a></div>
-          <div class="footer__col"><h4>Connect</h4><a href="#">Instagram</a><a href="#">YouTube</a><a href="#">Vimeo</a><a href="mailto:hello@thebrownprint.ca">Email</a></div>
+          <p class="note" data-reveal style="--d:250ms">Click any frame — <span class="serif" style="color:var(--dim-70)">step inside.</span></p>
         </div>
-        <div class="footer__bottom">
-          <p>&copy; 2024 The Brown Print. All rights reserved.</p>
-          <div class="footer__socials"><a href="#" aria-label="Instagram">IG</a><a href="#" aria-label="YouTube">YT</a><a href="#" aria-label="Vimeo">VM</a></div>
+        <ul class="wall" id="wall">
+          <li data-reveal style="--d:0ms"><button class="tile-card" data-lbx="0" aria-label="Open Arena Live">
+            <img src="media/concerts/concert-1.webp" alt="Performer under crossing stage beams at a packed arena" loading="lazy" />
+            <span class="tile-num">01</span><span class="tile-go"><svg class="ic"><use href="#i-arrup"/></svg></span>
+            <span class="tile-cap"><h3>Arena Live</h3><p>Rogers Arena · 2026</p></span>
+          </button></li>
+          <li data-reveal style="--d:90ms"><button class="tile-card" data-lbx="1" aria-label="Open Festival Mainstage">
+            <img src="media/concerts/concert-2.webp" alt="Festival mainstage washed in warm light over the crowd" loading="lazy" />
+            <span class="tile-num">02</span><span class="tile-go"><svg class="ic"><use href="#i-arrup"/></svg></span>
+            <span class="tile-cap"><h3>Festival Mainstage</h3><p>Toronto Fest · 2026</p></span>
+          </button></li>
+          <li data-reveal style="--d:180ms"><button class="tile-card" data-lbx="2" aria-label="Open Acoustic Night">
+            <img src="media/concerts/concert-3.webp" alt="A single spotlight cutting through haze during an acoustic set" loading="lazy" />
+            <span class="tile-num">03</span><span class="tile-go"><svg class="ic"><use href="#i-arrup"/></svg></span>
+            <span class="tile-cap"><h3>Acoustic Night</h3><p>The Vault · 2025</p></span>
+          </button></li>
+          <li data-reveal style="--d:0ms"><button class="tile-card" data-lbx="3" aria-label="Open Bhangra Beats Live">
+            <img src="media/concert3/bg1.jpeg" alt="Two performers trading verses over the front row" loading="lazy" />
+            <span class="tile-num">04</span><span class="tile-go"><svg class="ic"><use href="#i-arrup"/></svg></span>
+            <span class="tile-cap"><h3>Bhangra Beats Live</h3><p>Surrey Live · 2026</p></span>
+          </button></li>
+          <li data-reveal style="--d:90ms"><button class="tile-card" data-lbx="4" aria-label="Open Encore">
+            <img src="media/concert3/bg2.jpeg" alt="Duo on stage wrapped in amber smoke" loading="lazy" />
+            <span class="tile-num">05</span><span class="tile-go"><svg class="ic"><use href="#i-arrup"/></svg></span>
+            <span class="tile-cap"><h3>Encore</h3><p>Scotiabank Arena · 2025</p></span>
+          </button></li>
+          <li data-reveal style="--d:180ms"><button class="tile-card" data-lbx="5" aria-label="Open Under Lights">
+            <img src="media/concert3/bg3.jpeg" alt="Hazy golden wash over the full stage" loading="lazy" />
+            <span class="tile-num">06</span><span class="tile-go"><svg class="ic"><use href="#i-arrup"/></svg></span>
+            <span class="tile-cap"><h3>Under Lights</h3><p>Cross-Canada Tour · 2025</p></span>
+          </button></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ CRIMSON BAND ============ -->
+    <div class="redband tick" aria-hidden="true">
+      <div class="tick-track">
+        <span>Multi-Cam Direction <i class="sep">and</i> Aftermovies <i class="sep">and</i> Artist Films <i class="sep">and</i> Screen Content <i class="sep">and</i></span>
+        <span>Multi-Cam Direction <i class="sep">and</i> Aftermovies <i class="sep">and</i> Artist Films <i class="sep">and</i> Screen Content <i class="sep">and</i></span>
+      </div>
+    </div>
+
+    <!-- ============ SERVICES ============ -->
+    <section class="services" id="services">
+      <div class="shell">
+        <div class="services-head">
+          <p class="eyebrow" data-reveal>Services</p>
+          <h2 class="lns" data-reveal="fade" style="--d:120ms">
+            <span class="ln" style="--d:120ms"><span>Built for the</span></span>
+            <span class="ln" style="--d:240ms"><span class="serif">loudest rooms.</span></span>
+          </h2>
+        </div>
+        <div class="svc-stack">
+          <article class="svc-card">
+            <div class="svc-top"><span class="svc-no">01 / DIRECTION</span><button class="svc-cta" data-modal>Book this →</button></div>
+            <h3>Multi-Cam Direction</h3>
+            <div class="body">
+              <p class="desc">Eight cameras, one director, zero missed moments. We cut the room live — wides for the scale, tights for the sweat — and hand you a show that feels like the best seat in the house.</p>
+              <div class="svc-tags"><span>8 cams</span><span>Timecode</span><span>4K HDR</span></div>
+            </div>
+          </article>
+          <article class="svc-card">
+            <div class="svc-top"><span class="svc-no">02 / AFTERMOVIES</span><button class="svc-cta" data-modal>Book this →</button></div>
+            <h3>Aftermovies &amp; Recaps</h3>
+            <div class="body">
+              <p class="desc">Tour aftermovies and next-morning highlight reels. The teaser lands while the crowd is still posting — 48 hours, mastered and captioned, ready for every feed.</p>
+              <div class="svc-tags"><span>48h teaser</span><span>Vertical cuts</span><span>Tour recap</span></div>
+            </div>
+          </article>
+          <article class="svc-card">
+            <div class="svc-top"><span class="svc-no">03 / ARTIST FILMS</span><button class="svc-cta" data-modal>Book this →</button></div>
+            <h3>Artist Films</h3>
+            <div class="body">
+              <p class="desc">Documentary and brand films between the shows — soundchecks, green rooms, the drive between cities. The story your audience never gets to see.</p>
+              <div class="svc-tags"><span>Documentary</span><span>BTS</span><span>Brand</span></div>
+            </div>
+          </article>
+          <article class="svc-card">
+            <div class="svc-top"><span class="svc-no">04 / SCREENS</span><button class="svc-cta" data-modal>Book this →</button></div>
+            <h3>Screen Content</h3>
+            <div class="body">
+              <p class="desc">Visuals mastered for LED walls and IMAG. Built to the pixel map of your rig, delivered show-ready — so the room looks as loud as it sounds.</p>
+              <div class="svc-tags"><span>LED walls</span><span>IMAG</span><span>Pixel-map</span></div>
+            </div>
+          </article>
         </div>
       </div>
-      <div class="footer__watermark">CONCERTS</div>
-    </footer>
-  </div>
+    </section>
 
-  <!-- MODAL -->
-  <div class="modal-backdrop">
-    <div class="modal-panel">
-      <button class="modal-panel__close" aria-label="Close">✕</button>
-      <h3>Start a project</h3>
-      <p class="subtitle">Tell us about your vision and we'll get back to you within 24 hours.</p>
-      <form>
-        <div class="modal-field"><label for="modal-name">Name</label><input type="text" id="modal-name" name="name" placeholder="Your name" required></div>
-        <div class="modal-field"><label for="modal-email">Email</label><input type="email" id="modal-email" name="email" placeholder="you@email.com" required></div>
-        <div class="modal-field"><label for="modal-project">Project details</label><textarea id="modal-project" name="project" placeholder="Tell us about your event..." rows="4"></textarea></div>
-        <button type="submit" class="btn btn--accent">Send inquiry <span class="btn__arrow">→</span></button>
-      </form>
-      <div class="modal-success" style="display:none;"><h3>Message sent!</h3><p>We'll get back to you within 24 hours.</p></div>
+    <!-- ============ STATS LEDGER ============ -->
+    <section class="stats">
+      <div class="shell">
+        <p class="eyebrow" data-reveal>By the numbers</p>
+        <div class="stat-row" data-reveal style="--d:0ms">
+          <div class="n"><span data-count="120">0</span><em>+</em></div>
+          <p class="lb">Shows filmed</p>
+          <p class="ds">Clubs to arenas, one-night stands to full tours.</p>
+        </div>
+        <div class="stat-row" data-reveal style="--d:60ms">
+          <div class="n"><span data-count="1.2" data-dec="1">0</span><em>M</em></div>
+          <p class="lb">Live views</p>
+          <p class="ds">Across artist channels, reels, and recaps.</p>
+        </div>
+        <div class="stat-row" data-reveal style="--d:120ms">
+          <div class="n"><span data-count="8">0</span></div>
+          <p class="lb">Cameras per show</p>
+          <p class="ds">Every angle, synced to timecode.</p>
+        </div>
+        <div class="stat-row" data-reveal style="--d:180ms">
+          <div class="n"><span data-count="48">0</span><em>h</em></div>
+          <p class="lb">Teaser delivery</p>
+          <p class="ds">The first cut lands before the afterparty fades.</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer>
+    <div class="shell foot-in">
+      <p class="foot-kick" data-reveal>Got a show coming up?</p>
+      <button class="foot-giant" data-modal data-reveal style="--d:100ms" aria-label="Start a project">
+        <span class="row">LET'S <span class="serif">film</span> IT<span class="arrow"><svg class="ic"><use href="#i-arrup"/></svg></span></span>
+      </button>
+      <div class="foot-contact" data-reveal style="--d:200ms">
+        <a href="mailto:hello@thebrownprint.ca">hello@thebrownprint.ca</a>
+        <a href="tel:+14165550199">+1 (416) 555-0199</a>
+        <span>Toronto → worldwide</span>
+      </div>
+      <div class="foot-cols">
+        <div class="foot-col">
+          <h3>Pages</h3>
+          <ul>
+            <li><a class="alink" href="index.html"><span>Home</span></a></li>
+            <li><a class="alink" href="wedding.html"><span>Weddings</span></a></li>
+            <li><a class="alink" href="music.html"><span>Music</span></a></li>
+            <li><a class="alink" href="concerts.html"><span>Concerts</span></a></li>
+          </ul>
+        </div>
+        <div class="foot-col">
+          <h3>More</h3>
+          <ul>
+            <li><a class="alink" href="social.html"><span>Social Events</span></a></li>
+            <li><a class="alink" href="brands.html"><span>Brand Films</span></a></li>
+            <li><button class="alink" data-modal><span>Contact</span></button></li>
+          </ul>
+        </div>
+        <div class="foot-col">
+          <h3>Connect</h3>
+          <ul>
+            <li><a class="alink" href="https://instagram.com" target="_blank" rel="noopener"><span>Instagram</span></a></li>
+            <li><a class="alink" href="https://youtube.com" target="_blank" rel="noopener"><span>YouTube</span></a></li>
+            <li><button class="alink" data-modal><span>Start a Project</span></button></li>
+          </ul>
+        </div>
+      </div>
+      <div class="foot-legal">
+        <span>© 2026 The Brown Print. All rights reserved.</span>
+        <span class="links">
+          <a class="alink" href="#"><span>Privacy</span></a>
+          <a class="alink" href="#"><span>Terms</span></a>
+        </span>
+      </div>
+    </div>
+    <div class="foot-mark" aria-hidden="true">TBP</div>
+  </footer>
+
+  <!-- ============ NAV MENU OVERLAY ============ -->
+  <div class="navmenu" id="navmenu" hidden role="dialog" aria-modal="true" aria-label="Menu">
+    <div class="nm-preview" id="nmPreview" aria-hidden="true"><img src="media/concert3/hero-concert.jpeg" alt="" /></div>
+    <div class="shell nm-top">
+      <span class="brand" style="cursor:default"><svg class="ic"><use href="#i-eq"/></svg>THE BROWN PRINT</span>
+      <button class="nm-close" id="menuClose"><svg class="ic" style="font-size:.875rem"><use href="#i-x"/></svg>Close</button>
+    </div>
+    <nav class="shell nm-nav" aria-label="Menu">
+      <ul id="nmList">
+        <li><a class="nm-item" href="index.html" data-img="media/home/home_hero.jpeg"><span class="no">01</span><span class="lb">Home</span></a></li>
+        <li><a class="nm-item" href="wedding.html" data-img="media/wedding/photo-1.webp"><span class="no">02</span><span class="lb">Weddings</span></a></li>
+        <li><a class="nm-item" href="music.html" data-img="media/music/music-1.webp"><span class="no">03</span><span class="lb">Music</span></a></li>
+        <li><a class="nm-item active" href="concerts.html" data-img="media/concerts/concert-1.webp"><span class="no">04</span><span class="lb">Concerts</span></a></li>
+        <li><a class="nm-item" href="social.html" data-img="media/social/social-1.webp"><span class="no">05</span><span class="lb">Social</span></a></li>
+        <li><a class="nm-item" href="brands.html" data-img="media/brands/brand-1.webp"><span class="no">06</span><span class="lb">Brands</span></a></li>
+      </ul>
+    </nav>
+    <div class="shell nm-bottom">
+      <span>Local time — <span id="nmTime">Toronto</span></span>
+      <button data-modal>Start a project →</button>
     </div>
   </div>
 
-  <!-- SCRIPTS -->
-  <script src="content.js"></script>
-  <script src="js/app.js"></script>
-  <script src="js/loader.js"></script>
-  <script src="js/nav.js"></script>
-  <script src="js/reveals.js"></script>
-  <script src="js/player.js"></script>
-  <script src="js/modal.js"></script>
-  <script src="js/cards.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      TBP.initAdaptiveGrid();
-      TBP.initLenis();
-      TBPLoader.init();
-      TBPLoader.interceptLinks();
-      TBPNav.init();
-      TBPReveals.init();
-      TBPCards.init();
-      TBPModal.init();
+  <!-- ============ LIGHTBOX ============ -->
+  <div class="lbx" id="lbx" hidden role="dialog" aria-modal="true" aria-label="Photo viewer">
+    <figure>
+      <img id="lbxImg" src="" alt="" />
+      <figcaption>
+        <div><h3 id="lbxTitle"></h3><p id="lbxSub"></p></div>
+        <span class="cnt" id="lbxCnt"></span>
+      </figcaption>
+    </figure>
+    <button class="lbx-nav prev" id="lbxPrev" aria-label="Previous photo"><svg class="ic"><use href="#i-arr"/></svg></button>
+    <button class="lbx-nav next" id="lbxNext" aria-label="Next photo"><svg class="ic"><use href="#i-arr"/></svg></button>
+    <button class="lbx-x" id="lbxClose" aria-label="Close viewer"><svg class="ic"><use href="#i-x"/></svg></button>
+  </div>
 
-      /* === CONCERT3 IMMERSIVE SYSTEMS === */
-      const reduce = TBP.prefersReducedMotion;
+  <!-- ============ REQUEST MODAL ============ -->
+  <div class="modal" id="modal" hidden role="dialog" aria-modal="true" aria-label="Start a project">
+    <div class="modal-panel">
+      <button class="modal-x" id="modalClose" aria-label="Close"><svg class="ic"><use href="#i-x"/></svg></button>
+      <div class="modal-head">
+        <span class="tag">Start a project</span>
+        <h2>Tell us about <span class="serif">the show.</span></h2>
+      </div>
+      <form id="reqForm" novalidate>
+        <label>Name<input type="text" name="name" required placeholder="Your name" /></label>
+        <label>Email<input type="email" name="email" required placeholder="you@label.com" /></label>
+        <label>The show<textarea name="show" rows="4" required placeholder="Venue, date, and what's happening on stage."></textarea></label>
+        <div class="modal-foot">
+          <span class="note">We reply within one business day.</span>
+          <button class="btn solid" type="submit" id="reqSubmit"><span id="reqLabel">Send request</span> <span class="btn__arrow">→</span></button>
+        </div>
+      </form>
+      <div class="modal-ok">
+        <span class="badge-big"><svg class="ic"><use href="#i-eq"/></svg></span>
+        <h2>Request received</h2>
+        <p>Thanks for reaching out — we'll get back to you within one business day.</p>
+        <button class="btn solid" id="okClose">Close</button>
+      </div>
+    </div>
+  </div>
 
-      // --- Scroll-driven stage crossfade ---
-      const scrollSpacer = document.querySelector('.c3-scroll-spacer');
-      const imgCrimson = document.getElementById('c3-img-crimson');
-      const imgSpotlight = document.getElementById('c3-img-spotlight');
-      const overlay = document.getElementById('c3-overlay');
-      const spotlightCone = document.getElementById('c3-spotlight');
-      const captionCrimson = document.getElementById('c3-caption-crimson');
-      const captionSpotlight = document.getElementById('c3-caption-spotlight');
-      const scrollCue = document.getElementById('c3-scroll-cue');
-      const tlProgress = document.getElementById('c3-tl-progress');
-      const tlDots = document.querySelectorAll('.c3-tl-dot');
-      const tlTexts = document.querySelectorAll('.c3-tl-text');
-      const particles = document.getElementById('c3-particles');
-      const crowd = document.getElementById('c3-crowd');
-      const timecode = document.getElementById('c3-timecode');
-      const followspot = document.getElementById('c3-followspot');
-      const hasSpot = document.querySelector('.c3-has-spot');
+  <script type="importmap">
+  { "imports": { "lenis": "https://unpkg.com/lenis@1.3.23/dist/lenis.mjs" } }
+  </script>
+  <script type="module">
+    import Lenis from 'lenis';
 
-      if (!reduce && scrollSpacer) {
-        let ticking = false;
-        window.addEventListener('scroll', () => {
-          if (ticking) return;
-          ticking = true;
-          requestAnimationFrame(() => {
-            const scrollY = window.scrollY;
-            const maxScroll = scrollSpacer.offsetHeight - window.innerHeight;
-            const progress = Math.max(0, Math.min(1, scrollY / maxScroll));
+    const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const doc = document.documentElement;
+    const $ = (s, c=document) => c.querySelector(s);
+    const $$ = (s, c=document) => [...c.querySelectorAll(s)];
 
-            // Crossfade stage images
-            if (imgCrimson) imgCrimson.style.opacity = 1 - progress * 1.5;
-            if (imgSpotlight) {
-              const spotProg = Math.max(0, (progress - 0.3) / 0.7);
-              imgSpotlight.style.transform = `translateY(${(1 - spotProg) * 100}vh)`;
-              imgSpotlight.style.opacity = spotProg;
-            }
+    /* ---------- Lenis ---------- */
+    window.scrollTo(0, 0);
+    const lenis = new Lenis({ smoothWheel: true });
+    function raf(t){ lenis.raf(t); requestAnimationFrame(raf); }
+    requestAnimationFrame(raf);
 
-            // Overlay gradient shift
-            if (overlay) {
-              const r = Math.floor(220 - progress * 180);
-              const g = Math.floor(38 + progress * 200);
-              const b = Math.floor(38 + progress * 200);
-              overlay.style.background = `radial-gradient(circle at 50% 30%, rgba(${r},${g},${b},0.25), transparent 60%)`;
-            }
+    let scrollEnabled = true;
+    function stopScroll(){
+      if (!scrollEnabled) return; scrollEnabled = false;
+      lenis.stop();
+      doc.style.position = 'relative'; doc.style.overflow = 'hidden'; doc.style.height = '100%';
+    }
+    function startScroll(){
+      if (scrollEnabled) return; scrollEnabled = true;
+      lenis.start();
+      doc.style.removeProperty('position'); doc.style.removeProperty('overflow'); doc.style.removeProperty('height');
+    }
+    function anyOverlayOpen(){
+      return !$('#modal').hidden || !$('#navmenu').hidden || !$('#lbx').hidden;
+    }
+    function scrollToId(id){
+      const el = document.getElementById(id);
+      if (!el) return;
+      setTimeout(() => lenis.scrollTo(el, { duration: 1.1 }), 50);
+    }
 
-            // Spotlight cone
-            if (spotlightCone) {
-              const coneProg = Math.max(0, (progress - 0.4) / 0.6);
-              spotlightCone.style.opacity = coneProg * 0.15;
-              spotlightCone.style.transform = `translateX(-50%) rotate(${-10 + coneProg * 10}deg)`;
-            }
+    /* ---------- Adaptive grid (scale up above 1920) ---------- */
+    function applyAdaptiveGrid(){
+      const FONT_BASE = 16, baseWidth = 1920, coef = 0.6666;
+      const w = window.innerWidth;
+      const widthReduction = ((baseWidth - w) / baseWidth) * 100;
+      const size = FONT_BASE - (FONT_BASE * (widthReduction * coef)) / 100;
+      if (size > FONT_BASE) doc.style.fontSize = size + 'px';
+      else doc.style.removeProperty('font-size');
+    }
+    applyAdaptiveGrid(); addEventListener('resize', applyAdaptiveGrid);
 
-            // Caption crossfade
-            if (captionCrimson) {
-              const c1FadeIn = Math.min(1, progress / 0.05);
-              const c1FadeOut = progress < 0.3 ? 1 : Math.max(0, 1 - (progress - 0.3) / 0.2);
-              captionCrimson.style.opacity = Math.min(c1FadeIn, c1FadeOut);
-              captionCrimson.style.transform = `translateY(${progress * -80}px)`;
-            }
-            if (captionSpotlight) {
-              const c2FadeIn = progress < 0.35 ? 0 : Math.min(1, (progress - 0.35) / 0.15);
-              const c2FadeOut = progress < 0.7 ? 1 : Math.max(0, 1 - (progress - 0.7) / 0.1);
-              const c2Opacity = Math.min(c2FadeIn, c2FadeOut);
-              captionSpotlight.style.opacity = c2Opacity;
-              captionSpotlight.style.visibility = c2Opacity > 0.01 ? 'visible' : 'hidden';
-              captionSpotlight.style.transform = `translateY(${Math.max(0, (progress - 0.35) * -60)}px)`;
-            }
-
-            // Scroll cue fade
-            if (scrollCue) scrollCue.style.opacity = progress < 0.05 ? 1 : Math.max(0, 1 - (progress - 0.05) / 0.1);
-
-            // Timeline progress
-            if (tlProgress) tlProgress.style.height = (progress * 100) + '%';
-
-            // Timeline dots
-            tlDots.forEach((dot, i) => {
-              const thresholds = [0.15, 0.5, 0.8];
-              dot.classList.toggle('active', progress >= thresholds[i]);
-            });
-            tlTexts.forEach((text, i) => {
-              const thresholds = [0.15, 0.5, 0.8];
-              text.classList.toggle('active', progress >= thresholds[i]);
-            });
-
-            ticking = false;
-          });
-        }, { passive: true });
-      }
-
-      // --- Particles canvas ---
-      if (!reduce && particles) {
-        const pCtx = particles.getContext('2d');
-        let pW, pH;
-        const embers = [];
-        const EMBER_COUNT = 40;
-
-        function resizeParticles() {
-          pW = particles.width = window.innerWidth;
-          pH = particles.height = window.innerHeight;
-        }
-        resizeParticles();
-        window.addEventListener('resize', resizeParticles);
-
-        for (let i = 0; i < EMBER_COUNT; i++) {
-          embers.push({
-            x: Math.random() * pW,
-            y: pH + Math.random() * 100,
-            vx: (Math.random() - 0.5) * 0.3,
-            vy: -(0.2 + Math.random() * 0.6),
-            size: 1 + Math.random() * 2,
-            alpha: 0.3 + Math.random() * 0.5,
-            decay: 0.001 + Math.random() * 0.003,
-          });
-        }
-
-        function drawEmbers() {
-          pCtx.clearRect(0, 0, pW, pH);
-          for (const e of embers) {
-            e.x += e.vx;
-            e.y += e.vy;
-            e.alpha -= e.decay;
-            if (e.alpha <= 0 || e.y < -20) {
-              e.x = Math.random() * pW;
-              e.y = pH + Math.random() * 50;
-              e.alpha = 0.3 + Math.random() * 0.5;
-            }
-            pCtx.beginPath();
-            pCtx.arc(e.x, e.y, e.size, 0, Math.PI * 2);
-            pCtx.fillStyle = `rgba(220,38,38,${e.alpha})`;
-            pCtx.fill();
-          }
-          requestAnimationFrame(drawEmbers);
-        }
-        drawEmbers();
-      }
-
-      // --- Crowd SVG ---
-      if (crowd) {
-        const sw = window.innerWidth;
-        const sh = 100;
-        let svg = `<svg viewBox="0 0 ${sw} ${sh}" xmlns="http://www.w3.org/2000/svg">`;
-        // Back row
-        svg += `<g class="c3-crowd-row c3-crowd-row--back" fill="rgba(30,20,20,0.8)">`;
-        for (let i = 0; i < 60; i++) {
-          const cx = (i / 60) * sw + (Math.random() - 0.5) * 20;
-          const cy = sh - 15 - Math.random() * 25;
-          const r = 4 + Math.random() * 5;
-          svg += `<circle cx="${cx}" cy="${cy}" r="${r}"/>`;
-        }
-        svg += `</g>`;
-        // Front row
-        svg += `<g class="c3-crowd-row" fill="rgba(15,10,10,0.95)">`;
-        for (let i = 0; i < 45; i++) {
-          const cx = (i / 45) * sw + (Math.random() - 0.5) * 25;
-          const cy = sh - 5 - Math.random() * 18;
-          const r = 5 + Math.random() * 6;
-          svg += `<circle cx="${cx}" cy="${cy}" r="${r}"/>`;
-        }
-        svg += `</g>`;
-        // Phone lights
-        for (let i = 0; i < 8; i++) {
-          const cx = Math.random() * sw;
-          const cy = sh - 30 - Math.random() * 40;
-          svg += `<rect class="c3-phone-light" x="${cx}" y="${cy}" width="3" height="5" rx="1" fill="rgba(200,220,255,0.6)" style="animation-delay:${Math.random()*3}s"/>`;
-        }
-        svg += `</svg>`;
-        crowd.innerHTML = svg;
-      }
-
-      // --- Timecode ---
-      if (timecode) {
-        const tcStart = performance.now();
-        function updateTimecode() {
-          const elapsed = performance.now() - tcStart;
-          const h = String(Math.floor(elapsed / 3600000)).padStart(2, '0');
-          const m = String(Math.floor((elapsed % 3600000) / 60000)).padStart(2, '0');
-          const s = String(Math.floor((elapsed % 60000) / 1000)).padStart(2, '0');
-          const f = String(Math.floor((elapsed % 1000) / 41.67)).padStart(2, '0');
-          timecode.textContent = `${h}:${m}:${s}:${f}`;
-          requestAnimationFrame(updateTimecode);
-        }
-        updateTimecode();
-      }
-
-      // --- Followspot cursor ---
-      if (!reduce && followspot && hasSpot) {
-        hasSpot.addEventListener('mousemove', (e) => {
-          const rect = hasSpot.getBoundingClientRect();
-          followspot.style.transform = `translate(${e.clientX - rect.left}px, ${e.clientY - rect.top}px)`;
-          followspot.style.opacity = '1';
+    /* ---------- Reveal engine ---------- */
+    function initReveals(){
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
         });
-        hasSpot.addEventListener('mouseleave', () => { followspot.style.opacity = '0'; });
-      }
+      }, { threshold: 0.12, rootMargin: '0px 0px -4% 0px' });
+      $$('[data-reveal], .lns, #statement').forEach(el => io.observe(el));
+    }
 
-      // --- Populate collage grid ---
-      const grid = document.getElementById('concertGrid');
-      if (grid && CONTENT.concerts) {
-        grid.innerHTML = CONTENT.concerts.map(item => `
-          <div class="work-card" onclick="VideoPlayer.open({videoSrc:'${item.videoSrc}',poster:'${item.poster}',title:'${item.title}',venue:'${item.venue}'})">
-            <img src="${item.poster}" alt="${item.title}" loading="lazy">
-            <div class="work-card__shade"></div>
-            <div class="work-card__play">▶</div>
-            <div class="work-card__caption">
-              <div class="meta">${item.venue || 'Live'}</div>
-              <h3>${item.title}</h3>
-              <div class="sub">${item.sub}</div>
-            </div>
-          </div>
-        `).join('');
+    /* ---------- Loader ---------- */
+    function runLoader(){
+      const loader = $('#loader');
+      if (!loader){ onReady(); return; }
+      if (RM){ loader.remove(); onReady(); return; }
+      stopScroll();
+      const fill = $('#loaderFill'), num = $('#loaderNum');
+      const FILL_MS = 1300, t0 = performance.now();
+      const ease = t => t < .5 ? 4*t*t*t : 1 - Math.pow(-2*t + 2, 3) / 2;
+      function tick(now){
+        const t = Math.min((now - t0) / FILL_MS, 1);
+        const p = Math.round(ease(t) * 100);
+        fill.style.width = p + '%';
+        num.textContent = String(p).padStart(3, '0');
+        if (t < 1) requestAnimationFrame(tick);
+        else {
+          loader.classList.add('exit');
+          loader.addEventListener('transitionend', () => { loader.remove(); onReady(); }, { once: true });
+          setTimeout(() => { if (loader.isConnected){ loader.remove(); onReady(); } }, 1200);
+        }
       }
+      requestAnimationFrame(tick);
+    }
+    let readyFired = false;
+    function onReady(){
+      if (readyFired) return; readyFired = true;
+      doc.classList.add('ready');
+      startScroll();
+      initReveals();
+    }
 
-      // --- Stats counter (for c3-stat-num) ---
-      if (!reduce) {
-        const statNums = document.querySelectorAll('.c3-stat-num[data-target]');
-        const sIo = new IntersectionObserver((entries) => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              const el = entry.target;
-              const target = parseFloat(el.dataset.target);
-              const suffix = el.dataset.suffix || '';
-              const dur = 1500;
-              const start = performance.now();
-              function frame(now) {
-                const p = Math.min((now - start) / dur, 1);
-                const eased = 1 - Math.pow(1 - p, 3);
-                el.textContent = Math.floor(eased * target) + suffix;
-                if (p < 1) requestAnimationFrame(frame);
-                else el.textContent = target + suffix;
-              }
-              requestAnimationFrame(frame);
-              sIo.unobserve(el);
-            }
-          });
-        }, { threshold: 0.5 });
-        statNums.forEach(el => sIo.observe(el));
+    /* ---------- Clock (same format as other pages) ---------- */
+    function tickClock(){
+      let t;
+      try {
+        t = new Date().toLocaleTimeString('en-US', { hour:'2-digit', minute:'2-digit', second:'2-digit', hour12:false, timeZone:'America/Toronto' }) + ' EST';
+      } catch(e){ t = ''; }
+      $('#clockTime').textContent = t;
+      const nm = $('#nmTime'); if (nm) nm.textContent = t;
+    }
+    tickClock(); setInterval(tickClock, 1000);
+
+    /* ---------- Header scroll state (same threshold as other pages) ---------- */
+    (function(){
+      const hdr = $('.header');
+      if (!hdr) return;
+      const onScroll = () => hdr.classList.toggle('scrolled', window.scrollY > 60);
+      addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+    })();
+
+    /* ---------- Stats count-up ---------- */
+    (function(){
+      const nums = $$('[data-count]');
+      if (!nums.length) return;
+      let lastRun = 0;
+      function update(){
+        const now = performance.now();
+        if (now - lastRun < 30) return; lastRun = now;
+        const vh = innerHeight;
+        nums.forEach(el => {
+          const r = el.closest('.stat-row').getBoundingClientRect();
+          const startY = vh, endY = vh / 2 - r.height / 2;
+          const p = Math.min(Math.max((startY - r.top) / (startY - endY), 0), 1);
+          const target = parseFloat(el.dataset.count);
+          const dec = parseInt(el.dataset.dec || '0', 10);
+          const v = target * p;
+          el.textContent = dec ? v.toFixed(dec) : String(Math.round(v));
+        });
       }
+      lenis.on('scroll', update);
+      addEventListener('resize', update);
+      update();
+      if (RM) nums.forEach(el => {
+        const dec = parseInt(el.dataset.dec || '0', 10);
+        el.textContent = dec ? parseFloat(el.dataset.count).toFixed(dec) : el.dataset.count;
+      });
+    })();
 
-      TBPReveals.init();
+    /* ---------- Nav menu overlay ---------- */
+    const navmenu = $('#navmenu');
+    const nmPreview = $('#nmPreview'), nmPreviewImg = $('img', nmPreview);
+    $$('#nmList .nm-item').forEach((el, i) => {
+      el.style.transitionDelay = (i * 45 + 80) + 'ms';
+      el.addEventListener('mouseenter', () => {
+        const src = el.dataset.img;
+        if (!src) return;
+        nmPreviewImg.src = src;
+        nmPreview.classList.add('show');
+      });
     });
+    $('#nmList').addEventListener('mouseleave', () => nmPreview.classList.remove('show'));
+    function openMenu(){
+      navmenu.hidden = false;
+      $('#menuOpen').classList.add('open');
+      requestAnimationFrame(() => requestAnimationFrame(() => navmenu.classList.add('open')));
+      stopScroll();
+    }
+    function closeMenu(then){
+      navmenu.classList.remove('open');
+      nmPreview.classList.remove('show');
+      $('#menuOpen').classList.remove('open');
+      setTimeout(() => {
+        navmenu.hidden = true;
+        if (!anyOverlayOpen()) startScroll();
+        if (then) then();
+      }, 400);
+    }
+    $('#menuOpen').addEventListener('click', openMenu);
+    $('#menuClose').addEventListener('click', () => closeMenu());
+
+    /* ---------- Lightbox ---------- */
+    const lbx = $('#lbx');
+    const WALL = $$('#wall .tile-card').map(btn => ({
+      src: $('img', btn).src,
+      alt: $('img', btn).alt,
+      title: $('h3', btn).textContent,
+      sub: $('p', btn).textContent
+    }));
+    let lbxIdx = 0;
+    function lbxRender(){
+      const it = WALL[lbxIdx];
+      $('#lbxImg').src = it.src; $('#lbxImg').alt = it.alt;
+      $('#lbxTitle').textContent = it.title;
+      $('#lbxSub').textContent = it.sub;
+      $('#lbxCnt').textContent = String(lbxIdx + 1).padStart(2, '0') + ' / ' + String(WALL.length).padStart(2, '0');
+    }
+    function openLbx(i){
+      lbxIdx = i; lbxRender();
+      lbx.hidden = false;
+      requestAnimationFrame(() => requestAnimationFrame(() => lbx.classList.add('open')));
+      stopScroll();
+    }
+    function closeLbx(){
+      lbx.classList.remove('open');
+      setTimeout(() => { lbx.hidden = true; if (!anyOverlayOpen()) startScroll(); }, 350);
+    }
+    function lbxStep(d){ lbxIdx = (lbxIdx + d + WALL.length) % WALL.length; lbxRender(); }
+    $('#lbxClose').addEventListener('click', closeLbx);
+    $('#lbxPrev').addEventListener('click', e => { e.stopPropagation(); lbxStep(-1); });
+    $('#lbxNext').addEventListener('click', e => { e.stopPropagation(); lbxStep(1); });
+    lbx.addEventListener('click', e => { if (e.target === lbx) closeLbx(); });
+
+    /* ---------- Request modal ---------- */
+    const modal = $('#modal');
+    function openModal(){
+      modal.hidden = false;
+      requestAnimationFrame(() => requestAnimationFrame(() => modal.classList.add('open')));
+      stopScroll();
+      setTimeout(() => { const f = $('input', modal); if (f) f.focus(); }, 450);
+    }
+    function closeModal(){
+      modal.classList.remove('open');
+      setTimeout(() => {
+        modal.hidden = true;
+        if (!anyOverlayOpen()) startScroll();
+        setTimeout(() => { modal.classList.remove('done'); $('#reqForm').reset(); $('#reqLabel').textContent = 'Send request'; }, 300);
+      }, 400);
+    }
+    modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+    $('.modal-panel').addEventListener('click', e => e.stopPropagation());
+    $('#modalClose').addEventListener('click', closeModal);
+    $('#okClose').addEventListener('click', closeModal);
+    $('#reqForm').addEventListener('submit', e => {
+      e.preventDefault();
+      const form = e.target;
+      if (!form.reportValidity()) return;
+      $('#reqLabel').textContent = 'Sending…';
+      console.log('[TBP] project request', Object.fromEntries(new FormData(form)));
+      setTimeout(() => modal.classList.add('done'), 650);
+    });
+
+    /* ---------- Global routing ---------- */
+    document.addEventListener('click', e => {
+      const t = e.target.closest('[data-lbx]');
+      if (t){ openLbx(parseInt(t.dataset.lbx, 10)); return; }
+      const s = e.target.closest('[data-scroll]');
+      if (s){
+        const id = s.dataset.scroll;
+        if (navmenu && !navmenu.hidden) closeMenu(() => scrollToId(id));
+        else scrollToId(id);
+        return;
+      }
+      const m = e.target.closest('[data-modal]');
+      if (m){
+        if (navmenu && !navmenu.hidden) closeMenu(openModal);
+        else openModal();
+      }
+    });
+    addEventListener('keydown', e => {
+      if (e.key === 'Escape'){
+        if (!lbx.hidden) closeLbx();
+        else if (!modal.hidden) closeModal();
+        else if (!navmenu.hidden) closeMenu();
+        return;
+      }
+      if (!lbx.hidden){
+        if (e.key === 'ArrowRight') lbxStep(1);
+        if (e.key === 'ArrowLeft') lbxStep(-1);
+      }
+    });
+
+    /* ---------- Go ---------- */
+    runLoader();
   </script>
 </body>
 </html>
