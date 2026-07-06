@@ -67,21 +67,36 @@
   transform-origin: bottom;
 }
 
-.filmstrip-wipe.active .filmstrip-wipe__panel {
-  animation: panelWipe 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+/* Leaving page: panels rise and STAY covering until the next page loads */
+.filmstrip-wipe.cover .filmstrip-wipe__panel {
+  animation: panelCover 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
-.filmstrip-wipe.active .filmstrip-wipe__panel:nth-child(1) { animation-delay: 0s; }
-.filmstrip-wipe.active .filmstrip-wipe__panel:nth-child(2) { animation-delay: 0.06s; }
-.filmstrip-wipe.active .filmstrip-wipe__panel:nth-child(3) { animation-delay: 0.12s; }
-.filmstrip-wipe.active .filmstrip-wipe__panel:nth-child(4) { animation-delay: 0.18s; }
-.filmstrip-wipe.active .filmstrip-wipe__panel:nth-child(5) { animation-delay: 0.24s; }
+.filmstrip-wipe.cover .filmstrip-wipe__panel:nth-child(1) { animation-delay: 0s; }
+.filmstrip-wipe.cover .filmstrip-wipe__panel:nth-child(2) { animation-delay: 0.05s; }
+.filmstrip-wipe.cover .filmstrip-wipe__panel:nth-child(3) { animation-delay: 0.1s; }
+.filmstrip-wipe.cover .filmstrip-wipe__panel:nth-child(4) { animation-delay: 0.15s; }
+.filmstrip-wipe.cover .filmstrip-wipe__panel:nth-child(5) { animation-delay: 0.2s; }
 
-@keyframes panelWipe {
-  0% { transform: scaleY(0); transform-origin: bottom; }
-  50% { transform: scaleY(1); transform-origin: bottom; }
-  50.001% { transform-origin: top; }
-  100% { transform: scaleY(0); transform-origin: top; }
+/* Arriving page: panels start covering, then peel away to reveal it */
+.filmstrip-wipe.uncover .filmstrip-wipe__panel {
+  transform: scaleY(1);
+  transform-origin: top;
+  animation: panelUncover 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.filmstrip-wipe.uncover .filmstrip-wipe__panel:nth-child(1) { animation-delay: 0.05s; }
+.filmstrip-wipe.uncover .filmstrip-wipe__panel:nth-child(2) { animation-delay: 0.1s; }
+.filmstrip-wipe.uncover .filmstrip-wipe__panel:nth-child(3) { animation-delay: 0.15s; }
+.filmstrip-wipe.uncover .filmstrip-wipe__panel:nth-child(4) { animation-delay: 0.2s; }
+.filmstrip-wipe.uncover .filmstrip-wipe__panel:nth-child(5) { animation-delay: 0.25s; }
+
+@keyframes panelCover {
+  to { transform: scaleY(1); }
+}
+
+@keyframes panelUncover {
+  to { transform: scaleY(0); }
 }
 
 /* ---------- HEADER / NAV ---------- */
@@ -963,7 +978,8 @@
 .vp-overlay.open { opacity: 1; visibility: visible; }
 
 .vp-shell {
-  width: min(90vw, 80rem);
+  /* same card width as the photo album lightbox */
+  width: min(90vw, 900px);
   position: relative;
 }
 
@@ -988,6 +1004,11 @@
 .vp-video {
   width: 100%;
   display: block;
+  height: auto;
+  aspect-ratio: 16/9;
+  max-height: 70vh;
+  object-fit: contain;
+  background: #000;
 }
 
 .vp-guard {
@@ -1091,7 +1112,8 @@
   flex-direction: column;
   min-height: 100svh;
   background: #0c0a09;
-  border-radius: 0 0 var(--radius-card) var(--radius-card);
+  /* square corners so the ticker line runs straight edge-to-edge */
+  border-radius: 0;
 }
 .lhero__media { position: absolute; inset: 0; z-index: 0; }
 .lhero__media img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.55) contrast(1.06); }
@@ -1224,3 +1246,184 @@
 .lstat-row .lb { flex: 1; font-size: 1rem; font-weight: 500; color: var(--fg); opacity: 0.8; }
 .lstat-row .ds { display: none; max-width: 18rem; text-align: right; font-size: 0.8rem; color: var(--muted); }
 @media (min-width: 768px) { .lstat-row .ds { display: block; } }
+
+/* ---------- VIDEO PLAYER — playlist browse arrows ---------- */
+.vp-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 20;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255,255,255,0.12);
+  color: #fff;
+  font-size: 1.5rem;
+  cursor: pointer;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+.vp-overlay.vp-has-nav .vp-nav { display: flex; }
+.vp-nav:hover { background: rgba(255,255,255,0.3); }
+.vp-nav--prev { left: 1rem; }
+.vp-nav--next { right: 1rem; }
+
+/* ---------- UNIFORM WORK GRID + LOAD MORE (wedding-style cards) ---------- */
+.work-grid--uniform .work-card { aspect-ratio: 16/10; }
+
+.grid-loadmore {
+  display: flex;
+  justify-content: center;
+  margin-top: 2.5rem;
+}
+
+/* ---------- BRAND LOGO IMAGE ---------- */
+.logo-img {
+  width: 3rem;
+  height: 3rem;
+  object-fit: contain;
+  flex-shrink: 0;
+  display: block;
+}
+
+/* Footer logo is larger */
+.footer .logo-img {
+  width: 3.75rem;
+  height: 3.75rem;
+}
+
+/* Home theme: the logo keeps its natural red (the page accent now
+   matches it) — just lift it off the dark background */
+[data-theme="home"] .logo-img {
+  filter: drop-shadow(0 0 8px rgba(215,40,47,0.45));
+}
+
+/* Other dark themes: subtle glow so the black strokes stay visible */
+[data-theme="music"] .logo-img,
+[data-theme="brands"] .logo-img,
+[data-theme="concerts"] .logo-img {
+  filter: drop-shadow(0 0 5px rgba(255,255,255,0.18));
+}
+
+/* ---------- PHOTO ALBUM GRID (portrait cards, wedding-style) ---------- */
+.work-grid--photos .work-card { aspect-ratio: 4/5; }
+
+/* ---------- PHOTO ALBUM LIGHTBOX (site-wide, wedding-style) ---------- */
+.album-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  background: rgba(0,0,0,0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s, visibility 0.3s;
+}
+
+.album-backdrop.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.album-panel {
+  position: relative;
+  width: 90vw;
+  max-width: 900px;
+  max-height: 85vh;
+  overflow: hidden;
+  border-radius: 16px;
+  background: #1c1917;
+}
+
+.album-panel__close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 10;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  border: none;
+  background: rgba(0,0,0,0.5);
+  color: #fff;
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+
+.album-panel__close:hover { background: rgba(0,0,0,0.8); }
+
+.album-panel__img {
+  width: 100%;
+  max-height: 75vh;
+  object-fit: contain;
+  display: block;
+}
+
+.album-panel__caption {
+  padding: 1rem 1.5rem;
+  text-align: center;
+}
+
+.album-panel__title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.album-panel__sub {
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.5);
+  margin-top: 0.25rem;
+}
+
+.album-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+  z-index: 5;
+}
+
+.album-nav:hover { background: rgba(255,255,255,0.3); }
+.album-nav--prev { left: 0.75rem; }
+.album-nav--next { right: 0.75rem; }
+
+/* Counter pill in the top-left corner of the photo */
+.album-counter {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  z-index: 10;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #fff;
+  letter-spacing: 0.1em;
+  background: rgba(0,0,0,0.55);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  padding: 0.35rem 0.75rem;
+  border-radius: var(--radius-pill);
+  font-variant-numeric: tabular-nums;
+}

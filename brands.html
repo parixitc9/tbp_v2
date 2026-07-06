@@ -21,7 +21,7 @@
   <header class="header">
     <div class="shell header__inner">
       <a href="index.html" class="header__logo">
-        <svg width="28" height="28" viewBox="0 0 100 100" fill="none"><rect width="100" height="100" rx="20" fill="#0c0a09"/><circle cx="50" cy="50" r="28" stroke="#f59e0b" stroke-width="6" fill="none"/><circle cx="50" cy="50" r="8" fill="#f59e0b"/></svg>
+        <img src="media/tbp-logo.png" alt="The Brown Print logo" class="logo-img">
         <span class="header__logo-text">The Brown Print</span>
       </a>
       <nav class="header__nav">
@@ -79,7 +79,19 @@
         <svg class="brd-section__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"/><path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"/><path d="M10 6h4"/><path d="M10 10h4"/><path d="M10 14h4"/><path d="M10 18h4"/></svg>
         <span class="brd-section__label">Selected Clients</span>
       </div>
-      <div id="brandsGrid" class="work-grid reveal-stagger"></div>
+      <div id="brandsGrid" class="work-grid work-grid--uniform reveal-stagger"></div>
+      <div class="grid-loadmore"><button class="btn btn--outline" id="brandsMore">Load more work <span class="btn__arrow">↓</span></button></div>
+    </div>
+  </section>
+
+  <!-- PHOTO ALBUMS -->
+  <section class="brd-section">
+    <div class="shell">
+      <div class="brd-section__header reveal">
+        <svg class="brd-section__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+        <span class="brd-section__label">Photo Albums</span>
+      </div>
+      <div id="brandsPhotos" class="work-grid work-grid--photos reveal-stagger"></div>
     </div>
   </section>
 
@@ -187,7 +199,7 @@
     <div class="shell">
       <div class="footer__top">
         <div class="footer__brand">
-          <a href="index.html" class="header__logo"><svg width="28" height="28" viewBox="0 0 100 100" fill="none"><rect width="100" height="100" rx="20" fill="#0c0a09"/><circle cx="50" cy="50" r="28" stroke="#f59e0b" stroke-width="6" fill="none"/><circle cx="50" cy="50" r="8" fill="#f59e0b"/></svg><span class="header__logo-text">The Brown Print</span></a>
+          <a href="index.html" class="header__logo"><img src="media/tbp-logo.png" alt="The Brown Print logo" class="logo-img"><span class="header__logo-text">The Brown Print</span></a>
           <p>Punjabi-rooted film studio in Toronto. Concert films, wedding cinema, music videos, and brand storytelling.</p>
         </div>
         <div class="footer__col"><h4>Pages</h4><a href="index.html">Home</a><a href="wedding.html">Weddings</a><a href="music.html">Music</a><a href="concerts.html">Concerts</a></div>
@@ -221,6 +233,7 @@
   <script src="js/nav.js"></script>
   <script src="js/reveals.js"></script>
   <script src="js/player.js"></script>
+  <script src="js/album.js"></script>
   <script src="js/modal.js"></script>
   <script src="js/cards.js"></script>
   <script>
@@ -234,26 +247,71 @@
       TBPCards.init();
       TBPModal.init();
 
+      // === CLIENT WORK — uniform cards, Load more, browsable player (wedding-style) ===
+      const fadeInImgs = (scope) => {
+        scope.querySelectorAll('img').forEach(img => {
+          if (img.complete && img.naturalWidth > 0) { img.classList.add('loaded'); return; }
+          img.addEventListener('load', () => img.classList.add('loaded'), { once: true });
+          img.addEventListener('error', () => img.classList.add('loaded'), { once: true });
+        });
+      };
+      const INITIAL_VISIBLE = 6;
       const grid = document.getElementById('brandsGrid');
-      if (grid && CONTENT.brands) {
-        grid.innerHTML = CONTENT.brands.map(item => `
-          <div class="work-card ${item.tall ? 'tall' : ''}" data-video-src="${item.videoSrc}">
+      const gridMore = document.getElementById('brandsMore');
+      let shown = 0;
+
+      function renderMore() {
+        const items = CONTENT.brands.slice(shown, shown + INITIAL_VISIBLE);
+        grid.insertAdjacentHTML('beforeend', items.map((item, k) => `
+          <div class="work-card" data-video-index="${shown + k}">
             <img src="${item.poster}" alt="${item.title}" loading="lazy">
+            <div class="work-card__shade"></div>
+            <div class="work-card__info">
+              <div class="work-card__title">${item.title}</div>
+              <div class="work-card__sub">${item.client} · ${item.sub}</div>
+            </div>
+            <div class="work-card__play">▶</div>
+          </div>
+        `).join(''));
+        shown += items.length;
+        grid.querySelectorAll('.work-card[data-video-index]:not([data-bound])').forEach(card => {
+          card.dataset.bound = '1';
+          card.addEventListener('click', () => {
+            const idx = parseInt(card.dataset.videoIndex);
+            const item = CONTENT.brands[idx];
+            if (item && item.videoSrc) VideoPlayer.open(item, CONTENT.brands, idx);
+          });
+        });
+        fadeInImgs(grid);
+        if (gridMore && shown >= CONTENT.brands.length) gridMore.parentElement.style.display = 'none';
+      }
+      if (grid && CONTENT.brands) {
+        renderMore();
+        if (gridMore) gridMore.addEventListener('click', renderMore);
+      }
+
+      // === PHOTO ALBUMS — each card opens its own album (wedding-style) ===
+      const photosGrid = document.getElementById('brandsPhotos');
+      if (photosGrid && CONTENT.brandsPhotos) {
+        photosGrid.innerHTML = CONTENT.brandsPhotos.map((item, i) => `
+          <div class="work-card" data-album-index="${i}">
+            <img src="${item.src}" alt="${item.title}" loading="lazy">
             <div class="work-card__shade"></div>
             <div class="work-card__info">
               <div class="work-card__title">${item.title}</div>
               <div class="work-card__sub">${item.sub}</div>
             </div>
-            <div class="work-card__play">▶</div>
           </div>
         `).join('');
-        grid.querySelectorAll('.work-card[data-video-src]').forEach(card => {
-          card.addEventListener('click', (e) => {
-            if (e.target.closest('.work-card-video')) return;
-            const item = CONTENT.brands.find(v => v.videoSrc === card.dataset.videoSrc);
-            if (item) VideoPlayer.open(item);
+        photosGrid.querySelectorAll('.work-card[data-album-index]').forEach(card => {
+          card.addEventListener('click', () => {
+            const it = CONTENT.brandsPhotos[parseInt(card.dataset.albumIndex)];
+            if (!it) return;
+            const photos = (it.album && it.album.length) ? it.album : [{ src: it.src, caption: it.sub }];
+            PhotoAlbum.open(photos.map(p => ({ src: p.src, title: it.title, sub: p.caption || it.sub })));
           });
         });
+        fadeInImgs(photosGrid);
       }
       TBPReveals.init();
     });

@@ -79,11 +79,12 @@ input, textarea { font: inherit; }
 }
 
 /* --- Per-Theme Accent Overrides --- */
+/* Home accent matches the brand logo's red-orange */
 [data-theme="home"] {
-  --accent: #f59e0b;
-  --accent-from: #fbbf24;
-  --accent-to: #d97706;
-  --accent-glow: rgba(245,158,11,0.35);
+  --accent: #d7282f;
+  --accent-from: #ef4b52;
+  --accent-to: #a81e24;
+  --accent-glow: rgba(215,40,47,0.4);
 }
 
 [data-theme="wedding"] {

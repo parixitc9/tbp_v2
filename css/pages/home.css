@@ -305,23 +305,21 @@
   color: var(--muted);
 }
 
+/* The floating brand logo (replaces the old globe circle) */
 .about-section__globe {
   width: 100%;
   aspect-ratio: 1;
-  border-radius: 50%;
-  background: radial-gradient(circle at 30% 30%, var(--accent-glow), transparent 70%);
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
 }
 
-.about-section__globe::before {
-  content: '';
-  width: 80%;
-  height: 80%;
-  border-radius: 50%;
-  border: 1px solid var(--line);
+.about-section__globe img {
+  width: 85%;
+  height: 85%;
+  object-fit: contain;
+  filter: drop-shadow(0 0 50px var(--accent-glow));
 }
 
 @media (max-width: 768px) {

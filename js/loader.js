@@ -72,20 +72,40 @@ const TBPLoader = (() => {
     requestAnimationFrame(frame);
   }
 
-  /* --- Filmstrip wipe for page navigation --- */
+  /* --- Filmstrip wipe for page navigation ---
+     Panels cover the screen and STAY covered while the browser
+     navigates; the next page peels them away on load (see init). */
   function filmstripNavigate(url) {
+    if (TBP.prefersReducedMotion) {
+      window.location.href = url;
+      return;
+    }
     const wipe = buildFilmstrip();
-    wipe.classList.remove('active');
+    wipe.classList.remove('cover', 'uncover');
     void wipe.offsetWidth; // reflow
-    wipe.classList.add('active');
+    wipe.classList.add('cover');
+    try { sessionStorage.setItem('tbp-wipe', '1'); } catch (e) {}
 
+    // Last panel finishes covering at ~0.7s (0.2s stagger + 0.5s anim)
     setTimeout(() => {
       window.location.href = url;
-    }, 700);
+    }, 720);
   }
 
-  /* --- Init (counter animation removed — pages become ready immediately) --- */
+  /* --- Init (counter animation removed — pages become ready immediately).
+     If we arrived via a filmstrip wipe, reveal the page from behind it. --- */
   function init() {
+    let cameViaWipe = false;
+    try {
+      cameViaWipe = sessionStorage.getItem('tbp-wipe') === '1';
+      sessionStorage.removeItem('tbp-wipe');
+    } catch (e) {}
+
+    if (cameViaWipe && !TBP.prefersReducedMotion) {
+      const wipe = buildFilmstrip();
+      wipe.classList.add('uncover');
+      setTimeout(() => wipe.remove(), 1000);
+    }
     markReady();
   }
 

@@ -92,14 +92,24 @@
   margin-bottom: 0.5rem;
 }
 
-/* --- Stories cards --- */
+/* --- Stories cards (uniform size) --- */
 .stories-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
-  gap: 2rem;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+@media (max-width: 900px) {
+  .stories-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 560px) {
+  .stories-grid { grid-template-columns: 1fr; }
 }
 
 .story-card {
+  display: flex;
+  flex-direction: column;
   background: rgba(255,255,255,0.6);
   border: 1px solid #ffe4e6;
   border-radius: var(--radius-card);
@@ -116,6 +126,7 @@
 .story-card__img {
   aspect-ratio: 16/10;
   overflow: hidden;
+  flex-shrink: 0;
 }
 
 .story-card__img img {
@@ -131,6 +142,9 @@
 
 .story-card__body {
   padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 }
 
 .story-card__place {
@@ -152,6 +166,10 @@
   font-size: 0.85rem;
   color: #57534e;
   line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .story-card__link {
@@ -161,7 +179,8 @@
   font-size: 0.8rem;
   font-weight: 600;
   color: #b45309;
-  margin-top: 1rem;
+  margin-top: auto;
+  padding-top: 1rem;
   transition: gap 0.3s;
 }
 
@@ -220,38 +239,112 @@
   color: #a8a29e;
 }
 
-/* --- Photo Album Lightbox --- */
-.album-backdrop {
+/* Photo album lightbox styles now live in components.css (site-wide). */
+
+/* --- Structured, uniform work grids --- */
+.wed-grid--photos .work-card { aspect-ratio: 4/5; }
+.wed-grid--films .work-card { aspect-ratio: 16/10; }
+
+.wed-loadmore {
+  display: flex;
+  justify-content: center;
+  margin-top: 2.5rem;
+}
+
+/* --- Story reader (image left, story right) --- */
+.story-backdrop {
   position: fixed;
   inset: 0;
   z-index: 10000;
-  background: rgba(0,0,0,0.92);
+  background: rgba(0,0,0,0.75);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 1rem;
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.3s, visibility 0.3s;
 }
 
-.album-backdrop.open {
+.story-backdrop.open {
   opacity: 1;
   visibility: visible;
 }
 
-.album-panel {
+.story-panel {
   position: relative;
-  width: 90vw;
-  max-width: 900px;
-  max-height: 85vh;
-  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  width: min(92vw, 900px);
+  /* Fixed height so every story opens at the same size —
+     long stories scroll inside the text column */
+  height: min(80vh, 34rem);
+  background: #fff1f2;
   border-radius: 16px;
-  background: #1c1917;
+  overflow: hidden;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.4);
 }
 
-.album-panel__close {
+.story-panel__img {
+  position: relative;
+  min-height: 100%;
+}
+
+.story-panel__img img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.story-panel__body {
+  padding: 2.5rem 2.25rem 2rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.story-panel__place {
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #b45309;
+}
+
+.story-panel__couple {
+  font-size: clamp(1.4rem, 2.5vw, 1.9rem);
+  font-weight: 700;
+  color: #292524;
+  margin: 0.5rem 0 0.15rem;
+}
+
+.story-panel__date {
+  font-size: 0.8rem;
+  color: #a8a29e;
+  margin-bottom: 1.25rem;
+}
+
+.story-panel__text {
+  font-size: 0.92rem;
+  line-height: 1.75;
+  color: #57534e;
+}
+
+.story-panel__counter {
+  margin-top: auto;
+  padding-top: 1.5rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: #a8a29e;
+  font-variant-numeric: tabular-nums;
+}
+
+.story-panel__close {
   position: absolute;
   top: 1rem;
   right: 1rem;
@@ -260,9 +353,9 @@
   height: 2.5rem;
   border-radius: 50%;
   border: none;
-  background: rgba(0,0,0,0.5);
+  background: rgba(0,0,0,0.35);
   color: #fff;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -270,63 +363,46 @@
   transition: background 0.2s;
 }
 
-.album-panel__close:hover { background: rgba(0,0,0,0.8); }
+.story-panel__close:hover { background: rgba(0,0,0,0.6); }
 
-.album-panel__img {
-  width: 100%;
-  max-height: 75vh;
-  object-fit: contain;
-  display: block;
-}
-
-.album-panel__caption {
-  padding: 1rem 1.5rem;
-  text-align: center;
-}
-
-.album-panel__title {
-  font-size: 1rem;
-  font-weight: 700;
-  color: #fff;
-}
-
-.album-panel__sub {
-  font-size: 0.8rem;
-  color: rgba(255,255,255,0.5);
-  margin-top: 0.25rem;
-}
-
-.album-nav {
+.story-nav {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  width: 3rem;
-  height: 3rem;
+  z-index: 10;
+  width: 2.75rem;
+  height: 2.75rem;
   border-radius: 50%;
   border: none;
-  background: rgba(255,255,255,0.15);
+  background: rgba(0,0,0,0.35);
   color: #fff;
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: background 0.2s;
-  z-index: 5;
 }
 
-.album-nav:hover { background: rgba(255,255,255,0.3); }
-.album-nav--prev { left: 0.75rem; }
-.album-nav--next { right: 0.75rem; }
+.story-nav:hover { background: rgba(0,0,0,0.6); }
+.story-nav--prev { left: 0.75rem; }
+.story-nav--next { right: 0.75rem; }
 
-.album-counter {
-  position: absolute;
-  bottom: 0.75rem;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 0.75rem;
-  color: rgba(255,255,255,0.5);
-  letter-spacing: 0.1em;
+@media (max-width: 768px) {
+  .story-panel {
+    grid-template-columns: 1fr;
+    height: auto;
+    max-height: 85vh;
+    overflow-y: auto;
+  }
+  .story-panel__img {
+    min-height: 0;
+    aspect-ratio: 16/10;
+  }
+  .story-panel__img img { position: static; }
+  .story-panel__body { padding: 1.5rem 1.25rem; overflow: visible; }
 }
+
+/* Video player sizing now lives in components.css (site-wide). */
 
 /* --- Work card tinting --- */

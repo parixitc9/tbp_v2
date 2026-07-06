@@ -10,10 +10,12 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=Onest:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
   <style>
-    /* ============ RESET / BASE ============ */
+    /* ============ RESET / BASE (on top of base.css) ============ */
     *{ box-sizing:border-box; margin:0; padding:0 }
-    html{ font-size:16px; -webkit-font-smoothing:antialiased; background:#0a0908 }
+    html{ -webkit-font-smoothing:antialiased; background:#0a0908; scroll-behavior:auto }
     body{ background:var(--void); color:var(--bone); font-family:'Space Grotesk',sans-serif; overflow-x:hidden }
     a{ color:inherit; text-decoration:none }
     button{ font:inherit; color:inherit; background:none; border:none; cursor:pointer }
@@ -23,19 +25,14 @@
     .sr-only{ position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0 }
     :focus-visible{ outline:2px solid var(--crimson); outline-offset:2px }
 
-    /* ============ ADAPTIVE REM GRID (same clamps as base.css) ============ */
-    @media (min-width:1441px){ html{ font-size:clamp(16px, 0.83333vw, 20px) } }
-    @media (max-width:1440px){ html{ font-size:clamp(14px, 1.11111vw, 16px) } }
-    @media (max-width:1024px){ html{ font-size:clamp(13px, 1.5625vw, 16px) } }
-    @media (max-width:640px){  html{ font-size:clamp(12px, 4.44444vw, 16px) } }
-
-    /* ============ TOKENS ============ */
+    /* ============ TOKENS (bridges shared components to this page's crimson theme) ============ */
     :root{
       --void:#0a0908; --coal:#141110; --ash:#1e1a18; --panel:#171412;
       --bone:#f5f1ea; --bone-dim:#efe7d7;
       --crimson:#e11d2e; --crimson-soft:#ff4d5e; --crimson-deep:#8f1020;
       --amber:#f59e0b; --amber-bright:#fbbf24;
       --smoke:#8a8177; --silver:#d6d3d1;
+      --accent:#e11d2e; --accent-from:#ff4d5e; --accent-to:#8f1020; --accent-glow:rgba(225,29,46,.35);
       --line:rgba(245,241,234,.12); --line-soft:rgba(245,241,234,.07);
       --dim-70:rgba(245,241,234,.7); --dim-55:rgba(245,241,234,.55); --dim-45:rgba(245,241,234,.45); --dim-35:rgba(245,241,234,.35);
       --r-pill:9999px; --r-card:2rem; --r-card-sm:1.25rem; --r-ctl:.875rem;
@@ -44,8 +41,6 @@
       --spring:cubic-bezier(.2,.8,.2,1);
       --soft:cubic-bezier(.22,1,.36,1);
     }
-    .shell{ max-width:88rem; margin-inline:auto; padding-inline:1.25rem }
-    @media (min-width:640px){ .shell{ padding-inline:2.5rem } }
     .serif{ font-family:'Instrument Serif',Georgia,serif; font-style:italic; font-weight:400 }
     .ic{ width:1em; height:1em; display:inline-block; vertical-align:-0.125em; fill:none }
     .outline-txt{ color:transparent; -webkit-text-stroke:1.5px rgba(245,241,234,.6) }
@@ -80,26 +75,9 @@
     .tick-track>span{ display:inline-flex; align-items:center; gap:2.5rem; padding-right:2.5rem }
     @keyframes mq{ to{ transform:translateX(-50%) } }
 
-    /* ============ HEADER (site-wide header, same as other pages) ============ */
-    .header{ position:fixed; top:0; left:0; right:0; z-index:100; padding:.75rem 0; font-family:'Onest',system-ui,sans-serif; transition:background .3s, border-color .3s, backdrop-filter .3s, -webkit-backdrop-filter .3s }
-    .header.scrolled{ background:rgba(12,10,9,.85); border-bottom:1px solid var(--line); backdrop-filter:blur(20px) saturate(180%); -webkit-backdrop-filter:blur(20px) saturate(180%) }
-    .header__inner{ display:flex; align-items:center; justify-content:space-between; gap:1rem }
-    .header__logo{ display:flex; align-items:center; gap:.6rem; transition:transform .3s var(--spring) }
-    .header__logo:hover{ transform:scale(1.04) }
-    .header__logo svg{ flex-shrink:0 }
-    .header__logo-text{ font-size:.85rem; font-weight:600; letter-spacing:.08em; text-transform:uppercase }
-    .header__nav{ display:flex; align-items:center; gap:.25rem }
-    .header__link{ font-size:.8rem; font-weight:500; color:var(--smoke); padding:.4rem .75rem; border-radius:var(--r-pill); transition:color .3s, background .3s }
-    .header__link:hover, .header__link.active{ color:var(--crimson-soft); background:rgba(255,255,255,.06) }
-    .header__clock{ font-size:.75rem; font-weight:500; color:var(--smoke); padding:.35rem .75rem; border:1px solid var(--line); border-radius:var(--r-pill); font-variant-numeric:tabular-nums; white-space:nowrap }
-    .header__cta{ display:inline-flex; align-items:center; gap:.5rem }
-    .header__menu-btn{ display:none; width:2.5rem; height:2.5rem; align-items:center; justify-content:center; border-radius:50%; border:1px solid var(--line); transition:background .2s }
-    .header__menu-btn:hover{ background:rgba(255,255,255,.06) }
-    .header__menu-btn span{ display:block; width:18px; height:2px; background:var(--bone); position:relative }
-    .header__menu-btn span::before, .header__menu-btn span::after{ content:''; position:absolute; left:0; width:100%; height:2px; background:var(--bone); transition:transform .3s }
-    .header__menu-btn span::before{ top:-6px }
-    .header__menu-btn span::after{ top:6px }
-    @media (max-width:768px){ .header__nav{ display:none } .header__clock{ display:none } .header__menu-btn{ display:flex } }
+    /* ============ HEADER (layout/behaviour from components.css — local tweaks only) ============ */
+    .header{ font-family:'Onest',system-ui,sans-serif; color:#e7e5e4 }
+    .logo-img{ filter:drop-shadow(0 0 5px rgba(255,255,255,.16)) }
     .brand{ display:flex; align-items:center; gap:.625rem; font-size:.9375rem; font-weight:600; letter-spacing:.14em }
     .brand .ic{ font-size:1.25rem; color:var(--crimson) }
 
@@ -128,7 +106,7 @@
     .btn{ display:inline-flex; align-items:center; gap:.5rem; font-family:'Onest',system-ui,sans-serif; font-size:.85rem; font-weight:600; padding:.65rem 1.5rem; border-radius:var(--r-pill); white-space:nowrap; transition:transform .3s var(--spring), background .3s ease, color .3s ease, border-color .3s ease }
     .btn:hover{ transform:scale(1.04) }
     .btn:active{ transform:scale(.97) }
-    .btn.solid{ background:var(--crimson); color:#fff }
+    .btn.solid{ background:var(--crimson); color:#fff; border:1px solid transparent }
     .btn.solid:hover{ background:var(--crimson-soft) }
     .btn.ghost{ border:1px solid rgba(245,241,234,.3); background:rgba(10,9,8,.25); backdrop-filter:blur(4px); color:var(--bone) }
     .btn.ghost:hover{ border-color:var(--bone) }
@@ -210,34 +188,8 @@
     .stat-row .ds{ display:none; max-width:18rem; text-align:right; font-size:.8rem; color:var(--dim-45) }
     @media (min-width:768px){ .stat-row .ds{ display:block } }
 
-    /* ============ FOOTER ============ */
-    footer{ position:relative; overflow:hidden; border-radius:var(--r-card) var(--r-card) 0 0; background:var(--coal) }
-    .foot-in{ position:relative; z-index:10; padding-block:5.5rem 2.5rem }
-    .foot-kick{ font-size:.875rem; color:var(--dim-55) }
-    .foot-giant{ display:block; margin-top:1.25rem; text-align:left; font-size:3.4rem; font-weight:700; line-height:.95; letter-spacing:-.02em; text-transform:uppercase }
-    @media (min-width:640px){ .foot-giant{ font-size:5.5rem } }
-    @media (min-width:1024px){ .foot-giant{ font-size:7rem } }
-    .foot-giant .row{ display:flex; align-items:center; gap:1.5rem }
-    .foot-giant .serif{ text-transform:none; font-weight:400; color:var(--amber-bright) }
-    .foot-giant .arrow{ display:inline-grid; place-items:center; width:.9em; height:.9em; border:2px solid var(--line); border-radius:var(--r-pill); font-size:.55em; color:var(--bone); transition:background .35s ease, border-color .35s ease, transform .45s var(--spring) }
-    .foot-giant .arrow .ic{ transition:transform .35s var(--spring) }
-    @media (hover:hover){
-      .foot-giant:hover .arrow{ background:var(--crimson); border-color:var(--crimson); transform:rotate(45deg) }
-    }
-    .foot-contact{ margin-top:2.25rem; display:flex; flex-wrap:wrap; gap:1rem 2.5rem; font-size:.95rem; color:var(--dim-55) }
-    .foot-contact a{ border-bottom:1px solid var(--line); padding-bottom:.15rem; transition:color .3s ease, border-color .3s ease }
-    @media (hover:hover){ .foot-contact a:hover{ color:var(--bone); border-color:var(--bone) } }
-    .foot-cols{ display:grid; grid-template-columns:repeat(2,1fr); gap:2.5rem; margin-top:4.5rem; border-top:1px solid rgba(245,241,234,.1); padding-block:3rem }
-    @media (min-width:768px){ .foot-cols{ grid-template-columns:repeat(3,1fr) } }
-    .foot-col h3{ font-size:.75rem; font-weight:500; text-transform:uppercase; letter-spacing:.03em; color:rgba(245,241,234,.4) }
-    .foot-col ul{ margin-top:1.25rem; display:flex; flex-direction:column; gap:.75rem; font-size:.875rem }
-    .alink{ display:inline-flex }
-    .alink>span{ display:inline-block; opacity:.65; transition:opacity .35s var(--spring), transform .35s var(--spring) }
-    @media (hover:hover){ .alink:hover>span{ opacity:1; transform:translateX(4px) } }
-    .foot-legal{ display:flex; flex-direction:column; align-items:center; justify-content:space-between; gap:1rem; border-top:1px solid rgba(245,241,234,.1); padding-top:2rem; font-size:.75rem; color:rgba(245,241,234,.45) }
-    @media (min-width:640px){ .foot-legal{ flex-direction:row } }
-    .foot-legal .links{ display:flex; gap:1.5rem }
-    .foot-mark{ position:absolute; inset-inline:0; bottom:-2rem; z-index:0; text-align:center; pointer-events:none; user-select:none; font-weight:700; line-height:1; font-size:13rem; letter-spacing:.05em; color:rgba(245,241,234,.04) }
+    /* ============ FOOTER (layout from components.css — local tweaks only) ============ */
+    .footer{ font-family:'Onest',system-ui,sans-serif; color:#e7e5e4 }
 
     /* ============ NAV MENU OVERLAY ============ */
     .navmenu{ position:fixed; inset:0; z-index:315; display:flex; flex-direction:column; background:var(--void); color:var(--bone); opacity:0; transition:opacity .45s ease }
@@ -345,7 +297,7 @@
   <header class="header">
     <div class="shell header__inner">
       <a href="index.html" class="header__logo">
-        <svg width="28" height="28" viewBox="0 0 100 100" fill="none"><rect width="100" height="100" rx="20" fill="#0c0a09"/><circle cx="50" cy="50" r="28" stroke="#f59e0b" stroke-width="6" fill="none"/><circle cx="50" cy="50" r="8" fill="#f59e0b"/></svg>
+        <img src="media/tbp-logo.png" alt="The Brown Print logo" class="logo-img">
         <span class="header__logo-text">The Brown Print</span>
       </a>
       <nav class="header__nav">
@@ -441,6 +393,22 @@
       </div>
     </section>
 
+    <!-- ============ SCREENING ROOM (live films) ============ -->
+    <section class="films" id="screenings" style="padding-top:0">
+      <div class="shell">
+        <div class="films-head">
+          <div>
+            <p class="eyebrow" data-reveal>The Screening Room<sup>(6)</sup></p>
+            <h2 class="lns" data-reveal="fade" style="--d:120ms">
+              <span class="ln" style="--d:120ms"><span>Live <span class="serif">films.</span></span></span>
+            </h2>
+          </div>
+          <p class="note" data-reveal style="--d:250ms">Press play — <span class="serif" style="color:var(--dim-70)">relive the night.</span></p>
+        </div>
+        <div class="work-grid work-grid--uniform" id="concertFilms" data-reveal></div>
+      </div>
+    </section>
+
     <!-- ============ CRIMSON BAND ============ -->
     <div class="redband tick" aria-hidden="true">
       <div class="tick-track">
@@ -525,54 +493,23 @@
 
   </main>
 
-  <!-- ============ FOOTER ============ -->
-  <footer>
-    <div class="shell foot-in">
-      <p class="foot-kick" data-reveal>Got a show coming up?</p>
-      <button class="foot-giant" data-modal data-reveal style="--d:100ms" aria-label="Start a project">
-        <span class="row">LET'S <span class="serif">film</span> IT<span class="arrow"><svg class="ic"><use href="#i-arrup"/></svg></span></span>
-      </button>
-      <div class="foot-contact" data-reveal style="--d:200ms">
-        <a href="mailto:hello@thebrownprint.ca">hello@thebrownprint.ca</a>
-        <a href="tel:+14165550199">+1 (416) 555-0199</a>
-        <span>Toronto → worldwide</span>
-      </div>
-      <div class="foot-cols">
-        <div class="foot-col">
-          <h3>Pages</h3>
-          <ul>
-            <li><a class="alink" href="index.html"><span>Home</span></a></li>
-            <li><a class="alink" href="wedding.html"><span>Weddings</span></a></li>
-            <li><a class="alink" href="music.html"><span>Music</span></a></li>
-            <li><a class="alink" href="concerts.html"><span>Concerts</span></a></li>
-          </ul>
+  <!-- ============ FOOTER (same as other pages) ============ -->
+  <footer class="footer">
+    <div class="shell">
+      <div class="footer__top">
+        <div class="footer__brand">
+          <a href="index.html" class="header__logo">
+            <img src="media/tbp-logo.png" alt="The Brown Print logo" class="logo-img">
+            <span class="header__logo-text">The Brown Print</span>
+          </a>
+          <p>Punjabi-rooted film studio in Toronto. Concert films, wedding cinema, music videos, and brand storytelling.</p>
         </div>
-        <div class="foot-col">
-          <h3>More</h3>
-          <ul>
-            <li><a class="alink" href="social.html"><span>Social Events</span></a></li>
-            <li><a class="alink" href="brands.html"><span>Brand Films</span></a></li>
-            <li><button class="alink" data-modal><span>Contact</span></button></li>
-          </ul>
-        </div>
-        <div class="foot-col">
-          <h3>Connect</h3>
-          <ul>
-            <li><a class="alink" href="https://instagram.com" target="_blank" rel="noopener"><span>Instagram</span></a></li>
-            <li><a class="alink" href="https://youtube.com" target="_blank" rel="noopener"><span>YouTube</span></a></li>
-            <li><button class="alink" data-modal><span>Start a Project</span></button></li>
-          </ul>
-        </div>
+        <div class="footer__col"><h4>Pages</h4><a href="index.html">Home</a><a href="wedding.html">Weddings</a><a href="music.html">Music</a><a href="concerts.html">Concerts</a></div>
+        <div class="footer__col"><h4>More</h4><a href="social.html">Social Events</a><a href="brands.html">Brand Films</a><a href="#" data-modal>Contact</a></div>
+        <div class="footer__col"><h4>Connect</h4><a href="https://instagram.com" target="_blank" rel="noopener">Instagram</a><a href="https://youtube.com" target="_blank" rel="noopener">YouTube</a><a href="mailto:hello@thebrownprint.ca">Email</a></div>
       </div>
-      <div class="foot-legal">
-        <span>© 2026 The Brown Print. All rights reserved.</span>
-        <span class="links">
-          <a class="alink" href="#"><span>Privacy</span></a>
-          <a class="alink" href="#"><span>Terms</span></a>
-        </span>
-      </div>
+      <div class="footer__bottom"><p>&copy; 2026 The Brown Print. All rights reserved.</p><div class="footer__socials"><a href="#" aria-label="Instagram">IG</a><a href="#" aria-label="YouTube">YT</a><a href="#" aria-label="Vimeo">VM</a></div></div>
     </div>
-    <div class="foot-mark" aria-hidden="true">TBP</div>
   </footer>
 
   <!-- ============ NAV MENU OVERLAY ============ -->
@@ -637,6 +574,9 @@
       </div>
     </div>
   </div>
+
+  <script src="content.js"></script>
+  <script src="js/player.js"></script>
 
   <script type="importmap">
   { "imports": { "lenis": "https://unpkg.com/lenis@1.3.23/dist/lenis.mjs" } }
@@ -868,6 +808,76 @@
       setTimeout(() => modal.classList.add('done'), 650);
     });
 
+    /* ---------- Screening room (video cards, shared VideoPlayer) ---------- */
+    (function(){
+      const grid = document.getElementById('concertFilms');
+      if (!grid || typeof CONTENT === 'undefined' || !CONTENT.concerts) return;
+      grid.innerHTML = CONTENT.concerts.map((item, i) => `
+        <div class="work-card" data-video-index="${i}">
+          <img src="${item.poster}" alt="${item.title}" loading="lazy" class="loaded">
+          <div class="work-card__shade"></div>
+          <div class="work-card__info">
+            <div class="work-card__title">${item.title}</div>
+            <div class="work-card__sub">${item.venue ? item.venue + ' · ' : ''}${item.sub}</div>
+          </div>
+          <div class="work-card__play">▶</div>
+        </div>
+      `).join('');
+      grid.querySelectorAll('.work-card[data-video-index]').forEach(card => {
+        card.addEventListener('click', () => {
+          const idx = parseInt(card.dataset.videoIndex, 10);
+          const item = CONTENT.concerts[idx];
+          if (item && item.videoSrc && typeof VideoPlayer !== 'undefined') VideoPlayer.open(item, CONTENT.concerts, idx);
+        });
+      });
+    })();
+
+    /* ---------- Filmstrip page transitions (same as other pages) ---------- */
+    (function(){
+      function buildWipe(){
+        let wipe = document.querySelector('.filmstrip-wipe');
+        if (!wipe){
+          wipe = document.createElement('div');
+          wipe.className = 'filmstrip-wipe';
+          for (let i = 0; i < 5; i++){
+            const p = document.createElement('div');
+            p.className = 'filmstrip-wipe__panel';
+            wipe.appendChild(p);
+          }
+          document.body.prepend(wipe);
+        }
+        return wipe;
+      }
+      let cameViaWipe = false;
+      try {
+        cameViaWipe = sessionStorage.getItem('tbp-wipe') === '1';
+        sessionStorage.removeItem('tbp-wipe');
+      } catch(e){}
+      if (cameViaWipe && !RM){
+        const w = buildWipe();
+        w.classList.add('uncover');
+        setTimeout(() => w.remove(), 1000);
+      }
+      document.addEventListener('click', e => {
+        const link = e.target.closest('a[href]');
+        if (!link) return;
+        const href = link.getAttribute('href');
+        if (!href || href.startsWith('#') || href.startsWith('javascript:') || link.target === '_blank') return;
+        try {
+          const url = new URL(href, window.location.origin);
+          if (url.origin !== window.location.origin) return;
+        } catch(err){ return; }
+        e.preventDefault();
+        if (RM){ window.location.href = href; return; }
+        const w = buildWipe();
+        w.classList.remove('cover', 'uncover');
+        void w.offsetWidth;
+        w.classList.add('cover');
+        try { sessionStorage.setItem('tbp-wipe', '1'); } catch(err){}
+        setTimeout(() => { window.location.href = href; }, 720);
+      });
+    })();
+
     /* ---------- Global routing ---------- */
     document.addEventListener('click', e => {
       const t = e.target.closest('[data-lbx]');
@@ -881,6 +891,7 @@
       }
       const m = e.target.closest('[data-modal]');
       if (m){
+        e.preventDefault();
         if (navmenu && !navmenu.hidden) closeMenu(openModal);
         else openModal();
       }
